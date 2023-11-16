@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -10,12 +11,13 @@ Route::middleware('auth')->group(function () {
         return view('home');
     });
 
-    Route::get('/customers', function () {
-        return view('customers');
+    Route::controller(CustomerController::class)->prefix('/customers')->group(function () {
+        Route::get('/', 'index')->name('customers.index');
+        Route::get('/{id}','show')->name('customers.show');
     });
 
-    Route::get('/customer', function () {
-        return view('customer');
+    Route::get('/fares', function () {
+        return view('fares');
     });
 
     Route::get('/modals', function () {
