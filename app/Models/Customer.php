@@ -15,7 +15,7 @@ class Customer extends Model
         'phone',
         'emergency_phone',
         'email',
-        'blood_type_id',
+        'blood_group_id',
         'is_active'
     ];
 
