@@ -67,6 +67,19 @@
                             <span class="fw-medium mx-2 text-heading">Email:</span>
                             <span>albert@gmail.com</span>
                         </li>
+                        <li class="d-flex align-items-center mb-3">
+                            <i class="ti ti-phone-call"></i>
+                            <span class="fw-medium mx-2 text-heading">Emergencia:</span>
+                            <span>(612) 123 123 9</span>
+                        </li>
+                    </ul>
+                    <small class="card-text text-uppercase">Salud</small>
+                    <ul class="list-unstyled mb-4 mt-3">
+                        <li class="d-flex align-items-center mb-3">
+                            <i class="ti ti-phone-call"></i>
+                            <span class="fw-medium mx-2 text-heading">Tipo de Sangre:</span>
+                            <span>O+</span>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -81,9 +94,9 @@
                         <h5 class="card-action-title mb-0">Asistencias</h5>
                         <div class="card-action-element">
                             <div>
-                            <button class="btn btn-primary btn-sm" type="button">
-                                <i class="ti ti-calendar ti-sm"></i>
-                            </button>
+                                <span>
+                                    <i class="ti ti-calendar ti-sm"></i>
+                                </span>
                             </div>
                         </div>
                     </div>
