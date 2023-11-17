@@ -14,7 +14,7 @@ class CustomerFactory extends Factory
             'phone' => fake()->unique()->e164PhoneNumber(),
             'emergency_phone' => fake()->e164PhoneNumber(),
             'email' => fake()->unique()->freeEmail(),
-            'blood_group_id' => BloodGroup::inRandomOrder()->first(),
+            'blood_group_id' => fake()->randomElement(BloodGroup::all()),
             'is_active' => fake()->boolean()
         ];
     }

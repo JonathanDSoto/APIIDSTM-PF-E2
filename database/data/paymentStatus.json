@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Pagado"
+  },
+  {
+    "name": "Pendiente"
+  },
+  {
+    "name": "Cancelado"
+  } 
+]

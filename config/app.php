@@ -70,7 +70,8 @@ return [
     |
     */
 
-    'timezone' => 'America/Ciudad_Juarez',
+    // 'timezone' => 'America/Ciudad_Juarez',
+    'timezone' => 'UTC',
 
     /*
     |--------------------------------------------------------------------------
