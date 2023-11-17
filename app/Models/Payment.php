@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Payment extends Model
 {
@@ -23,9 +22,9 @@ class Payment extends Model
         return $this->belongsTo(Customer::class);
     }
 
-    public function fare(): HasOne
+    public function fare(): BelongsTo
     {
-        return $this->hasOne(Fare::class);
+        return $this->belongsTo(Fare::class);
     }
 
     public function paymentStatus(): BelongsTo

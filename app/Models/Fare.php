@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Fare extends Model
@@ -19,8 +19,8 @@ class Fare extends Model
         return $this->hasOne(FarePeriod::class);
     }
 
-    public function payment(): BelongsTo
+    public function payment(): HasMany
     {
-        return $this->belongsTo(Payment::class);
+        return $this->hasMany(Payment::class);
     }
 }
