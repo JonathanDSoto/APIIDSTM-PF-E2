@@ -79,7 +79,7 @@
                     <form id="formAuthentication" class="mb-3" action="{{ route('login') }}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label for="email" class="form-label">Usuario</label>
+                            <label for="email" class="form-label">Correo electronico</label>
                             <input type="email" class="form-control" id="email" name="email"
                                 placeholder="Ingresa tu correo electronico" autofocus />
                         </div>
