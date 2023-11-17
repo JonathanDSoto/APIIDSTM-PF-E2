@@ -2,30 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BloodGroup;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class CustomerController extends Controller
 {
+    protected $validator;
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->validator = [
+            'name' => ['required', 'string', 'not_regex:/\d/', 'max:255'],
+            'phone' => ['required', 'string', 'unique:customers,phone', 'max:50'],
+            'emergency_phone' => ['required', 'string', 'different:phone', 'max:50'],
+            'email' => ['email', 'unique:customers,email', 'nullable', 'max:255'],
+            'blood_group_id' => ['required', 'integer', 'exists:blood_groups,id'],
+            'is_active' => ['required', 'integer', Rule::in([0, 1])]
+        ];
+    }
+
     public function index()
     {
-        return view('customers.index', ['customersPagination' => Customer::simplePaginate(15)]);
+        return view('customers.index', [
+            'customersPagination' => Customer::simplePaginate(15),
+            'bloodGroups' => BloodGroup::all()->sortBy('name'),
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, $this->validator);
+
+        Customer::create($request->all());
+
+        return redirect()
+            ->route('customers')
+            ->with('success','¡Customer has benn stored successfully!');
     }
 
     public function show(string $id)
@@ -36,27 +51,27 @@ class CustomerController extends Controller
         return view('customers.show', ['customer' => $customer]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
-        //
+        $this->validate($request, $this->validator);
+
+        if (Customer::find($id)) {
+            Customer::find($id)->update($request->all());
+
+            return redirect()
+                ->route('customers')
+                ->with('success', '¡Client has been updated successfully!');
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+        if (Customer::find($id)) {
+            Customer::destroy($id);
+
+            return redirect()
+                ->route('customers')
+                ->with('success', 'Client has been deleted successfully.');
+        }
     }
 }
