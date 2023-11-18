@@ -79,7 +79,7 @@
                     <small class="card-text text-uppercase">Salud</small>
                     <ul class="list-unstyled mb-4 mt-3">
                         <li class="d-flex align-items-center mb-3">
-                            <i class="ti ti-phone-call"></i>
+                            <i class="fas fa-tint"></i>
                             <span class="fw-medium mx-2 text-heading">Tipo de Sangre:</span>
                             <span>O+</span>
                         </li>
