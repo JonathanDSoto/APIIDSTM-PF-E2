@@ -42,6 +42,7 @@
     <script src="{{ asset('assets/vendor/js/template-customizer.js') }}"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('assets/js/config.js') }}"></script>
+    @vite(['resources/js/app.js', 'resources/css/app.css']);
 </head>
 
 <body>
@@ -87,12 +88,7 @@
                             <div class="d-flex justify-content-between">
                                 <label class="form-label" for="password">Contraseña</label>
                             </div>
-                            <div class="input-group input-group-merge">
-                                <input type="password" id="password" class="form-control" name="password"
-                                    placeholder="Ingresa tu contraseña" aria-describedby="password" />
-                                <span class="input-group-text">
-                                    <i class="ti ti-lock"></i>
-                                </span>
+                            <div id="passField" class="input-group input-group-merge">
                             </div>
                         </div>
                         <button class="btn btn-primary d-grid w-100"> Login </button>

@@ -70,7 +70,7 @@ return [
     |
     */
 
-    'timezone' => 'America/Ciudad_Juarez',
+    'timezone' => 'America/Mazatlan',
 
     /*
     |--------------------------------------------------------------------------
