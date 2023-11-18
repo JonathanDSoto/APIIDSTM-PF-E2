@@ -18,4 +18,9 @@ class BloodGroup extends Model
     {
         return $this->hasMany(Customer::class);
     }
+
+    public function instructors(): HasMany
+    {
+        return $this->hasMany(Instructor::class);
+    }
 }

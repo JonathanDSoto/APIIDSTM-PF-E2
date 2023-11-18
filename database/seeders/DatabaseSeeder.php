@@ -16,7 +16,10 @@ class DatabaseSeeder extends Seeder
             PaymentTypeSeeder::class,
             FarePeriodSeeder::class,
             FareSeeder::class,
-            PaymentSeeder::class
+            PaymentSeeder::class,
+            ExerciseTypeSeeder::class,
+            InstructorSeeder::class,
+            InstructorQualificationSeeder::class
         ]);
     }
 }
