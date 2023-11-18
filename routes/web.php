@@ -28,10 +28,14 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('/modals', function () {
-        return view('modalEditarCliente');
+        return view('modals');
     });
 
-    Route::get('/prices', function () {
-        return view('prices');
+    Route::get('/instructors', function () {
+        return view('instructors/instructors');
+    });
+
+    Route::get('/instructor', function () {
+        return view('instructors/instructor');
     });
 });
