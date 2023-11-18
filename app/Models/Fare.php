@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -14,12 +15,12 @@ class Fare extends Model
         'is_active'
     ];
 
-    public function farePeriod(): HasOne
+    public function farePeriod(): BelongsTo
     {
-        return $this->hasOne(FarePeriod::class);
+        return $this->belongsTo(FarePeriod::class);
     }
 
-    public function payment(): HasMany
+    public function payments(): HasMany
     {
         return $this->hasMany(Payment::class);
     }

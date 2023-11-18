@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class FarePeriod extends Model
 {
@@ -11,8 +12,8 @@ class FarePeriod extends Model
         'name'
     ];
 
-    public function fare(): BelongsTo
+    public function fare(): HasOne
     {
-        return $this->belongsTo(Fare::class);
+        return $this->hasOne(Fare::class);
     }
 }
