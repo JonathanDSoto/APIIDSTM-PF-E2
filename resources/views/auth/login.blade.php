@@ -42,12 +42,11 @@
     <script src="{{ asset('assets/vendor/js/template-customizer.js') }}"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('assets/js/config.js') }}"></script>
-    @vite(['resources/js/app.js', 'resources/css/app.css']);
 </head>
 
 <body>
     <!-- Content -->
-    <div class="authentication-wrapper authentication-cover authentication-bg">
+    <div id="app" class="authentication-wrapper authentication-cover authentication-bg">
         <div class="authentication-inner row">
             <!-- /Left Text -->
             <div class="d-none d-lg-flex col-lg-7 p-0">
@@ -88,8 +87,7 @@
                             <div class="d-flex justify-content-between">
                                 <label class="form-label" for="password">Contraseña</label>
                             </div>
-                            <div id="passField" class="input-group input-group-merge">
-                            </div>
+                            <password-login-field></password-login-field>
                         </div>
                         <button class="btn btn-primary d-grid w-100"> Login </button>
                     </form>
@@ -119,6 +117,7 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <!-- Page JS -->
     <script src="{{ asset('assets/js/pages-auth.js') }}"></script>
+    @vite(['./resources/js/app.js', './resources/css/app.css']);
 </body>
 
 </html>

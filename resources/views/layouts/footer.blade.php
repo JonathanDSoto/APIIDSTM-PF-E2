@@ -2,7 +2,7 @@
     <div class="container-xxl">
         <div class="footer-container text-center">
             <div class="d-none d-lg-inline-block">
-            <h>UNIVERSIDAD AUTONOMA DE BAJA CALIFORNIA SUR</h>
+            <h6>UNIVERSIDAD AUTONOMA DE BAJA CALIFORNIA SUR</h6>
                 <p>Equipo 2 - Sistema de Gimnasio - GymXpert:</p>
             </div>
         </div>

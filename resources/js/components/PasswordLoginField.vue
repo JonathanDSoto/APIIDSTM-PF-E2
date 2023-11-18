@@ -12,9 +12,11 @@ const changeVisibility = () => {
 </script>
 
 <template>
-    <input :type="type" id="password" class="form-control" name="password"
-        placeholder="ingresa tu contraseña" aria-describedby="password" />
-    <span class="input-group-text">
-        <i @click="changeVisibility" id="togglePass" class="ti ti-lock"></i>
-    </span>
+    <div class="input-group input-group-merge">
+        <input :type="type" id="password" class="form-control" name="password"
+            placeholder="ingresa tu contraseña" aria-describedby="password" />
+        <span class="input-group-text">
+            <i @click="changeVisibility" id="togglePass" class="ti ti-lock"></i>
+        </span>
+    </div>
 </template>
