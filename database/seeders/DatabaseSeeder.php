@@ -19,7 +19,12 @@ class DatabaseSeeder extends Seeder
             PaymentSeeder::class,
             ExerciseTypeSeeder::class,
             InstructorSeeder::class,
-            InstructorQualificationSeeder::class
+            InstructorQualificationSeeder::class,
+            SessionSeeder::class,
+            WeekDaySeeder::class,
+            SessionDaySeeder::class,
+            SessionParticipantSeeder::class,
+            AttendanceHistorySeeder::class
         ]);
     }
 }
