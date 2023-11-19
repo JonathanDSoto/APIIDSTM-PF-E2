@@ -20,8 +20,8 @@ return new class extends Migration
                 ->constrained()
                 ->restrictOnDelete()
                 ->cascadeOnUpdate();
-            $table->dateTime('start_date');
-            $table->boolean('is_active');
+            $table->dateTime('start_date')->default(now());
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

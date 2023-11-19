@@ -10,10 +10,6 @@ class BloodGroup extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'name'
-    ];
-
     public function customers(): HasMany
     {
         return $this->hasMany(Customer::class);
