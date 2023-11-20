@@ -32,10 +32,10 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('/instructors', function () {
-        return view('instructors/instructors');
+        return view('instructors/show');
     });
 
     Route::get('/instructor', function () {
-        return view('instructors/instructor');
+        return view('instructors/index');
     });
 });
