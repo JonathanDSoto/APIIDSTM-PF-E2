@@ -10,4 +10,4 @@
 <script src="../../assets/js/main.js"></script>
 <!-- Page JS -->
 <script src="../../assets/js/pages-pricing.js"></script>
-@vite('./resources/js/app.js');
+@vite('./resources/js/app.js')

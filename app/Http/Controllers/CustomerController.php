@@ -40,13 +40,15 @@ class CustomerController extends Controller
 
         return redirect()
             ->route('customers')
-            ->with('success','¡Customer has benn stored successfully!');
+            ->with('success','La información del cliente se ha guardado con éxito.');
     }
 
     public function show(string $id)
     {
         $customer = Customer::find($id);
         $customer->bloodGroup;
+        $customer->attendedSessions;
+        $customer->payments;
 
         return view('customers.show', ['customer' => $customer]);
     }
@@ -60,7 +62,7 @@ class CustomerController extends Controller
 
             return redirect()
                 ->route('customers')
-                ->with('success', '¡Client has been updated successfully!');
+                ->with('success', 'La información del cliente se ha actualizado con éxito.');
         }
     }
 
@@ -71,7 +73,7 @@ class CustomerController extends Controller
 
             return redirect()
                 ->route('customers')
-                ->with('success', 'Client has been deleted successfully.');
+                ->with('success', 'La información del cliente se ha eliminado con éxito.');
         }
     }
 }
