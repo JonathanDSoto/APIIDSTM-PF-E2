@@ -9,6 +9,10 @@ class CustomerSeeder extends Seeder
 {
     public function run(): void
     {
-        Customer::factory(75)->create();
+        for ($i = 0; $i < 75; $i++) {
+            Customer::factory()
+                ->hasCheckingTimes(fake()->numberBetween(1, 150))
+                ->create();
+        }
     }
 }

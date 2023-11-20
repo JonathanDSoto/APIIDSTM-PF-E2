@@ -44,4 +44,9 @@ class Customer extends Model
             ->withPivot('attendance_date', 'attended')
             ->withTimestamps();
     }
+
+    public function checkingTimes(): HasMany
+    {
+        return $this->hasMany(TimeCheck::class);
+    }
 }
