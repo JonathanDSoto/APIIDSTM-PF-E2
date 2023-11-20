@@ -33,7 +33,7 @@
         <div class="col-xl-4 col-lg-5 col-md-5">
             <customer-info
             :name='{{ json_encode($customer->name) }}'
-            :status="{{ json_encode($customer->status) }}"
+            :status="{{ json_encode($customer->is_active)}}"
             :phone='{{ json_encode($customer->phone) }}'
             :email='{{ json_encode($customer->email) }}'
             :emergency_phone='{{ json_encode($customer->emergency_phone) }}'
