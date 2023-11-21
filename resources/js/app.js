@@ -1,6 +1,5 @@
 import "./bootstrap";
 import { createApp } from "vue";
-import route from "../../vendor/tightenco/ziggy";
 
 const app = createApp({});
 
