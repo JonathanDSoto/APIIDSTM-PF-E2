@@ -35,4 +35,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/modals', function () {
         return view('modals');
     });
+
+    Route::get('/sessions', function () {
+        return view('sessions/index');
+    });
+
+    Route::get('/session', function () {
+        return view('sessions/show');
+    });
 });
