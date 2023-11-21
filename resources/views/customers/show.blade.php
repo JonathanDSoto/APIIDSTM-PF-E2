@@ -20,7 +20,7 @@
                             </ul>
                         </div>
                         <div class="order-md-2">
-                            <a class="btn btn-primary" href="javascript:void(0);">
+                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editCustomer" href="javascript:void(0);">
                                 <i class="ti ti-pencil me-1"></i> Editar informacion
                             </a>
                         </div>
@@ -129,7 +129,7 @@
                             <h5 class="card-action-title mb-0">Pagos</h5>
                             <div class="card-action-element">
                                 <div>
-                                    <button class="btn btn-primary btn-sm" type="button">
+                                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#paymentCustomer" type="button">
                                         <i class="ti ti-currency-dollar ti-sm"></i>
                                     </button>
                                 </div>
@@ -203,4 +203,150 @@
                 </div>
             </div>
         </div>
-        @endsection
+    </div>
+
+    <!-- Edit customer Modal -->
+    <div class="modal fade" id="editCustomer" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-simple modal-edit-user">
+        <div class="modal-content p-3 p-md-5">
+            <div class="modal-body">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="text-center mb-4">
+                <h3 class="mb-2">Editar Informacion de Cliente</h3>
+                <p class="text-muted">Actualiza los datos permitidos.</p>
+            </div>
+            <form id="editCustomerForm" class="row g-3" onsubmit="return false">
+                <div class="col-12 col-md-6">
+                <label class="form-label" for="editCustomerFirstName">Nombre(s)</label>
+                <input type="text" id="editCustomerFirstName" name="editCustomerFirstName" class="form-control" placeholder="Albert" />
+                </div>
+                <div class="col-12 col-md-6">
+                <label class="form-label" for="editCustomerLastName">Apellidos</label>
+                <input type="text" id="editCustomerLastName" name="editCustomerLastName" class="form-control" placeholder="Cook" />
+                </div>
+                <div class="col-12 col-md-6">
+                <label class="form-label" for="editCustomerEmail">Email</label>
+                <input type="text" id="editCustomerEmail" name="editCustomerEmail" class="form-control" placeholder="albert@gmail.com" />
+                </div>
+                <div class="col-12 col-md-6">
+                <label class="form-label" for="editCustomerStatus">Status</label>
+                <select id="editCustomerStatus" name="editCustomerStatus" class="select2 form-select" aria-label="Default select example">
+                    <option value="1" selected>Activo</option>
+                    <option value="2">Inactivo</option>
+                    <option value="3">Suspendido</option>
+                </select>
+                </div>
+                <div class="col-12 col-md-6">
+                <label class="form-label" for="editCustomerPhone">Numero de Celular</label>
+                <div class="input-group">
+                    <span class="input-group-text">MX (+52)</span>
+                    <input type="text" id="editCustomerPhone" name="editCustomerPhone" class="form-control phone-number-mask" placeholder="(612) 123 123 0" />
+                </div>
+                </div>
+                <div class="col-12 col-md-6">
+                <label class="form-label" for="editCustomerPhoneEmergency">Numero Emergencia</label>
+                <div class="input-group">
+                    <span class="input-group-text">MX (+52)</span>
+                    <input type="text" id="editCustomerPhoneEmergency" name="editCustomerPhoneEmergency" class="form-control phone-number-mask" placeholder="(612) 123 123 9" />
+                </div>
+                </div>
+                <div class="col-12 col-md-6">
+                <label class="form-label" for="editCustomerFare">Tarifa</label>
+                <select id="editCustomerFare" name="editCustomerFare" class="select2 form-select" aria-label="Default select example">
+                    <option selected>Tarifa</option>
+                    <option value="diario" selected>Diaria</option>
+                    <option value="mensual">Mensual</option>
+                    <option value="anual">Anual</option>
+                </select>
+                </div>
+                <div class="col-12 col-md-6">
+                <label class="form-label" for="editCustomerBlood">Tipo de sangre</label>
+                <select id="editCustomerBlood" name="editCustomerBlood" class="select2 form-select" aria-label="Default select example">
+                    <option value="diario">A+</option>
+                    <option value="mensual">A-</option>
+                    <option value="anual">B+</option>
+                    <option value="diario">B-</option>
+                    <option value="mensual">AB+</option>
+                    <option value="anual">AB-</option>
+                    <option value="diario" selected>O+</option>
+                    <option value="mensual">O-</option>
+                </select>
+                </div>
+                <div class="col-12">
+                <label class="switch">
+                    <input type="checkbox" class="switch-input">
+                    <span class="switch-toggle-slider">
+                    <span class="switch-on"></span>
+                    <span class="switch-off"></span>
+                    </span>
+                    <span class="switch-label">¿Desea tener Entrenador Personal? + $150.00</span>
+                </label>
+                </div>
+                <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary me-sm-3 me-1">Guardar</button>
+                <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal" aria-label="Close">Cancelar</button>
+                </div>
+            </form>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!--/ Edit customer Modal -->
+
+    <!-- Payment customer modal-->
+    <div class="modal fade" id="paymentCustomer" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-simple modal-new-customer">
+        <div class="modal-content p-3 p-md-5">
+            <div class="modal-body">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="text-center mb-4">
+                <h3 class="mb-2">Pagar tarifa de Cliente</h3>
+                <p class="text-muted">Completa los datos.</p>
+            </div>
+            <form id="paymentCustomer" class="row g-3" onsubmit="return false">
+                <div class="col-12 col-md-6">
+                <label class="form-label" for="payCustomerName">Nombre Completo</label>
+                <input type="text" id="payCustomerName" name="payCustomerName" class="form-control" placeholder="Albert Cook" />
+                </div>
+
+                <div class="col-12 col-md-6">
+                <label class="form-label" for="payCustomerFare">Tarifa</label>
+                <select id="payCustomerFare" name="payCustomerFare" class="select2 form-select" aria-label="Default select example">
+                    <option selected>Tarifa</option>
+                    <option value="diario" selected>Diaria $50.00 </option>
+                    <option value="mensual">Mensual $450.00 </option>
+                    <option value="anual">Anual $3000.00 </option>
+                </select>
+                </div>
+                <div class="col-12 col-md-6">
+                <label class="form-label" for="payCustomerFareDays">Cantidad de Dias, Meses, Años</label>
+                <input type="text" id="payCustomerFareDays" name="payCustomerFareDays" class="form-control" placeholder="4" />
+                </div>
+                <div class="col-12 col-md-6">
+                <label class="form-label" for="payCustomerAmount">Monto a pagar</label>
+                <input type="text" id="payCustomerAmount" name="payCustomerAmount" class="form-control" placeholder="$200" />
+                </div>
+                <div class="col-12 col-md-6">
+                <label class="form-label" for="payCustomerFare">Tipo de pago</label>
+                <select id="payCustomerFare" name="payCustomerFare" class="select2 form-select" aria-label="Default select example">
+                    <option value="efectivo" selected>Efectivo</option>
+                    <option value="tarjeta">Tarjeta </option>
+                    <option value="tranferencia">Transferencia</option>
+                </select>
+                </div>
+                <div class="col-12 col-md-6">
+                <label for="dobBasic" class="form-label">Fecha de Pago</label>
+                <input type="date" id="dobBasic" class="form-control">
+                </div>
+                <div class="col-12 text-center">
+                <button type="submit" class="btn btn-primary me-sm-3 me-1">Pagar</button>
+                <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal" aria-label="Close">Cancelar</button>
+                </div>
+            </form>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!--/ Payment customer modal-->
+</div>
+ @endsection
