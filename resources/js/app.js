@@ -8,4 +8,10 @@ Object.entries(import.meta.glob('./**/*.vue', { eager: true }))
         app.component(path.split('/').pop().replace(/\.\w+$/, ''), definition.default);
     });
 
+app.mixin({
+    methods: {
+        route
+    }
+})
+
 app.mount('#app');
