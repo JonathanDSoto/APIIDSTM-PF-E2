@@ -31,11 +31,13 @@
                 @foreach ($customersPagination as $customer)
                 <tr>
                     <td>
-                        <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albert Cook">
-                                <img src="../../assets/img/avatars/5.png" alt="Avatar" class="rounded-circle"> {{ $customer->name }}
-                            </li>
-                        </ul>
+                        <a class="link-dark" href="{{ route('customers.show', ['id' => $customer->id]) }}">
+                            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albert Cook">
+                                    <img src="../../assets/img/avatars/5.png" alt="Avatar" class="rounded-circle"> {{ $customer->name }}
+                                </li>
+                            </ul>
+                        </a>
                     </td>
                     <td style="padding-left: 3%;">{{ $customer->phone }}</td>
                     <td>
