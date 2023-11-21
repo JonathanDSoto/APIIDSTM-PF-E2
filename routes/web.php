@@ -1,14 +1,11 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\InstructorController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Auth::routes();
-
-Route::get('/test', function () {
-    return view('test');
-});
 
 Route::controller(CustomerController::class)->prefix('/customers')->group(function () {
     Route::get('/', 'index')->name('customers');
@@ -16,6 +13,14 @@ Route::controller(CustomerController::class)->prefix('/customers')->group(functi
     Route::get('/{id}','show')->name('customers.show');
     Route::put('/{id}','update')->name('customers.update');
     Route::delete('/{id}','destroy')->name('customers.delete');
+});
+
+Route::controller(InstructorController::class)->prefix('/instructors')->group(function () {
+    Route::get('/', 'index')->name('instructors');
+    Route::post('/', 'store')->name('instructors.store');
+    Route::get('/{id}','show')->name('instructors.show');
+    Route::put('/{id}','update')->name('instructors.update');
+    Route::delete('/{id}','destroy')->name('instructors.delete');
 });
 
 Route::middleware('auth')->group(function () {
@@ -29,13 +34,5 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/modals', function () {
         return view('modals');
-    });
-
-    Route::get('/instructors', function () {
-        return view('instructors/show');
-    });
-
-    Route::get('/instructor', function () {
-        return view('instructors/index');
     });
 });

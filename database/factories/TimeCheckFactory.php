@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\Customer;
-use DateTime;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TimeCheckFactory extends Factory
