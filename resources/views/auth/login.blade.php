@@ -117,6 +117,7 @@
     <script src="{{ asset('assets/js/main.js') }}"></script>
     <!-- Page JS -->
     <script src="{{ asset('assets/js/pages-auth.js') }}"></script>
+    @routes
     @vite(['./resources/js/app.js', './resources/css/app.css']);
 </body>
 
