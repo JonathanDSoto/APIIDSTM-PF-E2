@@ -2,7 +2,7 @@
 <template>
     <ul class="menu-inner py-1">
         <li class="menu-item">
-            <a href="app-calendar.html" class="menu-link">
+            <a href="" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-id"></i>
                 <div data-i18n="Clientes">Dashboard</div>
             </a>
