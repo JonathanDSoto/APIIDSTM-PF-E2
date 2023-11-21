@@ -43,4 +43,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/session', function () {
         return view('sessions/show');
     });
+
+    Route::get('/payments', function () {
+        return view('payments/payments');
+    });
+
+    Route::get('/payment', function () {
+        return view('payments/payment');
+    });
 });
