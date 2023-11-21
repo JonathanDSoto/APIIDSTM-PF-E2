@@ -15,7 +15,6 @@ class InstructorFactory extends Factory
             'emergency_phone' => fake()->e164PhoneNumber(),
             'email' => fake()->unique()->freeEmail(),
             'blood_group_id' => fake()->randomElement(BloodGroup::all()),
-            'start_date' => fake()->dateTimeBetween(now()->subMonths(6), now()->addMonths(6)),
             'is_active' => fake()->boolean()
         ];
     }

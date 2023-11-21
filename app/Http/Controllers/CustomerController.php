@@ -27,8 +27,7 @@ class CustomerController extends Controller
     public function index()
     {
         return view('customers.index', [
-            'customersPagination' => Customer::simplePaginate(15),
-            'bloodGroups' => BloodGroup::all()->sortBy('name'),
+            'customersPagination' => Customer::simplePaginate(15)
         ]);
     }
 
@@ -40,15 +39,12 @@ class CustomerController extends Controller
 
         return redirect()
             ->route('customers')
-            ->with('success','La información del cliente se ha guardado con éxito.');
+            ->with('success', 'La información del cliente se ha guardado con éxito.');
     }
 
     public function show(string $id)
     {
         $customer = Customer::find($id);
-        $customer->bloodGroup;
-        $customer->attendedSessions;
-        $customer->payments;
 
         return view('customers.show', ['customer' => $customer]);
     }
