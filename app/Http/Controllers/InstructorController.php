@@ -19,7 +19,9 @@ class InstructorController extends Controller
             'emergency_phone' => ['required', 'string', 'different:phone', 'max:50'],
             'email' => ['email', 'unique:instructors,email', 'nullable', 'max:255'],
             'blood_group_id' => ['required', 'integer', 'exists:blood_groups,id'],
-            'is_active' => ['integer', Rule::in([0, 1])]
+            'is_active' => ['integer', Rule::in([0, 1])],
+            'instructor_qualifications' => ['required', 'array'],
+            'instructor_qualifications.*' => ['required', 'integer', 'exists:exercise_types,id']
         ];
     }
 
@@ -34,7 +36,8 @@ class InstructorController extends Controller
     {
         $this->validate($request, $this->validator);
 
-        Instructor::create($request->all());
+        $instructor = Instructor::create($request->all());
+        $instructor->exerciseTypes()->attach($request->instructor_qualifications);
 
         return redirect()
             ->route('instructors')
@@ -57,6 +60,7 @@ class InstructorController extends Controller
 
         if ($instructor) {
             $instructor->update($request->all());
+            $instructor->exerciseTypes()->sync($request->exercise_types);
 
             return redirect()
                 ->route('instructors.show', ['id' => $id])
