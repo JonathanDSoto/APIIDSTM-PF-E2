@@ -45,10 +45,10 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::get('/payments', function () {
-        return view('payments/payments');
+        return view('payments/index');
     });
 
     Route::get('/payment', function () {
-        return view('payments/payment');
+        return view('payments/show');
     });
 });
