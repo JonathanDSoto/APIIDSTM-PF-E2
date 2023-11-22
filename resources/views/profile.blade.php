@@ -20,7 +20,7 @@
                             </ul>
                         </div>
                         <div class="order-md-2">
-                            <a class="btn btn-primary" href="javascript:void(0);">
+                            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editAdmin" href="javascript:void(0);">
                                 <i class="ti ti-pencil me-1"></i> Editar informacion 
                             </a>
                         </div>
@@ -29,6 +29,7 @@
             </div>
         </div>
     </div>
+</div>
     <!-- INFORMACION -->
     <div class="row">
         <div class="col-12">
@@ -51,11 +52,6 @@
                                 <span class="fw-medium mx-2 text-heading">Nombre Completo:</span>
                                 <span>Marielena Nuñez Romero</span>
                             </li>
-                            <!-- <li class="d-flex align-items-center mb-3">
-                                <i class="ti ti-check text-heading"></i>
-                                <span class="fw-medium mx-2 text-heading">Status:</span>
-                                <span>Activo</span>
-                            </li> -->
                         </ul>
                         <small class="card-text text-uppercase">Contacto</small>
                         <ul class="list-unstyled mb-4 mt-3">
@@ -75,5 +71,45 @@
             </div>
         </div>
     </div>
+    <!-- edit admin -->
+    <div class="modal fade" id="editAdmin" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-simple modal-edit-admin">
+        <div class="modal-content p-3 p-md-5">
+            <div class="modal-body">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="text-center mb-4">
+                <h3 class="mb-2">Editar Informacion de Administrador</h3>
+                <p class="text-muted">Actualiza los datos permitidos.</p>
+            </div>
+            <form id="editAdminForm" class="row g-3" onsubmit="return false">
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="editAdminFirstName">Nombre(s)</label>
+                    <input type="text" id="editAdminFirstName" name="editAdminrFirstName" class="form-control" placeholder="Marielena" />
+                </div>
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="editAdminLastName">Apellidos</label>
+                    <input type="text" id="editAdminLastName" name="editAdminrLastName" class="form-control" placeholder="Nuñez Romero" />
+                </div>
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="editAdminEmail">Email</label>
+                    <input type="text" id="editAdminEmail" name="editAdminEmail" class="form-control" placeholder="albert@gmail.com" />
+                </div>
+                <div class="col-12 col-md-6">
+                    <label class="form-label" for="editAdminPhone">Numero de Celular</label>
+                    <div class="input-group">
+                        <span class="input-group-text">MX (+52)</span>
+                        <input type="text" id="editAdminPhone" name="editAdminPhone" class="form-control phone-number-mask" placeholder="(612) 123 123 0" />
+                    </div>
+                </div>
+                <div class="col-12 text-center">
+                    <button type="submit" class="btn btn-primary me-sm-3 me-1">Editar</button>
+                    <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal" aria-label="Close">Cancelar</button>
+                </div>
+            </form>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!--/ edit admin -->
 </div> 
 @endsection
