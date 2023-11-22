@@ -51,4 +51,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/payment', function () {
         return view('payments/show');
     });
+
+    Route::get('/checker', function () {
+        return view('checker');
+    });
+    Route::get('/profile', function () {
+        return view('profile');
+    });
 });
