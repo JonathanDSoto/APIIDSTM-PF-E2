@@ -27,8 +27,10 @@ class InstructorController extends Controller
 
     public function index()
     {
+        $instructors = Instructor::with("exerciseTypes")->simplePaginate(15);
+
         return view('instructors.index', [
-            'instructors' => Instructor::simplePaginate(15)
+            'instructors' => $instructors
         ]);
     }
 
