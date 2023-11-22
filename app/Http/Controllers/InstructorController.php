@@ -28,7 +28,7 @@ class InstructorController extends Controller
     public function index()
     {
         return view('instructors.index', [
-            'instructorsPagination' => Instructor::simplePaginate(15)
+            'instructors' => Instructor::simplePaginate(15)
         ]);
     }
 
