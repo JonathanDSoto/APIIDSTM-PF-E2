@@ -137,21 +137,34 @@
             <p class="text-muted">Completa los datos.</p>
           </div>
           <form id="NewFare" class="row g-3" onsubmit="return false">
-            <div class="col-12 col-md-6">
-              <label class="form-label" for="newFareName">Nombre de la Tarifa</label>
-              <input type="text" id="newFareName" name="newFareName" class="form-control" placeholder="Semanal" />
+            <div class="col-12 col-md-12">
+                <label class="form-label" for="newFareName">Nombre de la Tarifa</label>
+                <input type="text" id="newFareName" name="newFareName" class="form-control" placeholder="Semanal" />
             </div>
             <div class="col-12 col-md-6">
-              <label class="form-label" for="newFareCost">Costo</label>
-              <input type="text" id="newFareCost" name="newFareCost" class="form-control" placeholder="$200" />
+                <label class="form-label" for="newFareCost">Costo</label>
+                <input type="text" id="newFareCost" name="newFareCost" class="form-control" placeholder="$200" />
+            </div>
+            <div class="col-12 col-md-4">
+                <label class="form-label" for="editInstructorBlood">Periodo</label>
+                <select id="editInstructorBlood" name="editInstructorBlood" class="select2 form-select" aria-label="Default select example">
+                    <option value="diario">Diario</option>
+                    <option value="mensual">Mensual</option>
+                    <option value="anual">Anual</option>
+                </select>
+            </div>
+            <div class="col-12 col-md-1 d-flex align-items-end">
+                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newPeriod" href="javascript:void(0);">
+                    <i class="ti ti-plus me-1"></i> 
+                </a>
             </div>
             <div class="col-12 col-md-12">
                 <label for="descripcionFare" class="form-label">Descripción:</label>
                 <textarea class="form-control" id="descripcionFare" name="descripcionFare" rows="2"> Acceso completo al gimnasio</textarea>
             </div>
             <div class="col-12 text-center">
-              <button type="submit" class="btn btn-primary me-sm-3 me-1">Añadir</button>
-              <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal" aria-label="Close">Cancelar</button>
+                <button type="submit" class="btn btn-primary me-sm-3 me-1">Añadir</button>
+                <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal" aria-label="Close">Cancelar</button>
             </div>
           </form>
         </div>

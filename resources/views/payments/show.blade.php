@@ -11,19 +11,7 @@
                     <div class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-4 flex-md-row flex-column gap-4">
                         <div class="user-profile-info">
                             <h4>Albert Cook</h4>
-                            <!-- <ul class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-2">
-                                <li class="list-inline-item d-flex gap-1">
-                                    <span class="badge bg-label-success me-1">
-                                       <i class="fas fa-dumbbell"> </i>  Entrenamiento Funcional
-                                    </span>
-                                </li>
-                            </ul> -->
                         </div>
-                        <!-- <div class="order-md-2">
-                            <a class="btn btn-primary" href="javascript:void(0);">
-                                <i class="ti ti-pencil me-1"></i> Editar informacion 
-                            </a>
-                        </div> -->
                     </div>
                 </div>
             </div>

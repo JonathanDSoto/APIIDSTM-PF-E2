@@ -377,8 +377,8 @@
                               <input type="text" id="newInstructorPhoneEmergency" name="newInstructorPhoneEmergency" class="form-control phone-number-mask" placeholder="(612) 000 000 0" />
                           </div>
                       </div>
-                      <div class="col-12 col-md-6">
-                          <label class="form-label" for="newInstructorFare">Especialidad/Clase</label>
+                      <div class="col-12 col-md-5">
+                          <label class="form-label" for="newInstructorFare">Especialidad/Ejercicio</label>
                           <select id="newInstructorFare" name="newInstructorFare" class="select2 form-select" aria-label="Default select example">
                               <option value="pesas">Pesas</option>
                               <option value="entrenamientoFuncional" selected>Entrenamiento Funcional</option>
@@ -388,6 +388,11 @@
                               <option value="yoga">Yoga</option>
                               <option value="acondicionamientoFisico">Acondicionamiento Fisico</option>
                           </select>
+                      </div>
+                      <div class="col-12 col-md-1 d-flex align-items-end">
+                          <a class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#newTypeExercise" href="javascript:void(0);">
+                              <i class="ti ti-plus me-1"></i> 
+                          </a>
                       </div>
                       <div class="col-12 col-md-6">
                           <label class="form-label" for="newInstructorBlood">Tipo de sangre</label>
@@ -402,16 +407,6 @@
                             <option value="diario">O+</option>
                             <option value="mensual">O-</option>
                           </select>
-                      </div>
-                      <div class="col-12">
-                          <label class="switch">
-                              <input type="checkbox" class="switch-input">
-                              <span class="switch-toggle-slider">
-                                  <span class="switch-on"></span>
-                                  <span class="switch-off"></span>
-                              </span>
-                              <span class="switch-label">¿Desea ser Entrenador Personal?</span>
-                          </label>
                       </div>
                       <div class="col-12 text-center">
                           <button type="submit" class="btn btn-primary me-sm-3 me-1">Guardar</button>
@@ -493,16 +488,6 @@
                               <option value="diario" selected>O+</option>
                               <option value="mensual">O-</option>
                           </select>
-                      </div>
-                      <div class="col-12">
-                          <label class="switch">
-                              <input type="checkbox" class="switch-input">
-                              <span class="switch-toggle-slider">
-                                  <span class="switch-on"></span>
-                                  <span class="switch-off"></span>
-                              </span>
-                              <span class="switch-label">¿Desea ser Entrenador Personal?</span>
-                          </label>
                       </div>
                       <div class="col-12 text-center">
                           <button type="submit" class="btn btn-primary me-sm-3 me-1">Guardar</button>

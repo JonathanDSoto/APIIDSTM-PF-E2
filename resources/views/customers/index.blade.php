@@ -58,11 +58,11 @@
                         <?php } ?>
                     </td>
                     <td class="text-end">
-                        <a class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editCustomer" href="javascript:void(0);">
-                            <i class="ti ti-pencil me-1"></i> Editar
+                        <a class="btn btn-success me-1" data-bs-toggle="modal" data-bs-target="#editCustomer" href="javascript:void(0);">
+                            <i class="ti ti-pencil "></i> 
                         </a>
                         <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteCustomer" href="javascript:void(0);">
-                            <i class="ti ti-trash me-1"></i> Borrar
+                            <i class="ti ti-trash"></i> 
                         </a>
                     </td>
                 </tr>
@@ -129,16 +129,6 @@
                     <option value="diario">O+</option>
                     <option value="mensual">O-</option>
                 </select>
-                </div>
-                <div class="col-12">
-                <label class="switch">
-                    <input type="checkbox" class="switch-input">
-                    <span class="switch-toggle-slider">
-                    <span class="switch-on"></span>
-                    <span class="switch-off"></span>
-                    </span>
-                    <span class="switch-label">¿Desea tener Entrenador Personal? + $150.00</span>
-                </label>
                 </div>
                 <div class="col-12 text-center">
                 <button type="submit" class="btn btn-primary me-sm-3 me-1">Guardar</button>

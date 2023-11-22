@@ -14,7 +14,9 @@
     <div class="col-12 col-sm-6 col-lg-3 mb-4">
         <div class="card position-relative">
             <div class="card-body text-center">
-                <i class="mb-3 fas fa-dumbbell ti-lg"></i>
+                <a href="/session">
+                    <i class="mb-3 fas fa-dumbbell ti-lg"></i>
+                </a>
                 <h5>Entrenamiento Funcional</h5>
                 <p>"Haz que cada movimiento cuente, entrena para la vida diaria."</p>
                 <div class="d-flex flex-column justify-content-between align-items-center mt-3 gap-3">
@@ -23,7 +25,9 @@
                     <small>Disponible: 10 personas</small>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#reserveSession"> Reservar </button>
+                    <a type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#reserveSession"  href="javascript:void(0);">
+                        <i class="ti ti-calendar"></i>
+                    </a>
                     <a type="button" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#editSession"  href="javascript:void(0);">
                         <i class="ti ti-pencil"></i>
                     </a>
@@ -49,7 +53,9 @@
                     <small>Disponible: 10 personas</small>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#reserveSession"> Reservar </button>
+                    <a type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#reserveSession"  href="javascript:void(0);">
+                        <i class="ti ti-calendar"></i>
+                    </a>                    
                     <a type="button" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#editSession"  href="javascript:void(0);">
                         <i class="ti ti-pencil"></i>
                     </a>
@@ -75,7 +81,9 @@
                     <small>Disponible: 10 personas</small>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#reserveSession"> Reservar </button>
+                    <a type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#reserveSession"  href="javascript:void(0);">
+                        <i class="ti ti-calendar"></i>
+                    </a>                    
                     <a type="button" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#editSession"  href="javascript:void(0);">
                         <i class="ti ti-pencil"></i>
                     </a>
@@ -101,7 +109,9 @@
                     <small>Disponible: 10 personas</small>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#reserveSession"> Reservar </button>
+                    <a type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#reserveSession"  href="javascript:void(0);">
+                        <i class="ti ti-calendar"></i>
+                    </a>                    
                     <a type="button" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#editSession"  href="javascript:void(0);">
                         <i class="ti ti-pencil"></i>
                     </a>
@@ -127,7 +137,9 @@
                     <small>Disponible: 10 personas</small>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#reserveSession"> Reservar </button>
+                    <a type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#reserveSession"  href="javascript:void(0);">
+                        <i class="ti ti-calendar"></i>
+                    </a>                    
                     <a type="button" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#editSession"  href="javascript:void(0);">
                         <i class="ti ti-pencil"></i>
                     </a>
@@ -153,7 +165,9 @@
                     <small>Disponible: 10 personas</small>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#reserveSession"> Reservar </button>
+                    <a type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#reserveSession"  href="javascript:void(0);">
+                        <i class="ti ti-calendar"></i>
+                    </a>                    
                     <a type="button" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#editSession"  href="javascript:void(0);">
                         <i class="ti ti-pencil"></i>
                     </a>
@@ -179,7 +193,9 @@
                     <small>Disponible: 10 personas</small>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#reserveSession"> Reservar </button>
+                    <a type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#reserveSession"  href="javascript:void(0);">
+                        <i class="ti ti-calendar"></i>
+                    </a>                    
                     <a type="button" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#editSession"  href="javascript:void(0);">
                         <i class="ti ti-pencil"></i>
                     </a>
@@ -205,7 +221,9 @@
                     <small>Disponible: 10 personas</small>
                 </div>
                 <div class="d-flex justify-content-between align-items-center">
-                    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#reserveSession"> Reservar </button>
+                    <a type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#reserveSession"  href="javascript:void(0);">
+                        <i class="ti ti-calendar"></i>
+                    </a>                    
                     <a type="button" class="btn btn-success mt-3" data-bs-toggle="modal" data-bs-target="#editSession"  href="javascript:void(0);">
                         <i class="ti ti-pencil"></i>
                     </a>
@@ -241,10 +259,6 @@
                             <option data-name="Trevor Baker" data-image="">Trevor Baker</option>
                             <option data-name="Emma Jhonson" data-image="">Emma Jhonson</option>
                             </select>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <label class="form-label" for="modalReserveSession">Clase</label>
-                            <input type="text" id="modalReserveSession" name="modalReserveSession" class="form-control" placeholder="Entrenamiento Funcional" />
                         </div>
                         <div class="col-12 col-md-6">
                             <label for="selectCustomer" class="form-label">Entrenador/Instructor</label>
@@ -306,20 +320,6 @@
                             <label for="selectCustomer" class="form-label">Ingresa el nombre de la clase</label>
                             <input type="text" id="modalNewSession" name="modalNewSession" class="form-control" placeholder="Entrenamiento Funcional" />
                         </div>
-                        <div class="row">
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="horaInicial" class="form-label">Hora Inicial:</label>
-                                    <input type="time" class="form-control" id="horaInicial" name="horaInicialSession">
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="horaFinal" class="form-label">Hora Final:</label>
-                                    <input type="time" class="form-control" id="horaFinal" name="horaFinalSession">
-                                </div>
-                            </div>
-                        </div>
                         <div class="col-12 col-md-6">
                             <label class="form-label" for="modalNewSessionInstructor">Entrenador/Instructor</label>
                             <input type="text" id="modalNewSessionInstructor" name="modalNewSessionInstructor" class="form-control" placeholder="Mark Martin" />
@@ -336,6 +336,21 @@
                                 <option value="sabado">Sabado </option>
                             </select>
                         </div>
+                        <div class="row">
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="horaInicial" class="form-label">Hora Inicial:</label>
+                                    <input type="time" class="form-control" id="horaInicial" name="horaInicialSession">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="horaFinal" class="form-label">Hora Final:</label>
+                                    <input type="time" class="form-control" id="horaFinal" name="horaFinalSession">
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="col-12 col-md-6">
                             <label for="descripcion" class="form-label">Descripción:</label>
                             <textarea class="form-control" id="descripcion" name="descripcion" rows="2"></textarea>
@@ -370,20 +385,6 @@
                             <label for="selectCustomer" class="form-label">Ingresa el nombre de la clase</label>
                             <input type="text" id="modalEditSession" name="modalEditSession" class="form-control" placeholder="Entrenamiento Funcional" />
                         </div>
-                        <div class="row">
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="horaInicial" class="form-label">Hora Inicial:</label>
-                                    <input type="time" class="form-control" id="horaInicial" name="horaInicialSession">
-                                </div>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="form-group">
-                                    <label for="horaFinal" class="form-label">Hora Final:</label>
-                                    <input type="time" class="form-control" id="horaFinal" name="horaFinalSession">
-                                </div>
-                            </div>
-                        </div>
                         <div class="col-12 col-md-6">
                             <label class="form-label" for="modalSessionInstructor">Entrenador/Instructor</label>
                             <input type="text" id="modalSessionInstructor" name="modalSessionInstructor" class="form-control" placeholder="Mark Martin" />
@@ -399,6 +400,20 @@
                                 <option value="viernes">Viernes </option>
                                 <option value="sabado">Sabado </option>
                             </select>
+                        </div>
+                        <div class="row 12">
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="horaInicial" class="form-label">Hora Inicial:</label>
+                                    <input type="time" class="form-control" id="horaInicial" name="horaInicialSession">
+                                </div>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="horaFinal" class="form-label">Hora Final:</label>
+                                    <input type="time" class="form-control" id="horaFinal" name="horaFinalSession">
+                                </div>
+                            </div>
                         </div>
                         <div class="col-12 col-md-6">
                             <label for="descripcion" class="form-label">Descripción:</label>

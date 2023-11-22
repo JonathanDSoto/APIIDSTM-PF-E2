@@ -21,11 +21,14 @@
             <tbody class="table-border-bottom-0">
                 <tr>
                     <td>
-                        <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                            <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albert Cook">
-                                <img src="../../assets/img/avatars/5.png" alt="Avatar" class="rounded-circle"> Albert Cook
-                            </li>
-                        </ul>
+                        <!-- href para llevar a la vista de pago de cada cliente -->
+                        <a href="/payment"> 
+                            <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                                <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="Albert Cook">
+                                    <img src="../../assets/img/avatars/5.png" alt="Avatar" class="rounded-circle">Albert Cook
+                                </li>
+                            </ul>
+                        </a>
                     </td>
                     <td>Diario</td>
                     <td>
@@ -34,13 +37,13 @@
                     <td> Trasferencia</td>
                     <td class="text-end">
                         <a class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#newPaymentCustomer" href="javascript:void(0);">
-                            <i class="ti ti-cash me-1"></i> Pagar 
+                            <i class="ti ti-cash"></i>  
                         </a>
                         <a class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#editPaymentCustomer" href="javascript:void(0);">
-                            <i class="ti ti-pencil me-1"></i> 
+                            <i class="ti ti-pencil"></i> 
                         </a>
                         <a class="btn btn-danger ti-sm" data-bs-toggle="modal" data-bs-target="#deletePaymentCustomer" href="javascript:void(0);">
-                            <i class="ti ti-trash me-1"></i> 
+                            <i class="ti ti-ban"></i> 
                         </a>
                     </td>
                 </tr>
@@ -59,13 +62,13 @@
                     <td> Tarjeta</td>
                     <td class="text-end">
                         <a class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#newPaymentCustomer" href="javascript:void(0);">
-                            <i class="ti ti-cash me-1"></i> Pagar 
+                            <i class="ti ti-cash"></i>  
                         </a>
                         <a class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#editPaymentCustomer" href="javascript:void(0);">
-                            <i class="ti ti-pencil me-1"></i> 
+                            <i class="ti ti-pencil"></i> 
                         </a>
                         <a class="btn btn-danger ti-sm" data-bs-toggle="modal" data-bs-target="#deletePaymentCustomer" href="javascript:void(0);">
-                            <i class="ti ti-trash me-1"></i> 
+                            <i class="ti ti-ban"></i> 
                         </a>
                     </td>
                 </tr>
@@ -84,13 +87,13 @@
                     <td> Efectivo</td>
                     <td class="text-end">
                         <a class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#newPaymentCustomer" href="javascript:void(0);">
-                            <i class="ti ti-cash me-1"></i> Pagar 
+                            <i class="ti ti-cash"></i>  
                         </a>
                         <a class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#editPaymentCustomer" href="javascript:void(0);">
-                            <i class="ti ti-pencil me-1"></i> 
+                            <i class="ti ti-pencil"></i> 
                         </a>
                         <a class="btn btn-danger ti-sm" data-bs-toggle="modal" data-bs-target="#deletePaymentCustomer" href="javascript:void(0);">
-                            <i class="ti ti-trash me-1"></i> 
+                            <i class="ti ti-ban"></i> 
                         </a>
                     </td>
                 </tr>
@@ -109,13 +112,13 @@
                     <td>Efectivo</td>
                     <td class="text-end">
                         <a class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#newPaymentCustomer" href="javascript:void(0);">
-                            <i class="ti ti-cash me-1"></i> Pagar 
+                            <i class="ti ti-cash"></i>  
                         </a>
                         <a class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#editPaymentCustomer" href="javascript:void(0);">
-                            <i class="ti ti-pencil me-1"></i> 
+                            <i class="ti ti-pencil"></i> 
                         </a>
                         <a class="btn btn-danger ti-sm" data-bs-toggle="modal" data-bs-target="#deletePaymentCustomer" href="javascript:void(0);">
-                            <i class="ti ti-trash me-1"></i> 
+                            <i class="ti ti-ban"></i> 
                         </a>
                     </td>
                 </tr>
@@ -134,13 +137,13 @@
                     <td>Transferencia</td>
                     <td class="text-end">
                         <a class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#newPaymentCustomer" href="javascript:void(0);">
-                            <i class="ti ti-cash me-1"></i> Pagar 
+                            <i class="ti ti-cash"></i>  
                         </a>
                         <a class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#editPaymentCustomer" href="javascript:void(0);">
-                            <i class="ti ti-pencil me-1"></i> 
+                            <i class="ti ti-pencil"></i> 
                         </a>
                         <a class="btn btn-danger ti-sm" data-bs-toggle="modal" data-bs-target="#deletePaymentCustomer" href="javascript:void(0);">
-                            <i class="ti ti-trash me-1"></i> 
+                            <i class="ti ti-ban"></i> 
                         </a>
                     </td>
                 </tr>
@@ -153,57 +156,49 @@
         <div class="modal-dialog modal-lg modal-simple modal-new-customer">
         <div class="modal-content p-3 p-md-5">
             <div class="modal-body">
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            <div class="text-center mb-4">
-                <h3 class="mb-2">Pagar tarifa de Cliente</h3>
-                <p class="text-muted">Completa los datos.</p>
-            </div>
-            <form id="paymentCustomer" class="row g-3" onsubmit="return false">
-                <div class="col-12 col-md-6">
-                    <label for="selectCustomer" class="form-label">Selecciona el cliente</label>
-                    <select id="selectCustomer" class="form-select form-select-lg share-project-select" data-allow-clear="true">
-                        <option select>Selecciona un cliente</option>
-                        <option data-name="Albert Cook" data-image="">Albert Cook</option>
-                        <option data-name="Barry Hunter" data-image="">Barry Hunter</option>
-                        <option data-name="Trevor Baker" data-image="">Trevor Baker</option>
-                        <option data-name="Emma Jhonson" data-image="">Emma Jhonson</option>
-                    </select>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <div class="text-center mb-4">
+                    <h3 class="mb-2">Pagar tarifa de Cliente</h3>
+                    <p class="text-muted">Completa los datos.</p>
                 </div>
+                <form id="paymentCustomer" class="row g-3" onsubmit="return false">
+                    <div class="col-12 col-md-6">
+                        <label for="selectCustomer" class="form-label">Selecciona el cliente</label>
+                        <select id="selectCustomer" class="form-select form-select-lg" data-allow-clear="true">
+                            <option select>Selecciona un cliente</option>
+                            <option data-name="Albert Cook" data-image="">Albert Cook</option>
+                            <option data-name="Barry Hunter" data-image="">Barry Hunter</option>
+                            <option data-name="Trevor Baker" data-image="">Trevor Baker</option>
+                            <option data-name="Emma Jhonson" data-image="">Emma Jhonson</option>
+                        </select>
+                    </div>
 
-                <div class="col-12 col-md-6">
-                <label class="form-label" for="payCustomerFare">Tarifa</label>
-                <select id="payCustomerFare" name="payCustomerFare" class="select2 form-select" aria-label="Default select example">
-                    <option selected>Tarifa</option>
-                    <option value="diario" selected>Diaria $50.00 </option>
-                    <option value="mensual">Mensual $450.00 </option>
-                    <option value="anual">Anual $3000.00 </option>
-                </select>
-                </div>
-                <div class="col-12 col-md-6">
-                <label class="form-label" for="payCustomerFareDays">Cantidad de Dias, Meses, Años</label>
-                <input type="text" id="payCustomerFareDays" name="payCustomerFareDays" class="form-control" placeholder="4" />
-                </div>
-                <div class="col-12 col-md-6">
-                <label class="form-label" for="payCustomerAmount">Monto a pagar</label>
-                <input type="text" id="payCustomerAmount" name="payCustomerAmount" class="form-control" placeholder="$200" />
-                </div>
-                <div class="col-12 col-md-6">
-                <label class="form-label" for="payCustomerFare">Tipo de pago</label>
-                <select id="payCustomerFare" name="payCustomerFare" class="select2 form-select" aria-label="Default select example">
-                    <option value="efectivo" selected>Efectivo</option>
-                    <option value="tarjeta">Tarjeta </option>
-                    <option value="tranferencia">Transferencia</option>
-                </select>
-                </div>
-                <div class="col-12 col-md-6">
-                <label for="dobBasic" class="form-label">Fecha de Pago</label>
-                <input type="date" id="dobBasic" class="form-control">
-                </div>
-                <div class="col-12 text-center">
-                <button type="submit" class="btn btn-primary me-sm-3 me-1">Pagar</button>
-                <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal" aria-label="Close">Cancelar</button>
-                </div>
-            </form>
+                    <div class="col-12 col-md-6">
+                        <label class="form-label" for="payCustomerFare">Tarifa</label>
+                        <input type="text" id="payCustomerFare" name="payCustomerFare" class="form-control" placeholder="Diario $50" />
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <label for="dobBasic" class="form-label">Fecha de Pago</label>
+                        <input type="date" id="dobBasic" class="form-control">
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <label class="form-label" for="payCustomerFare">Tipo de pago</label>
+                        <select id="payCustomerFare" name="payCustomerFare" class="select2 form-select" aria-label="Default select example">
+                            <option value="efectivo" selected>Efectivo</option>
+                            <option value="tarjeta">Tarjeta </option>
+                            <option value="tranferencia">Transferencia</option>
+                        </select>
+                    </div>
+                    <div class="col-12 col-md-1 d-flex align-items-end">
+                        <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newPeriod" href="javascript:void(0);">
+                            <i class="ti ti-plus me-1"></i> 
+                        </a>
+                    </div>
+                    <div class="col-12 text-center">
+                        <button type="submit" class="btn btn-primary me-sm-3 me-1">Pagar</button>
+                        <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal" aria-label="Close">Cancelar</button>
+                    </div>
+                </form>
             </div>
         </div>
         </div>
@@ -222,42 +217,33 @@
             </div>
             <form id="paymentCustomer" class="row g-3" onsubmit="return false">
                 <div class="col-12 col-md-6">
-                <label class="form-label" for="payCustomerName">Nombre Completo</label>
-                <input type="text" id="payCustomerName" name="payCustomerName" class="form-control" placeholder="Albert Cook" />
-                </div>
-
-                <div class="col-12 col-md-6">
-                <label class="form-label" for="payCustomerFare">Tarifa</label>
-                <select id="payCustomerFare" name="payCustomerFare" class="select2 form-select" aria-label="Default select example">
-                    <option selected>Tarifa</option>
-                    <option value="diario" selected>Diaria $50.00 </option>
-                    <option value="mensual">Mensual $450.00 </option>
-                    <option value="anual">Anual $3000.00 </option>
-                </select>
+                    <label class="form-label" for="payCustomerName">Nombre Completo</label>
+                    <input type="text" id="payCustomerName" name="payCustomerName" class="form-control" placeholder="Albert Cook" />
                 </div>
                 <div class="col-12 col-md-6">
-                <label class="form-label" for="payCustomerFareDays">Cantidad de Dias, Meses, Años</label>
-                <input type="text" id="payCustomerFareDays" name="payCustomerFareDays" class="form-control" placeholder="4" />
+                    <label class="form-label" for="payCustomerFare">Tarifa</label>
+                    <input type="text" id="payCustomerFare" name="payCustomerFare" class="form-control" placeholder="Diario $50" />
                 </div>
                 <div class="col-12 col-md-6">
-                <label class="form-label" for="payCustomerAmount">Monto a pagar</label>
-                <input type="text" id="payCustomerAmount" name="payCustomerAmount" class="form-control" placeholder="$200" />
+                    <label for="dobBasic" class="form-label">Fecha de Pago</label>
+                    <input type="date" id="dobBasic" class="form-control">
                 </div>
-                <div class="col-12 col-md-6">
-                <label class="form-label" for="payCustomerFare">Tipo de pago</label>
-                <select id="payCustomerFare" name="payCustomerFare" class="select2 form-select" aria-label="Default select example">
-                    <option value="efectivo" selected>Efectivo</option>
-                    <option value="tarjeta">Tarjeta </option>
-                    <option value="tranferencia">Transferencia</option>
-                </select>
+                <div class="col-12 col-md-4">
+                    <label class="form-label" for="payCustomerFare">Tipo de pago</label>
+                    <select id="payCustomerFare" name="payCustomerFare" class="select2 form-select" aria-label="Default select example">
+                        <option value="efectivo" selected>Efectivo</option>
+                        <option value="tarjeta">Tarjeta </option>
+                        <option value="tranferencia">Transferencia</option>
+                    </select>
                 </div>
-                <div class="col-12 col-md-6">
-                <label for="dobBasic" class="form-label">Fecha de Pago</label>
-                <input type="date" id="dobBasic" class="form-control">
+                <div class="col-12 col-md-1 d-flex align-items-end">
+                    <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#newPeriod" href="javascript:void(0);">
+                        <i class="ti ti-plus me-1"></i> 
+                    </a>
                 </div>
                 <div class="col-12 text-center">
-                <button type="submit" class="btn btn-primary me-sm-3 me-1">Pagar</button>
-                <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal" aria-label="Close">Cancelar</button>
+                    <button type="submit" class="btn btn-primary me-sm-3 me-1">Pagar</button>
+                    <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal" aria-label="Close">Cancelar</button>
                 </div>
             </form>
             </div>
