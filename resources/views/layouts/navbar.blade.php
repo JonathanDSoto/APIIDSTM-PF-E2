@@ -25,7 +25,7 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                        <a class="dropdown-item" href="pages-account-settings-account.html">
+                        <a class="dropdown-item" href="/profile">
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
@@ -40,7 +40,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="pages-profile-user.html">
+                        <a class="dropdown-item" href="/profile">
                             <i class="ti ti-user-check me-2 ti-sm"></i>
                             <span class="align-middle">Mi Perfil</span>
                         </a>
