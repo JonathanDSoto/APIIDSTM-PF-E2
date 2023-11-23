@@ -19,6 +19,11 @@ app.mixin({
     methods: {
         route,
     },
+    provide: {
+        csrf: document
+            .querySelector('meta[name="csrf-token"]')
+            ?.getAttribute('content')
+    }
 });
 
 app.mount("#app");
