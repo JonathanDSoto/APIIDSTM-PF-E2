@@ -25,7 +25,7 @@ class CustomerController extends Controller
     public function index()
     {
         return view('customers.index', [
-            'customersPagination' => Customer::simplePaginate(15)
+            'customers' => Customer::simplePaginate(15)
         ]);
     }
 
