@@ -16,7 +16,7 @@ return new class extends Migration
                 ->cascadeOnUpdate();
             $table->foreignId('customer_id')
                 ->constrained()
-                ->restrictOnDelete()
+                ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->dateTime('subscription_date')->default(now());
             $table->timestamps();
