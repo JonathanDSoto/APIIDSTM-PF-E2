@@ -1,7 +1,18 @@
 <script setup>
+import FormAuth from "./FormAuth.vue";
+
+const recordData = {
+    name: "",
+    email: "",
+    phone: "",
+    emergency_phone: "",
+    blood_type_id: "",
+};
+
 const emit = defineEmits(["close"]);
 </script>
 <template>
+    {{ recordData }}
     <div class="modal fade" id="addUser" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-simple modal-edit-user">
             <div class="modal-content p-3 p-md-5">
@@ -21,13 +32,24 @@ const emit = defineEmits(["close"]);
                     <form
                         id="addUserForm"
                         class="row g-3"
-                        onsubmit="return false"
+                        :action="
+                            route('customers.store', {
+                                name: recordData.name,
+                                phone: recordData.phone,
+                                emergency_phone: recordData.emergency_phone,
+                                email: recordData.email,
+                                blood_type_id: recordData.blood_type_id,
+                            })
+                        "
+                        method="POST"
                     >
+                        <FormAuth method="POST" />
                         <div class="col-12">
                             <label class="form-label" for="modalEditUserName"
                                 >Nombre</label
                             >
                             <input
+                                v-model="recordData.name"
                                 type="text"
                                 id="modalAddUserName"
                                 name="modalAddUserName"
@@ -40,6 +62,7 @@ const emit = defineEmits(["close"]);
                                 >Correo Electronico</label
                             >
                             <input
+                                v-model="recordData.email"
                                 type="text"
                                 id="modalAddUserEmail"
                                 name="modalAddUserEmail"
@@ -54,6 +77,7 @@ const emit = defineEmits(["close"]);
                             <div class="input-group">
                                 <span class="input-group-text">MX (+52)</span>
                                 <input
+                                    v-model="recordData.phone"
                                     type="text"
                                     id="modalEditUserPhone"
                                     name="modalEditUserPhone"
@@ -69,6 +93,7 @@ const emit = defineEmits(["close"]);
                             <div class="input-group">
                                 <span class="input-group-text">MX (+52)</span>
                                 <input
+                                    v-model="recordData.emergency_phone"
                                     type="text"
                                     id="modalEditUserPhone"
                                     name="modalEditUserPhone"
@@ -86,16 +111,19 @@ const emit = defineEmits(["close"]);
                                 name="modalEditUserCountry"
                                 class="select2 form-select"
                                 data-allow-clear="true"
+                                v-model="recordData.blood_type"
                             >
-                                <option value="">Selecciona tipo de sangre</option>
-                                <option value="Australia">O-</option>
-                                <option value="Bangladesh">O+</option>
-                                <option value="Belarus">A-</option>
-                                <option value="Brazil">A+</option>
-                                <option value="Canada">B-</option>
-                                <option value="China">B+</option>
-                                <option value="France">AB-</option>
-                                <option value="Germany">AB+</option>
+                                <option value="">
+                                    Selecciona tipo de sangre
+                                </option>
+                                <option value="1">O-</option>
+                                <option value="2">O+</option>
+                                <option value="3">A-</option>
+                                <option value="4">A+</option>
+                                <option value="5">B-</option>
+                                <option value="6">B+</option>
+                                <option value="7">AB-</option>
+                                <option value="8">AB+</option>
                             </select>
                         </div>
                         <div class="col-12 text-center">
@@ -103,7 +131,7 @@ const emit = defineEmits(["close"]);
                                 type="submit"
                                 class="btn btn-primary me-sm-3 me-1"
                             >
-                                Submit
+                                Guardar
                             </button>
                             <button
                                 type="reset"

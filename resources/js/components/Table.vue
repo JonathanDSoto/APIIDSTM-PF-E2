@@ -1,4 +1,6 @@
 <script setup>
+import FormAuth from "./FormAuth.vue";
+
 const props = defineProps({
     users: {
         type: Object,
@@ -50,16 +52,28 @@ const returnActiveOrNot = (lol) => {
                         }}</span>
                     </td>
                     <td class="text-end">
-                        <a
-                            style="margin-right: 10px"
-                            class="btn btn-success"
-                            href="javascript:void(0);"
+                        <form action="" method="post">
+                            <a
+                                style="margin-right: 10px"
+                                class="btn btn-success"
+                                href="javascript:void(0);"
+                            >
+                                <i class="ti ti-pencil me-1"></i>
+                            </a>
+                        </form>
+                        <form
+                            method="POST"
+                            :action="route('customers.delete', { id: user.id })"
                         >
-                            <i class="ti ti-pencil me-1"></i>
-                        </a>
-                        <a class="btn btn-danger" href="javascript:void(0);">
-                            <i class="ti ti-trash me-1"></i>
-                        </a>
+                            <FormAuth method="delete" />
+                            <button
+                                class="btn btn-danger"
+                                href="javascript:void(0);"
+                            >
+                                <i class="ti ti-trash me-1"></i>
+                                <input type="text" :value="user.id" hidden />
+                            </button>
+                        </form>
                     </td>
                 </tr>
             </tbody>
