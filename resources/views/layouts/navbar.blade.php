@@ -1,1 +1,1 @@
-<navbar></navbar>
+<navbar :user="{{Auth::user()}}"></navbar>

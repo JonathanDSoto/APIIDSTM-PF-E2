@@ -1,5 +1,11 @@
 <script setup>
-const props = defineProps({});
+const props = defineProps({
+    user: {
+        type: Object,
+        required: true,
+    },
+});
+console.log(props.user);
 </script>
 <template>
     <nav
@@ -25,7 +31,7 @@ const props = defineProps({});
                         href="javascript:void(0);"
                     >
                         <span class="d-none d-md-inline-block text-muted"
-                            >BIENVENIDO - MARIELENA</span
+                            >BIENVENIDO - {{ user.name }}</span
                         >
                     </a>
                 </div>
@@ -62,7 +68,7 @@ const props = defineProps({});
                                     </div>
                                     <div class="flex-grow-1">
                                         <span class="fw-medium d-block"
-                                            >Marielena Nuñez Romero</span
+                                            >{{ user.name }}</span
                                         >
                                         <small class="text-muted">Admin</small>
                                     </div>
