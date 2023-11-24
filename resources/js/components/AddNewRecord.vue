@@ -12,7 +12,6 @@ const recordData = {
 const emit = defineEmits(["close"]);
 </script>
 <template>
-    {{ recordData }}
     <div class="modal fade" id="addUser" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-simple modal-edit-user">
             <div class="modal-content p-3 p-md-5">
@@ -33,13 +32,7 @@ const emit = defineEmits(["close"]);
                         id="addUserForm"
                         class="row g-3"
                         :action="
-                            route('customers.store', {
-                                name: recordData.name,
-                                phone: recordData.phone,
-                                emergency_phone: recordData.emergency_phone,
-                                email: recordData.email,
-                                blood_type_id: recordData.blood_type_id,
-                            })
+                            route('customers.store')
                         "
                         method="POST"
                     >
@@ -49,10 +42,9 @@ const emit = defineEmits(["close"]);
                                 >Nombre</label
                             >
                             <input
-                                v-model="recordData.name"
                                 type="text"
                                 id="modalAddUserName"
-                                name="modalAddUserName"
+                                name="name"
                                 class="form-control"
                                 placeholder="Adalberto Garcia"
                             />
@@ -62,10 +54,9 @@ const emit = defineEmits(["close"]);
                                 >Correo Electronico</label
                             >
                             <input
-                                v-model="recordData.email"
                                 type="text"
                                 id="modalAddUserEmail"
-                                name="modalAddUserEmail"
+                                name="email"
                                 class="form-control"
                                 placeholder="adalberto_papu@alu.uabcs.mx"
                             />
@@ -80,7 +71,7 @@ const emit = defineEmits(["close"]);
                                     v-model="recordData.phone"
                                     type="text"
                                     id="modalEditUserPhone"
-                                    name="modalEditUserPhone"
+                                    name="phone"
                                     class="form-control phone-number-mask"
                                     placeholder="612 1234 124"
                                 />
@@ -96,7 +87,7 @@ const emit = defineEmits(["close"]);
                                     v-model="recordData.emergency_phone"
                                     type="text"
                                     id="modalEditUserPhone"
-                                    name="modalEditUserPhone"
+                                    name="emergency_phone"
                                     class="form-control phone-number-mask"
                                     placeholder="612 1234 124"
                                 />
@@ -108,10 +99,9 @@ const emit = defineEmits(["close"]);
                             >
                             <select
                                 id="modalEditUserCountry"
-                                name="modalEditUserCountry"
+                                name="blood_group_id"
                                 class="select2 form-select"
                                 data-allow-clear="true"
-                                v-model="recordData.blood_type"
                             >
                                 <option value="">
                                     Selecciona tipo de sangre
