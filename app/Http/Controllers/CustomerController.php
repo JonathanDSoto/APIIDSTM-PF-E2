@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BloodGroup;
 use App\Models\Customer;
+use App\Models\Fare;
+use App\Models\PaymentStatus;
+use App\Models\PaymentType;
+use App\Models\Session;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -15,23 +20,24 @@ class CustomerController extends Controller
         $this->middleware('auth');
         $this->validator = [
             'name' => ['required', 'string', 'not_regex:/\d/', 'max:255'],
-            'phone' => ['required', 'string', 'unique:customers,phone', 'max:50'],
-            'emergency_phone' => ['required', 'string', 'different:phone', 'max:50'],
+            'phone' => ['required', 'integer', 'unique:customers,phone', 'digits:10'],
+            'emergency_phone' => ['required', 'required', 'different:phone', 'digits:10'],
             'email' => ['email', 'unique:customers,email', 'nullable', 'max:255'],
-            'blood_group_id' => ['required', 'integer', 'exists:blood_groups,id']
+            'blood_group_id' => ['required', 'integer', 'exists:blood_groups,id'],
+            'is_active' => ['integer', Rule::in([0, 1])]
         ];
     }
 
     public function index()
     {
         return view('customers.index', [
-            'customers' => Customer::simplePaginate(15)
+            'customers' => Customer::orderBy('name')->simplePaginate(15),
+            'bloodGroups' => BloodGroup::all()->sortBy('name')
         ]);
     }
 
     public function store(Request $request)
     {
-        $this->validator['is_active'] = ['integer', Rule::in([0, 1])];
         $this->validate($request, $this->validator);
 
         Customer::create($request->all());
@@ -43,9 +49,27 @@ class CustomerController extends Controller
 
     public function show(string $id)
     {
-        $customer = Customer::find($id);
+        $customer = Customer::with([
+            'attendedSessions' => function ($attendedSessions) {
+                $attendedSessions->orderBy('attendance_date', 'desc');
+            },
+            'payments' => function ($payments) {
+                $payments
+                    ->orderBy('payment_datetime', 'asc')
+                    ->orderBy('created_at', 'desc');
+            },
+            'bloodGroup'
+        ])->find($id);
 
-        return view('customers.show', ['customer' => $customer]);
+        $attendedSessionIds = array_unique($customer->attendedSessions->pluck('session_id')->toArray());
+
+        return view('customers.show', [
+            'customer' => $customer,
+            'sessionNames' => Session::whereIn('id', $attendedSessionIds)->pluck('name', 'id'),
+            'paymentStatus' => PaymentStatus::all()->pluck('name', 'id'),
+            'paymentTypes' => PaymentType::all()->pluck('name', 'id'),
+            'fares' => Fare::all()->pluck('name', 'id')
+        ]);
     }
 
     public function update(Request $request, string $id)
