@@ -18,6 +18,9 @@ return new class extends Migration
                 ->constrained()
                 ->restrictOnDelete()
                 ->cascadeOnUpdate();
+            $table->integer('start_hour', false, true);
+            $table->integer('end_hour', false, true);
+            $table->integer('current_capacity', false, true);
             $table->timestamps();
         });
     }

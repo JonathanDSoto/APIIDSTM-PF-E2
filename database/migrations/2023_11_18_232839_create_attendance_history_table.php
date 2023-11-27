@@ -14,7 +14,7 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->foreignId('session_id')
+            $table->foreignId('session_day_id')
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();

@@ -10,13 +10,14 @@ return new class extends Migration
     {
         Schema::create('fares', function (Blueprint $table) {
             $table->id();
+            $table->string('name')->unique();
             $table->foreignId('fare_period_id')
                 ->unique()
                 ->constrained()
                 ->restrictOnDelete()
                 ->cascadeOnUpdate();
             $table->decimal('price', 11, 2);
-            $table->boolean('is_active')->default(true);
+            $table->text('description');
             $table->timestamps();
         });
     }

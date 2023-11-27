@@ -13,9 +13,10 @@ class FareSeeder extends Seeder
 
         foreach ($fares as $fare) {
             Fare::create([
+                'name' => $fare['name'],
                 'fare_period_id' => $fare['fare_period_id'],
                 'price' => $fare['price'],
-                'is_active' => $fare['is_active']
+                'description' => fake()->paragraph()
             ]);
         }
     }

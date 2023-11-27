@@ -10,9 +10,10 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 class Fare extends Model
 {
     protected $fillable = [
+        'name',
         'fare_period_id',
         'price',
-        'is_active'
+        'description'
     ];
 
     public function farePeriod(): BelongsTo

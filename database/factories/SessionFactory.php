@@ -23,17 +23,11 @@ class SessionFactory extends Factory
             $instructor = fake()->randomElement(Instructor::all());
         }
 
-        $startHour = fake()->numberBetween(7, 18);
-        $endHour = $startHour + fake()->numberBetween(1, 2);
         $maxCapacity = fake()->numberBetween(10, 20);
-        $currentCapacity = fake()->numberBetween(0, $maxCapacity);
 
         return [
             'name' => "Clase de {$exerciseType->name}",
-            'start_hour' => $startHour,
-            'end_hour' => $endHour,
             'instructor_id' => $instructor,
-            'current_capacity' => $currentCapacity,
             'exercise_type_id' => $exerciseType,
             'max_capacity' => $maxCapacity,
             'description' => fake()->paragraph()

@@ -3,21 +3,21 @@
 namespace Database\Seeders;
 
 use App\Models\Customer;
-use App\Models\Session;
+use App\Models\SessionDay;
 use Illuminate\Database\Seeder;
 
 class SessionParticipantSeeder extends Seeder
 {
     public function run(): void
     {
-        foreach (Session::all() as $session) {
+        foreach (SessionDay::all() as $sessionDay) {
             foreach(
                 Customer::inRandomOrder()
-                    ->take($session->current_capacity)
+                    ->take($sessionDay->current_capacity)
                     ->get() as $customer
             ) {
                 $subscriptionDate = fake()->dateTimeBetween(now()->subMonths(6), now());
-                $session->participants()
+                $sessionDay->participants()
                     ->attach($customer->id, ['subscription_date' => $subscriptionDate]);
             }
         }

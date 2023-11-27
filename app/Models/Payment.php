@@ -14,7 +14,8 @@ class Payment extends Model
         'customer_id',
         'fare_id',
         'payment_status_id',
-        'payment_type_id'
+        'payment_type_id',
+        'payment_datetime'
     ];
 
     public function customer(): BelongsTo

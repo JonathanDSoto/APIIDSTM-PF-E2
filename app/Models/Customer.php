@@ -33,14 +33,14 @@ class Customer extends Model
 
     public function subscribedSessions(): BelongsToMany
     {
-        return $this->belongsToMany(Session::class, 'session_participants')
+        return $this->belongsToMany(SessionDay::class, 'session_participants')
             ->withPivot('subscription_date')
             ->withTimestamps();
     }
 
     public function attendedSessions(): BelongsToMany
     {
-        return $this->belongsToMany(Session::class, 'attendance_history')
+        return $this->belongsToMany(SessionDay::class, 'attendance_history')
             ->withPivot('attendance_date', 'attended')
             ->withTimestamps();
     }

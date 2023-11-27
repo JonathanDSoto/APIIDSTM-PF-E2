@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('session_participants', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('session_id')
+            $table->foreignId('session_day_id')
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
@@ -18,7 +18,7 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
-            $table->dateTime('subscription_date')->default(now());
+            $table->dateTime('subscription_date');
             $table->timestamps();
         });
     }

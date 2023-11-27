@@ -15,8 +15,8 @@ class AttendanceHistorySeeder extends Seeder
         $dateInterval = new DateInterval('P1D');
 
         foreach (WeekDay::all() as $weekDay) {
-            foreach ($weekDay->sessions as $session) {
-                foreach ($session->participants as $participant) {
+            foreach ($weekDay->sessionDays as $sessionDay) {
+                foreach ($sessionDay->participants as $participant) {
                     $subscriptionDate = new DateTime($participant->pivot->subscription_date);
                     $datePeriod = new DatePeriod($subscriptionDate, $dateInterval, now());
 
@@ -26,7 +26,7 @@ class AttendanceHistorySeeder extends Seeder
                         }
 
                         if ($date->format('N') == $weekDay->id) {
-                            $participant->attendedSessions()->attach($session, [
+                            $participant->attendedSessions()->attach($sessionDay, [
                                 'attendance_date' => $date,
                                 'attended' => fake()->boolean()
                             ]);

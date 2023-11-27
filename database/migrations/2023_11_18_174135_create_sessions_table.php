@@ -11,8 +11,6 @@ return new class extends Migration
         Schema::create('sessions', function (Blueprint $table) {
             $table->id();
             $table->string('name', 50);
-            $table->integer('start_hour');
-            $table->integer('end_hour');
             $table->foreignId('instructor_id')
                 ->constrained()
                 ->restrictOnDelete()
@@ -21,7 +19,6 @@ return new class extends Migration
                 ->constrained()
                 ->restrictOnDelete()
                 ->cascadeOnUpdate();
-            $table->integer('current_capacity');
             $table->integer('max_capacity');
             $table->text('description')->nullable();
             $table->timestamps();
