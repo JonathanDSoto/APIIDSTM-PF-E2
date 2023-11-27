@@ -11,8 +11,8 @@ class CustomerFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'phone' => fake()->unique()->numerify('612######'),
-            'emergency_phone' => fake()->numerify('612######'),
+            'phone' => fake()->unique()->numerify('612#######'),
+            'emergency_phone' => fake()->numerify('612#######'),
             'email' => fake()->unique()->freeEmail(),
             'blood_group_id' => fake()->randomElement(BloodGroup::all()),
             'is_active' => fake()->boolean()

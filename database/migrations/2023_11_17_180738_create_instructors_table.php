@@ -11,8 +11,8 @@ return new class extends Migration
         Schema::create('instructors', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->integer('phone', false, true)->unique();
-            $table->integer('emergency_phone', false, true);
+            $table->string('phone', 10)->unique();
+            $table->string('emergency_phone', 10);
             $table->string('email')
                 ->nullable()
                 ->unique();

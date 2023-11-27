@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('name', 50);
             $table->foreignId('instructor_id')
                 ->constrained()
-                ->restrictOnDelete()
+                ->cascadeOnDelete()
                 ->cascadeOnUpdate();
             $table->foreignId('exercise_type_id')
                 ->constrained()

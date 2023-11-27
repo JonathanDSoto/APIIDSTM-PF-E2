@@ -11,8 +11,9 @@ return new class extends Migration
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')
+                ->nullable()
                 ->constrained()
-                ->cascadeOnDelete()
+                ->nullOnDelete()
                 ->cascadeOnUpdate();
             $table->foreignId('fare_id')
                 ->constrained()
@@ -20,11 +21,12 @@ return new class extends Migration
                 ->cascadeOnUpdate();
             $table->foreignId('payment_status_id')
                 ->constrained('payment_status')
-                ->cascadeOnDelete()
+                ->restrictOnDelete()
                 ->cascadeOnUpdate();
             $table->foreignId('payment_type_id')
+                ->nullable()
                 ->constrained()
-                ->cascadeOnDelete()
+                ->nullOnDelete()
                 ->cascadeOnUpdate();
             $table->dateTime('payment_datetime')->nullable();
             $table->timestamps();
