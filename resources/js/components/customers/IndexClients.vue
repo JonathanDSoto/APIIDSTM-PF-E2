@@ -1,7 +1,7 @@
 <script setup>
 import Table from "../Table.vue";
-import AddNewRecord from "../AddNewRecord.vue";
 import { ref } from "vue";
+import Addnewrecord from "../addnewrecord.vue";
 
 const clientes = false;
 
@@ -16,7 +16,7 @@ const toggle = ref(false);
 
 </script>
 <template>
-    <AddNewRecord />
+    <Addnewrecord/>
 
     <h4 class="py-3 mb-4">
         <span class="text-muted fw-light">Clientes /</span> Lista de clientes
@@ -36,6 +36,6 @@ const toggle = ref(false);
                 <i class="ti ti-plus me-1"></i> Añadir Cliente nuevo
             </button>
         </h5>
-        <Table :users="props.customers.data" :tipo="clientes" />
+        <Table :users="props.customers.data" :tipo="false" />
     </div>
 </template>

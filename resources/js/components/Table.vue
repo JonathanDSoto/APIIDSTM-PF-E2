@@ -12,8 +12,8 @@ const props = defineProps({
         required: true,
     },
 });
-const returnActiveOrNot = (lol) => {
-    return lol ? "Activo" : "Inactivo";
+const returnActiveOrNot = (isActive) => {
+    return isActive ? "Activo" : "Inactivo";
 };
 </script>
 <template>
@@ -30,48 +30,31 @@ const returnActiveOrNot = (lol) => {
             <tbody class="table-border-bottom-0">
                 <tr v-for="user in props.users" :key="user.id">
                     <td>
-                        <a
-                            class="text-reset fw-bold"
-                            :href="
-                                route('instructors.show', {
-                                    id: user.id,
-                                })
-                            "
-                            >{{ user.name }}</a
-                        >
+                        <a class="text-reset fw-bold" :href="route((props.tipo) ? 'instructors.show' : 'customers.show', {
+                            id: user.id,
+                        })
+                            ">{{ user.name }}</a>
+
                     </td>
                     <td>{{ user.phone }}</td>
                     <td>
-                        <span
-                            v-if="user.is_active"
-                            class="badge bg-label-success me-1"
-                            >{{ returnActiveOrNot(user.is_active) }}</span
-                        >
+                        <span v-if="user.is_active" class="badge bg-label-success me-1">{{ returnActiveOrNot(user.is_active)
+                        }}</span>
                         <span v-else class="badge bg-label-danger me-1">{{
                             returnActiveOrNot(user.is_active)
                         }}</span>
                     </td>
-                    <td class="text-end">
+                    <td class="text-end d-flex">
+                        <!--  ToDo: <form :action="route((props.tipo) ? 'instructors.update' : 'customers.update', { id: user.id })" method="post"></form> -->
                         <form action="" method="post">
-                            <a
-                                style="margin-right: 10px"
-                                class="btn btn-success"
-                                href="javascript:void(0);"
-                            >
+                            <button style="margin: 5px" class="btn btn-success" href="javascript:void(0);">
                                 <i class="ti ti-pencil me-1"></i>
-                            </a>
+                            </button>
                         </form>
-                        <form
-                            method="POST"
-                            :action="route('customers.delete', { id: user.id })"
-                        >
+                        <form method="POST" :action="route((props.tipo) ? 'instructors.delete' : 'customers.delete', { id: user.id })">
                             <FormAuth method="delete" />
-                            <button
-                                class="btn btn-danger"
-                                href="javascript:void(0);"
-                            >
+                            <button class="btn btn-danger" style="margin: 5px" href="javascript:void(0);">
                                 <i class="ti ti-trash me-1"></i>
-                                <input type="text" :value="user.id" hidden />
                             </button>
                         </form>
                     </td>

@@ -25,6 +25,6 @@ console.log(props.instructors);
                 <i class="ti ti-plus me-1"></i> Añadir Instructor Nuevo
             </a>
         </h5>
-        <Table :users="props.instructors.data" :tipo="True" />
+        <Table :users="props.instructors.data" :tipo="true" />
     </div>
 </template>
