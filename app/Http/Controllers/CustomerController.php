@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\BloodGroup;
 use App\Models\Customer;
-use App\Models\Fare;
-use App\Models\PaymentStatus;
-use App\Models\PaymentType;
 use App\Models\Session;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -80,8 +77,10 @@ class CustomerController extends Controller
         $this->validator['is_active'] = ['required', 'integer', Rule::in([0, 1])];
         $this->validate($request, $this->validator);
 
-        if (Customer::find($id)) {
-            Customer::find($id)->update($request->all());
+        $customer = Customer::find($id);
+
+        if ($customer) {
+            $customer->update($request->all());
 
             return redirect()
                 ->route('customers.show', ['id'=> $id])
@@ -91,8 +90,10 @@ class CustomerController extends Controller
 
     public function destroy(string $id)
     {
-        if (Customer::find($id)) {
-            Customer::destroy($id);
+        $customer = Customer::find($id);
+
+        if ($customer) {
+            $customer->delete();
 
             return redirect()
                 ->route('customers')
