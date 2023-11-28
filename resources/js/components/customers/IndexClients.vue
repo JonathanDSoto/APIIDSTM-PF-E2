@@ -17,9 +17,11 @@ const props = defineProps({
     message: {
         type: String,
     },
+    blood_groups:{
+        type: Object,
+        required: true,
+    }
 });
-
-console.log(props.success);
 
 const toggle = ref(false);
 
@@ -70,6 +72,6 @@ const alert = () => {
                 <i class="ti ti-plus me-1"></i> Añadir Cliente nuevo
             </button>
         </h5>
-        <Table :users="props.customers.data" :tipo="false" />
+        <Table :users="props.customers.data" :blood_groups="props.blood_groups" :tipo="false" />
     </div>
 </template>

@@ -6,6 +6,10 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    blood_groups: {
+        type: Object,
+        required: true,
+    }
 });
 console.log(props.instructors);
 //TODO Qualifications for each instructor
@@ -25,6 +29,6 @@ console.log(props.instructors);
                 <i class="ti ti-plus me-1"></i> Añadir Instructor Nuevo
             </a>
         </h5>
-        <Table :users="props.instructors.data" :tipo="true" />
+        <Table :users="props.instructors.data" :blood_groups="props.blood_groups.data" :tipo="true" />
     </div>
 </template>
