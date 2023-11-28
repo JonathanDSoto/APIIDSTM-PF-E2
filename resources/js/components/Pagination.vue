@@ -13,8 +13,6 @@ const canGoNext =
 const canGoPrev = props.users.current_page > 1 ? true : false;
 </script>
 <template>
-    <h1>sex</h1>
-
     <div class="btn-group mt-2" role="group">
         <a
             class="btn btn-secondary waves-effect"
