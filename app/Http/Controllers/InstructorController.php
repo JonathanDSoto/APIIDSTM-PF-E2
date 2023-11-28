@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\BloodGroup;
 use App\Models\Instructor;
-use App\Models\WeekDay;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
