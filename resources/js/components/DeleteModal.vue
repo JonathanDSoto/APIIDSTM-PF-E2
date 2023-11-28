@@ -1,6 +1,5 @@
 <script setup>
 import FormAuth from "./FormAuth.vue";
-import { ref } from 'vue';
 const props = defineProps({
     /* Instructor -> true - Cliente -> false */
     idUser: {

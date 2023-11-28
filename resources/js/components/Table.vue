@@ -1,6 +1,7 @@
 <script setup>
 import DeleteModal from './DeleteModal.vue';
 import { ref } from 'vue';
+import EditCustomerForm from './EditCustomerForm.vue';
 
 
 const props = defineProps({
@@ -13,8 +14,13 @@ const props = defineProps({
         type: Boolean,
         required: true,
     },
+    blood_groups: {
+        type: Object,
+        required: true,
+    }
 });
 const selectedUserId = ref(0);
+const selectedIndex = ref(0);
 const returnActiveOrNot = (isActive) => {
     return isActive ? "Activo" : "Inactivo";
 };
@@ -31,7 +37,7 @@ const returnActiveOrNot = (isActive) => {
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
-                <tr v-for="user in props.users" :key="user.id">
+                <tr v-for="(user,index) in props.users" :key="user.id">
                     <td>
                         <a class="text-reset fw-bold" :href="route((props.tipo) ? 'instructors.show' : 'customers.show', {
                             id: user.id,
@@ -49,11 +55,9 @@ const returnActiveOrNot = (isActive) => {
                     </td>
                     <td class="text-end d-flex">
                         <!--  ToDo: <form :action="route((props.tipo) ? 'instructors.update' : 'customers.update', { id: user.id })" method="post"></form> -->
-                        <form action="" method="post">
-                            <button style="margin: 5px" class="btn btn-success" href="javascript:void(0);">
+                            <button @click="selectedIndex = index;" data-bs-toggle="modal" :data-bs-target="(props.tipo) ?'#editInstructor':'#editCustomer'" style="margin: 5px" class="btn btn-success" href="javascript:void(0);">
                                 <i class="ti ti-pencil me-1"></i>
                             </button>
-                        </form>
                         <button @click="selectedUserId = user.id;" class="btn btn-danger" style="margin: 5px;" href="javascript:void(0);"
                             data-bs-toggle="modal" data-bs-target="#deleteUser">
                             <i class="ti ti-trash me-1"></i>
@@ -62,6 +66,7 @@ const returnActiveOrNot = (isActive) => {
                 </tr>
             </tbody>
         </table>
+        <edit-customer-form  :user="users[selectedIndex]" :blood_groups="props.blood_groups" />
         <delete-modal :type="props.tipo" :idUser="selectedUserId" />
     </div>
 </template>
