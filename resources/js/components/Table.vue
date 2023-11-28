@@ -2,6 +2,7 @@
 import DeleteModal from './DeleteModal.vue';
 import { ref } from 'vue';
 import EditCustomerForm from './EditCustomerForm.vue';
+import EditInstructorForm from './EditInstructorForm.vue';
 
 
 const props = defineProps({
@@ -37,7 +38,7 @@ const returnActiveOrNot = (isActive) => {
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
-                <tr v-for="(user,index) in props.users" :key="user.id">
+                <tr v-for="(user, index) in props.users" :key="user.id">
                     <td>
                         <a class="text-reset fw-bold" :href="route((props.tipo) ? 'instructors.show' : 'customers.show', {
                             id: user.id,
@@ -54,19 +55,21 @@ const returnActiveOrNot = (isActive) => {
                         }}</span>
                     </td>
                     <td class="text-end d-flex">
-                        <!--  ToDo: <form :action="route((props.tipo) ? 'instructors.update' : 'customers.update', { id: user.id })" method="post"></form> -->
-                            <button @click="selectedIndex = index;" data-bs-toggle="modal" :data-bs-target="(props.tipo) ?'#editInstructor':'#editCustomer'" style="margin: 5px" class="btn btn-success" href="javascript:void(0);">
-                                <i class="ti ti-pencil me-1"></i>
-                            </button>
-                        <button @click="selectedUserId = user.id;" class="btn btn-danger" style="margin: 5px;" href="javascript:void(0);"
-                            data-bs-toggle="modal" data-bs-target="#deleteUser">
+                        <button @click="selectedIndex = index;" data-bs-toggle="modal"
+                            :data-bs-target="(props.tipo) ? '#editInstructor' : '#editCustomer'" style="margin: 5px"
+                            class="btn btn-success" href="javascript:void(0);">
+                            <i class="ti ti-pencil me-1"></i>
+                        </button>
+                        <button @click="selectedUserId = user.id;" class="btn btn-danger" style="margin: 5px;"
+                            href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#deleteUser">
                             <i class="ti ti-trash me-1"></i>
                         </button>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <edit-customer-form  :user="users[selectedIndex]" :blood_groups="props.blood_groups" />
+        <edit-instructor-form v-if="props.tipo" :user="users[selectedIndex]" :blood_groups="props.blood_groups" />
+        <edit-customer-form v-else :user="users[selectedIndex]" :blood_groups="props.blood_groups" />
         <delete-modal :type="props.tipo" :idUser="selectedUserId" />
     </div>
 </template>
