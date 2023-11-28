@@ -7,5 +7,5 @@
 <script src="../../assets/vendor/libs/typeahead-js/typeahead.js"></script>
 <script src="../../assets/vendor/js/menu.js"></script>
 
+@vite(['resources/js/app.js'])
 @routes
-@vite('./resources/js/app.js')
