@@ -38,9 +38,8 @@ const emit = defineEmits(["close"]);
                     >
                         <FormAuth method="POST" />
                         <div class="col-12">
-                            <label class="form-label" for="modalEditUserName"
-                                >Nombre</label
-                            >
+                            <label class="form-label" for="modalAddUserName"
+                                >Nombre</label>
                             <input
                                 type="text"
                                 id="modalAddUserName"
@@ -62,7 +61,7 @@ const emit = defineEmits(["close"]);
                             />
                         </div>
                         <div class="col-12 col-md-6">
-                            <label class="form-label" for="modalEditUserPhone"
+                            <label class="form-label" for="modalAddUserPhone"
                                 >Numero de telefono</label
                             >
                             <div class="input-group">
@@ -70,7 +69,7 @@ const emit = defineEmits(["close"]);
                                 <input
                                     v-model="recordData.phone"
                                     type="text"
-                                    id="modalEditUserPhone"
+                                    id="modalAddUserPhone"
                                     name="phone"
                                     class="form-control phone-number-mask"
                                     placeholder="612 1234 124"
@@ -78,7 +77,7 @@ const emit = defineEmits(["close"]);
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
-                            <label class="form-label" for="modalEditUserPhone"
+                            <label class="form-label" for="modalAddUserEmPhone"
                                 >Numero de telefono de emergencia</label
                             >
                             <div class="input-group">
@@ -86,7 +85,7 @@ const emit = defineEmits(["close"]);
                                 <input
                                     v-model="recordData.emergency_phone"
                                     type="text"
-                                    id="modalEditUserPhone"
+                                    id="modalAddUserEmPhone"
                                     name="emergency_phone"
                                     class="form-control phone-number-mask"
                                     placeholder="612 1234 124"
@@ -94,11 +93,11 @@ const emit = defineEmits(["close"]);
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
-                            <label class="form-label" for="modalEditUserCountry"
+                            <label class="form-label" for="modalAddUserCountry"
                                 >Tipo de sangre</label
                             >
                             <select
-                                id="modalEditUserCountry"
+                                id="modalAddUserCountry"
                                 name="blood_group_id"
                                 class="select2 form-select"
                                 data-allow-clear="true"

@@ -1,17 +1,20 @@
 <script setup>
-import FormAuth from "./FormAuth.vue";
+import DeleteModal from './DeleteModal.vue';
+import { ref } from 'vue';
+
 
 const props = defineProps({
     users: {
         type: Object,
         required: true,
     },
-    // 1 - For Instructors, 2 - For Clients
+    // 1 - For Instructors, 0 - For Clients
     tipo: {
         type: Boolean,
         required: true,
     },
 });
+const selectedUserId = ref(0);
 const returnActiveOrNot = (isActive) => {
     return isActive ? "Activo" : "Inactivo";
 };
@@ -51,16 +54,15 @@ const returnActiveOrNot = (isActive) => {
                                 <i class="ti ti-pencil me-1"></i>
                             </button>
                         </form>
-                        <form method="POST" :action="route((props.tipo) ? 'instructors.delete' : 'customers.delete', { id: user.id })">
-                            <FormAuth method="delete" />
-                            <button class="btn btn-danger" style="margin: 5px" href="javascript:void(0);">
-                                <i class="ti ti-trash me-1"></i>
-                            </button>
-                        </form>
+                        <button @click="selectedUserId = user.id;" class="btn btn-danger" style="margin: 5px;" href="javascript:void(0);"
+                            data-bs-toggle="modal" data-bs-target="#deleteUser">
+                            <i class="ti ti-trash me-1"></i>
+                        </button>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <delete-modal :type="props.tipo" :idUser="selectedUserId" />
     </div>
 </template>
 <style scoped>
