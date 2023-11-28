@@ -62,6 +62,8 @@ class InstructorController extends Controller
     public function update(Request $request, string $id)
     {
         $this->validator['is_active'] = ['required', 'integer', Rule::in([0, 1])];
+        $this->validator['phone'] = ['required', 'integer', "unique:instructors,phone,{$id}", 'digits:10'];
+        $this->validator['email'] = ['email', "unique:instructors,email,{$id}", 'nullable', 'max:255'];
         $this->validate($request, $this->validator);
 
         $instructor = Instructor::find($id);
