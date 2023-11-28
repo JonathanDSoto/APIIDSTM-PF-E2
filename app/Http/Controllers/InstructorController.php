@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BloodGroup;
 use App\Models\Instructor;
+use App\Models\WeekDay;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -15,8 +17,8 @@ class InstructorController extends Controller
         $this->middleware('auth');
         $this->validator = [
             'name' => ['required', 'string', 'not_regex:/\d/', 'max:255'],
-            'phone' => ['required', 'string', 'unique:instructors,phone', 'max:50'],
-            'emergency_phone' => ['required', 'string', 'different:phone', 'max:50'],
+            'phone' => ['required', 'integer', 'unique:instructors,phone', 'digits:10'],
+            'emergency_phone' => ['required', 'integer', 'different:phone', 'digits:10'],
             'email' => ['email', 'unique:instructors,email', 'nullable', 'max:255'],
             'blood_group_id' => ['required', 'integer', 'exists:blood_groups,id'],
             'is_active' => ['integer', Rule::in([0, 1])],
@@ -27,10 +29,9 @@ class InstructorController extends Controller
 
     public function index()
     {
-        $instructors = Instructor::with("exerciseTypes")->simplePaginate(15);
-
         return view('instructors.index', [
-            'instructors' => $instructors
+            'instructors' => Instructor::orderBy('name')->simplePaginate(15),
+            'bloodGroups' => BloodGroup::orderBy('name')->get()
         ]);
     }
 
@@ -39,7 +40,9 @@ class InstructorController extends Controller
         $this->validate($request, $this->validator);
 
         $instructor = Instructor::create($request->all());
-        $instructor->exerciseTypes()->attach($request->instructor_qualifications);
+        $instructor
+            ->exerciseTypes()
+            ->attach($request->instructor_qualifications);
 
         return redirect()
             ->route('instructors')
@@ -48,7 +51,11 @@ class InstructorController extends Controller
 
     public function show(string $id)
     {
-        $instructor = Instructor::find($id);
+        $instructor = Instructor::with([
+            'sessions.sessionDays.weekDay',
+            'exerciseTypes',
+            'bloodGroup'
+        ])->find($id);
 
         return view('instructors.show', ['instructor' => $instructor]);
     }
@@ -62,7 +69,9 @@ class InstructorController extends Controller
 
         if ($instructor) {
             $instructor->update($request->all());
-            $instructor->exerciseTypes()->sync($request->exercise_types);
+            $instructor
+                ->exerciseTypes()
+                ->sync($request->exercise_types);
 
             return redirect()
                 ->route('instructors.show', ['id' => $id])
