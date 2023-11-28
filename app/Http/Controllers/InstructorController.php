@@ -36,6 +36,7 @@ class InstructorController extends Controller
 
     public function store(Request $request)
     {
+        $request['instructor_qualifications'] = json_decode($request->instructor_qualifications);
         $this->validate($request, $this->validator);
 
         $instructor = Instructor::create($request->all());
@@ -61,9 +62,12 @@ class InstructorController extends Controller
 
     public function update(Request $request, string $id)
     {
+        $request['instructor_qualifications'] = json_decode($request->instructor_qualifications);
+
         $this->validator['is_active'] = ['required', 'integer', Rule::in([0, 1])];
         $this->validator['phone'] = ['required', 'integer', "unique:instructors,phone,{$id}", 'digits:10'];
         $this->validator['email'] = ['email', "unique:instructors,email,{$id}", 'nullable', 'max:255'];
+
         $this->validate($request, $this->validator);
 
         $instructor = Instructor::find($id);
@@ -72,7 +76,7 @@ class InstructorController extends Controller
             $instructor->update($request->all());
             $instructor
                 ->exerciseTypes()
-                ->sync($request->exercise_types);
+                ->sync($request->instructor_qualifications);
 
             return redirect()
                 ->route('instructors.show', ['id' => $id])
