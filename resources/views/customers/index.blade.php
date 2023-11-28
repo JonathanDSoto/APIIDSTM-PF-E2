@@ -1,4 +1,11 @@
 @extends('layouts.app')
 @section('contenido')
-    <index-clients :customers="{{json_encode($customers)}}"></index-clients>
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+            </button>
+        </div>
+    @endif
+    <index-clients :customers="{{ $customers->toJson() }}"></index-clients>
 @endsection

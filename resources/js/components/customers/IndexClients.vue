@@ -1,7 +1,8 @@
 <script setup>
+import AlertSuccess from "../../AlertSuccess.vue";
 import AddNewRecord from "../AddNewRecord.vue";
 import Table from "../Table.vue";
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 
 const clientes = false;
 
@@ -10,22 +11,57 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    success: {
+        type: Boolean,
+    },
+    message: {
+        type: String,
+    },
 });
 
+console.log(props.success);
+
 const toggle = ref(false);
+
+const currentPage = ref(0);
+let obj = reactive({ currentPage });
+
+const plusPage = () => {
+    obj.currentPage++;
+};
+
+const toggleAlert = ref(false);
+
+const alert = () => {
+    toggleAlert.value = true;
+};
 </script>
+
 <template>
-    <AddNewRecord/>
+    <AlertSuccess
+        @alert="alert"
+        v-if="toggleAlert"
+        message="Usuario creado correctamente"
+    />
+    <AddNewRecord />
     <h4 class="py-3 mb-4">
         <span class="text-muted fw-light">Clientes /</span> Lista de clientes
     </h4>
+    <div>
+        <a
+            @click="plusPage"
+            class="btn btn-primary"
+            :href="route('customers', { page: obj.currentPage })"
+            >Next</a
+        >
+    </div>
     <div class="card">
         <h5
             class="card-header d-flex justify-content-between align-items-center"
         >
             <span>CLIENTES</span>
             <button
-            @click="toggle = !toggle"
+                @click="toggle = !toggle"
                 class="btn btn-primary"
                 href="javascript:void(0);"
                 data-bs-toggle="modal"

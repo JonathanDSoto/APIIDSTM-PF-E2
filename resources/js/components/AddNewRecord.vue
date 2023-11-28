@@ -9,7 +9,7 @@ const recordData = {
     blood_type_id: "",
 };
 
-const emit = defineEmits(["close"]);
+const emit = defineEmits(["close", "alert"]);
 </script>
 <template>
     <div class="modal fade" id="addUser" tabindex="-1" aria-hidden="true">
@@ -31,21 +31,20 @@ const emit = defineEmits(["close"]);
                     <form
                         id="addUserForm"
                         class="row g-3"
-                        :action="
-                            route('customers.store')
-                        "
+                        :action="route('customers.store')"
                         method="POST"
                     >
                         <FormAuth method="POST" />
                         <div class="col-12">
-                            <label class="form-label" for="modalAddUserName"
-                                >Nombre</label>
+                            <label class="form-label" for="bs-validation-name"
+                                >Nombre</label
+                            >
                             <input
                                 type="text"
-                                id="modalAddUserName"
                                 name="name"
                                 class="form-control"
                                 placeholder="Adalberto Garcia"
+                                required
                             />
                         </div>
                         <div class="col-12 col-md-6">
@@ -58,6 +57,7 @@ const emit = defineEmits(["close"]);
                                 name="email"
                                 class="form-control"
                                 placeholder="adalberto_papu@alu.uabcs.mx"
+                                required
                             />
                         </div>
                         <div class="col-12 col-md-6">
@@ -67,6 +67,7 @@ const emit = defineEmits(["close"]);
                             <div class="input-group">
                                 <span class="input-group-text">MX (+52)</span>
                                 <input
+                                    required
                                     v-model="recordData.phone"
                                     type="text"
                                     id="modalAddUserPhone"
@@ -83,6 +84,7 @@ const emit = defineEmits(["close"]);
                             <div class="input-group">
                                 <span class="input-group-text">MX (+52)</span>
                                 <input
+                                    required
                                     v-model="recordData.emergency_phone"
                                     type="text"
                                     id="modalAddUserEmPhone"
@@ -97,6 +99,7 @@ const emit = defineEmits(["close"]);
                                 >Tipo de sangre</label
                             >
                             <select
+                                required
                                 id="modalAddUserCountry"
                                 name="blood_group_id"
                                 class="select2 form-select"
