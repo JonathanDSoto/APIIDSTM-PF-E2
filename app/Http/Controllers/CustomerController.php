@@ -32,7 +32,7 @@ class CustomerController extends Controller
     {
         return view('customers.index', [
             'customers' => Customer::orderBy('name')->simplePaginate(15),
-            'bloodGroups' => BloodGroup::all()->sortBy('name')
+            'bloodGroups' => BloodGroup::orderBy('name')->get()
         ]);
     }
 
@@ -55,20 +55,23 @@ class CustomerController extends Controller
             },
             'payments' => function ($payments) {
                 $payments
+                    ->with('fare', 'paymentStatus', 'paymentType')
                     ->orderBy('payment_datetime', 'asc')
                     ->orderBy('created_at', 'desc');
             },
             'bloodGroup'
         ])->find($id);
 
-        $attendedSessionIds = array_unique($customer->attendedSessions->pluck('session_id')->toArray());
+        $attendedSessionIds = array_unique($customer
+            ->attendedSessions
+            ->pluck('session_id')
+            ->toArray()
+        );
 
         return view('customers.show', [
             'customer' => $customer,
-            'sessionNames' => Session::whereIn('id', $attendedSessionIds)->pluck('name', 'id'),
-            'paymentStatus' => PaymentStatus::all()->pluck('name', 'id'),
-            'paymentTypes' => PaymentType::all()->pluck('name', 'id'),
-            'fares' => Fare::all()->pluck('name', 'id')
+            'sessionNames' => Session::whereIn('id', $attendedSessionIds)
+                ->pluck('name', 'id')
         ]);
     }
 
