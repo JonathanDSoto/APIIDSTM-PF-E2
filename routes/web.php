@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\FareController;
 use App\Http\Controllers\InstructorController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -23,13 +24,16 @@ Route::controller(InstructorController::class)->prefix('/instructors')->group(fu
     Route::delete('/{id}', 'destroy')->name('instructors.delete');
 });
 
+Route::controller(FareController::class)->prefix('/fares')->group(function () {
+    Route::get('/', 'index')->name('fares');
+    Route::post('/', 'store')->name('fares.store');
+    Route::put('/{id}', 'update')->name('fares.update');
+    Route::delete('/{id}', 'destroy')->name('fares.delete');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('home');
-    });
-
-    Route::get('/fares', function () {
-        return view('fares');
     });
 
     Route::get('/modals', function () {
