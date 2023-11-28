@@ -74,7 +74,10 @@ class CustomerController extends Controller
 
     public function update(Request $request, string $id)
     {
+        $this->validator['phone'] = ['required', 'integer', "unique:customers,phone,{$id}", 'digits:10'];
+        $this->validator['email'] = ['email', "unique:customers,email,{$id}", 'nullable', 'max:255'];
         $this->validator['is_active'] = ['required', 'integer', Rule::in([0, 1])];
+
         $this->validate($request, $this->validator);
 
         $customer = Customer::find($id);
