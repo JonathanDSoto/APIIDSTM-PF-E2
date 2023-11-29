@@ -1,6 +1,6 @@
 <script setup>
-import AlertSuccess from "../../AlertSuccess.vue";
 import AddNewRecord from "../AddNewRecord.vue";
+import Pagination from "../Pagination.vue";
 import Table from "../Table.vue";
 import { reactive, ref } from "vue";
 
@@ -17,46 +17,21 @@ const props = defineProps({
     message: {
         type: String,
     },
-    blood_groups:{
+    blood_groups: {
         type: Object,
         required: true,
-    }
+    },
 });
 
 const toggle = ref(false);
 
-const currentPage = ref(0);
-let obj = reactive({ currentPage });
-
-const plusPage = () => {
-    obj.currentPage++;
-};
-
-const toggleAlert = ref(false);
-
-const alert = () => {
-    toggleAlert.value = true;
-};
 </script>
 
 <template>
-    <AlertSuccess
-        @alert="alert"
-        v-if="toggleAlert"
-        message="Usuario creado correctamente"
-    />
     <AddNewRecord />
     <h4 class="py-3 mb-4">
         <span class="text-muted fw-light">Clientes /</span> Lista de clientes
     </h4>
-    <div>
-        <a
-            @click="plusPage"
-            class="btn btn-primary"
-            :href="route('customers', { page: obj.currentPage })"
-            >Next</a
-        >
-    </div>
     <div class="card">
         <h5
             class="card-header d-flex justify-content-between align-items-center"
@@ -72,6 +47,11 @@ const alert = () => {
                 <i class="ti ti-plus me-1"></i> Añadir Cliente nuevo
             </button>
         </h5>
-        <Table :users="props.customers.data" :blood_groups="props.blood_groups" :tipo="false" />
+        <Table
+            :users="props.customers.data"
+            :blood_groups="props.blood_groups"
+            :tipo="false"
+        />
     </div>
+    <Pagination :users="props.customers" />
 </template>
