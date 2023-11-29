@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('contenido')
 <!-- {{$customer}} -->
-<show-clients :customer="{{ json_encode($customer) }}"></show-clients>
+<!-- {{$bloodGroups}} -->
+<show-clients :customer="{{ json_encode($customer) }}" :blood_groups="{{json_encode($bloodGroups)}}"></show-clients>
  @endsection

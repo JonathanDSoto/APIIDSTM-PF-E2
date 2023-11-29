@@ -8,7 +8,7 @@ const props = defineProps({
 console.log(props.customer);
 </script>
 <template>
-    <div class="card mb-4">
+    <div class="card mb-4" style="max-height: 350px; overflow: hidden;">
         <div class="card-body">
             <div class="d-flex justify-content-between">
                 <h5 class="card-action-title mb-0">Informacion</h5>
