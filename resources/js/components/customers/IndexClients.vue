@@ -28,7 +28,7 @@ const toggle = ref(false);
 </script>
 
 <template>
-    <AddNewRecord />
+    <AddNewRecord what="customers"/>
     <h4 class="py-3 mb-4">
         <span class="text-muted fw-light">Clientes /</span> Lista de clientes
     </h4>
