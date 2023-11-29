@@ -7,5 +7,5 @@
             </button>
         </div>
     @endif
-    <index-fares :fares="{{ json_encode($fares) }}"></index-fares>
+    <index-fares :fares="{{ json_encode($fares) }}" :fare_periods="{{json_encode($farePeriods)}}"></index-fares>
 @endsection

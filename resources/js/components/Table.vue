@@ -26,7 +26,6 @@ const returnActiveOrNot = (isActive) => {
 };
 const editRef = ref(null);
 editRef.value = props.tipo === "instructors" ? "#editInstructor" : "#editCustomer";
-console.log(editRef.value);
 </script>
 <template>
     <div class="table-responsive text-nowrap">
