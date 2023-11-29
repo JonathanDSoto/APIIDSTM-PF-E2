@@ -16,5 +16,5 @@
             </button>
         </div>
     @endif
-    <index-clients :customers="{{ json_encode($customers) }}"></index-clients>
+    <index-clients :customers="{{ json_encode($customers) }}" :blood_groups="{{ json_encode($bloodGroups) }}"></index-clients>
 @endsection
