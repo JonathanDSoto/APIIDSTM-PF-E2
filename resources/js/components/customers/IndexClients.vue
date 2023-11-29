@@ -50,7 +50,7 @@ const toggle = ref(false);
         <Table
             :users="props.customers.data"
             :blood_groups="props.blood_groups"
-            :tipo="false"
+            tipo="customers"
         />
     </div>
     <Pagination :users="props.customers" />

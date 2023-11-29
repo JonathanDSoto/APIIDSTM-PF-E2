@@ -12,7 +12,7 @@ const props = defineProps({
     },
     // 1 - For Instructors, 0 - For Clients
     tipo: {
-        type: Boolean,
+        type: String,
         required: true,
     },
     blood_groups: {

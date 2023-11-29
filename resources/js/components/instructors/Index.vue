@@ -29,6 +29,6 @@ console.log(props.instructors);
                 <i class="ti ti-plus me-1"></i> Añadir Instructor Nuevo
             </a>
         </h5>
-        <Table :users="props.instructors.data" :blood_groups="props.blood_groups" :tipo="true" />
+        <Table :users="props.instructors.data" :blood_groups="props.blood_groups" tipo="instructors" />
     </div>
 </template>
