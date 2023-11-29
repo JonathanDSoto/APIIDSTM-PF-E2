@@ -3,6 +3,7 @@
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\FareController;
 use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,14 @@ Route::controller(FareController::class)->prefix('/fares')->group(function () {
     Route::delete('/{id}', 'destroy')->name('fares.delete');
 });
 
+Route::controller(PaymentController::class)->prefix('/payments')->group(function () {
+    Route::get('/', 'index')->name('payments');
+    Route::post('/', 'store')->name('payments.store');
+    Route::patch('/{id}', 'update')->name('payments.update');
+    Route::patch('/pay/{id}', 'pay')->name('payments.pay');
+    Route::patch('/cancel/{id}', 'cancel')->name('payments.cancel');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('home');
@@ -46,10 +55,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/session', function () {
         return view('sessions/show');
-    });
-
-    Route::get('/payments', function () {
-        return view('payments/index');
     });
 
     Route::get('/payment', function () {
