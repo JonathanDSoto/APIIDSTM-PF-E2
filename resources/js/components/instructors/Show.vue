@@ -5,7 +5,6 @@
          required: true,
      }
  });
- console.log(props.instructor);
 </script>
 <template>
   <div class="row">

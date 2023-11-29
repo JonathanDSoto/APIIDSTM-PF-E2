@@ -5,7 +5,6 @@ const props = defineProps({
         required: true,
     },
 });
-console.log(props.customer);
 </script>
 <template>
     <div class="card mb-4" style="max-height: 500px; overflow: hidden">

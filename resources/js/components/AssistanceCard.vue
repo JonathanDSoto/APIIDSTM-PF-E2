@@ -5,7 +5,6 @@ const props = defineProps({
         required: true,
     },
 });
-console.log(props.sessions);
 </script>
 <template>
     <div class="col-lg-12 col-xl-6">

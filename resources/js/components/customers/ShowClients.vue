@@ -13,7 +13,6 @@ const props = defineProps({
         required: true,
     }
 });
-console.log(props.blood_groups);
 </script>
 <template>
     <div class="row">

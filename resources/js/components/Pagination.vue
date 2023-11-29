@@ -8,7 +8,6 @@ const props = defineProps({
 
 const canGoNext = props.users.to < props.users.total ? true : false;
 const canGoPrev = props.users.current_page > 1 ? true : false;
-console.log(props.users);
 </script>
 <template>
     <div class="btn-group mt-2" role="group">

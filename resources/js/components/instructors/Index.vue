@@ -11,7 +11,6 @@ const props = defineProps({
         required: true,
     }
 });
-console.log(props.instructors);
 //TODO Qualifications for each instructor
 //TODO Fix table weight
 </script>

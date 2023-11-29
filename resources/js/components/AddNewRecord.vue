@@ -16,7 +16,6 @@ const recordData = {
 };
 
 const emit = defineEmits(["close", "alert"]);
-console.log(props.what);
 </script>
 <template>
     <template v-if="props.what == 'fares'">
