@@ -6,15 +6,14 @@ const props = defineProps({
     },
 });
 
-const canGoNext =
-    props.users.to < props.users.current_page * props.users.per_page
-        ? false
-        : true;
+const canGoNext = props.users.to < props.users.total ? true : false;
 const canGoPrev = props.users.current_page > 1 ? true : false;
+console.log(props.users);
 </script>
 <template>
     <div class="btn-group mt-2" role="group">
         <a
+            v-if="canGoPrev"
             class="btn btn-secondary waves-effect"
             type="button"
             :href="route('customers', { page: props.users.current_page - 1 })"

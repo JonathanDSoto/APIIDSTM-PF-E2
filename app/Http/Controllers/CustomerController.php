@@ -28,7 +28,7 @@ class CustomerController extends Controller
     public function index()
     {
         return view('customers.index', [
-            'customers' => Customer::orderBy('name')->simplePaginate(15),
+            'customers' => Customer::orderBy('name')->paginate(15),
             'bloodGroups' => BloodGroup::orderBy('name')->get()
         ]);
     }

@@ -2,7 +2,7 @@
 import FormAuth from "./FormAuth.vue";
 const props = defineProps({
     /* Instructor -> true - Cliente -> false */
-    idUser: {
+    id: {
         type: Number,
         required: true,
     },
@@ -14,10 +14,11 @@ const props = defineProps({
 </script>
 
 <template>
+    {{ props.id }}
     <form
         method="POST"
         id="deleteUserForm"
-        :action="route(`${props.type}.delete`, { id: props.idUser })"
+        :action="route(`${props.type}.delete`, { id: props.id })"
     >
         <FormAuth method="delete" />
         <div
@@ -38,10 +39,11 @@ const props = defineProps({
                         <div class="text-center mb-4">
                             <h3 class="mb-2">
                                 Eliminar
-                                {{ props.type ? "instructor" : "cliente" }}
+                                {{ props.type }}
                             </h3>
                             <p class="text-muted">
                                 ¿Estas Seguro que deseas eliminar
+                                {{ props.type }}
                             </p>
                         </div>
                         <!-- <form id="deleteUserForm" class="row g-3" :action="route('customers.delete', { id: props.id })

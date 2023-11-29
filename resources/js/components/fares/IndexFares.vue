@@ -34,7 +34,6 @@ console.log(props.fares);
                         class="col-lg mb-md-0 mb-4"
                         v-for="fare in props.fares"
                     >
-                        <DeleteModal type="fares" :idUser="fare.id" />
                         <div class="card border rounded shadow-none">
                             <div class="card-body">
                                 <h3
@@ -83,6 +82,8 @@ console.log(props.fares);
                                 </div>
                             </div>
                         </div>
+                        <h1>{{ fare.id }}</h1>
+                        <DeleteModal type="fares" :id="fare.id" />
                     </div>
                 </div>
             </div>

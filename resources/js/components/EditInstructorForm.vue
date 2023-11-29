@@ -4,7 +4,7 @@ import FormAuth from './FormAuth.vue';
 const props = defineProps({
     user: {
         type: Object,
-        required: true,
+        required: false,
     },
     blood_groups: {
         type: Object,
