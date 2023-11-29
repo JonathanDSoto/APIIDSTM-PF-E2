@@ -42,6 +42,7 @@ Route::controller(PaymentController::class)->prefix('/payments')->group(function
 
 Route::middleware('auth')->group(function () {
     Route::get('/', function () {
+        return view('home');
     });
 
     Route::get('/modals', function () {
