@@ -24,6 +24,9 @@ const selectedIndex = ref(0);
 const returnActiveOrNot = (isActive) => {
     return isActive ? "Activo" : "Inactivo";
 };
+const editRef = ref(null);
+editRef.value = props.tipo === "instructors" ? "#editInstructor" : "#editCustomer";
+console.log(editRef.value);
 </script>
 <template>
     <div class="table-responsive text-nowrap">
@@ -41,16 +44,7 @@ const returnActiveOrNot = (isActive) => {
                     <td>
                         <a
                             class="text-reset fw-bold"
-                            :href="
-                                route(
-                                    props.tipo
-                                        ? 'instructors.show'
-                                        : 'customers.show',
-                                    {
-                                        id: user.id,
-                                    }
-                                )
-                            "
+                            :href="route(`${props.tipo}.show`, { id: user.id })"
                             >{{ user.name }}</a
                         >
                     </td>
@@ -69,9 +63,7 @@ const returnActiveOrNot = (isActive) => {
                         <button
                             @click="selectedIndex = index"
                             data-bs-toggle="modal"
-                            :data-bs-target="
-                                props.tipo ? '#editInstructor' : '#editCustomer'
-                            "
+                            :data-bs-target="editRef"
                             style="margin: 5px"
                             class="btn btn-success"
                             href="javascript:void(0);"
@@ -93,7 +85,7 @@ const returnActiveOrNot = (isActive) => {
             </tbody>
         </table>
         <edit-instructor-form
-            v-if="props.tipo"
+            v-if="props.tipo == 'instructors'"
             :user="users[selectedIndex]"
             :blood_groups="props.blood_groups"
         />

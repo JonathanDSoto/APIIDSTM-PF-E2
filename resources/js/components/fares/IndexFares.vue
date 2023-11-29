@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import EditFareForm from "../EditFareForm.vue";
 import AddNewRecord from "../AddNewRecord.vue";
 import DeleteModal from "../DeleteModal.vue";
 const props = defineProps({
@@ -82,6 +83,7 @@ console.log(props.fares);
                                     >
                                         <i class="ti ti-trash me-1"></i>
                                     </button>
+                                    <EditFareForm :fare="fare"/>
                                     <DeleteModal type="fares" :id="selectedId" />
                                 </div>
                             </div>
