@@ -1,15 +1,11 @@
-<script>
-export default {
-    props: {
-        name: String,
-        status: Number,
-        phone: String,
-        email: String,
-        emergency_phone: String,
-        blood_type: String,
+<script setup>
+const props = defineProps({
+    customer: {
+        type: Object,
+        required: true,
     }
-}
-
+});
+console.log(props.customer);
 </script>
 <template>
     <div class="card mb-4">
@@ -29,12 +25,13 @@ export default {
                     <li class="d-flex align-items-center mb-3">
                         <i class="ti ti-user text-heading"></i>
                         <span class="fw-medium mx-2 text-heading">Nombre Completo:</span>
-                        <span>{{ name }}</span>
+                        <span>{{ props.customer.name }}</span>
                     </li>
                     <li class="d-flex align-items-center mb-3">
                         <i class="ti ti-check text-heading"></i>
                         <span class="fw-medium mx-2 text-heading">Status:</span>
-                        <span>{{ (status === '1' || status === 1) ? 'Activo' : 'Inactivo' }}</span>
+                        <span>{{ (props.customer.status === '1' || props.customer.status === 1) ? 'Activo' : 'Inactivo'
+                        }}</span>
                     </li>
                 </ul>
                 <small class="card-text text-uppercase">Contacto</small>
@@ -42,17 +39,17 @@ export default {
                     <li class="d-flex align-items-center mb-3">
                         <i class="ti ti-phone-call"></i>
                         <span class="fw-medium mx-2 text-heading">Contacto:</span>
-                        <span>{{ phone }}</span>
+                        <span>{{ props.customer.phone }}</span>
                     </li>
                     <li class="d-flex align-items-center mb-3">
                         <i class="ti ti-mail"></i>
                         <span class="fw-medium mx-2 text-heading">Email:</span>
-                        <span>{{ email }}</span>
+                        <span>{{ props.customer.email }}</span>
                     </li>
                     <li class="d-flex align-items-center mb-3">
                         <i class="ti ti-phone-call"></i>
                         <span class="fw-medium mx-2 text-heading">Emergencia:</span>
-                        <span>{{ emergency_phone }}</span>
+                        <span>{{ props.customer.emergency_phone }}</span>
                     </li>
                 </ul>
                 <small class="card-text text-uppercase">Salud</small>
@@ -60,7 +57,7 @@ export default {
                     <li class="d-flex align-items-center mb-3">
                         <i class="fas fa-tint"></i>
                         <span class="fw-medium mx-2 text-heading">Tipo de Sangre:</span>
-                        <span>{{ blood_type }}</span>
+                        <span>{{ props.customer.blood_group.name }}</span>
                     </li>
                 </ul>
             </div>
