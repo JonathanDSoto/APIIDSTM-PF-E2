@@ -100,7 +100,7 @@ class CustomerController extends Controller
 
             return redirect()
                 ->route('customers')
-                ->with('delete', 'La información del cliente se ha eliminado con éxito.');
+                ->with('success', 'La información del cliente se ha eliminado con éxito.');
         }
     }
 }
