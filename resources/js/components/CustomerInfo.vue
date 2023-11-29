@@ -3,12 +3,12 @@ const props = defineProps({
     customer: {
         type: Object,
         required: true,
-    }
+    },
 });
 console.log(props.customer);
 </script>
 <template>
-    <div class="card mb-4" style="max-height: 350px; overflow: hidden;">
+    <div class="card mb-4" style="max-height: 500px; overflow: hidden">
         <div class="card-body">
             <div class="d-flex justify-content-between">
                 <h5 class="card-action-title mb-0">Informacion</h5>
@@ -24,13 +24,19 @@ console.log(props.customer);
                 <ul class="list-unstyled mb-4 mt-3">
                     <li class="d-flex align-items-center mb-3">
                         <i class="ti ti-user text-heading"></i>
-                        <span class="fw-medium mx-2 text-heading">Nombre Completo:</span>
+                        <span class="fw-medium mx-2 text-heading"
+                            >Nombre Completo:</span
+                        >
                         <span>{{ props.customer.name }}</span>
                     </li>
                     <li class="d-flex align-items-center mb-3">
                         <i class="ti ti-check text-heading"></i>
                         <span class="fw-medium mx-2 text-heading">Status:</span>
-                        <span>{{ (props.customer.status === '1' || props.customer.status === 1) ? 'Activo' : 'Inactivo'
+                        <span>{{
+                            props.customer.status === "1" ||
+                            props.customer.status === 1
+                                ? "Activo"
+                                : "Inactivo"
                         }}</span>
                     </li>
                 </ul>
@@ -38,17 +44,21 @@ console.log(props.customer);
                 <ul class="list-unstyled mb-4 mt-3">
                     <li class="d-flex align-items-center mb-3">
                         <i class="ti ti-phone-call"></i>
-                        <span class="fw-medium mx-2 text-heading">Contacto:</span>
+                        <span class="fw-medium mx-2 text-heading"
+                            >Contacto:</span
+                        >
                         <span>{{ props.customer.phone }}</span>
                     </li>
                     <li class="d-flex align-items-center mb-3">
                         <i class="ti ti-mail"></i>
                         <span class="fw-medium mx-2 text-heading">Email:</span>
-                        <span>{{ props.customer.email }}</span>
+                        <span class="text-break">{{ props.customer.email }}</span>
                     </li>
                     <li class="d-flex align-items-center mb-3">
                         <i class="ti ti-phone-call"></i>
-                        <span class="fw-medium mx-2 text-heading">Emergencia:</span>
+                        <span class="fw-medium mx-2 text-heading"
+                            >Emergencia:</span
+                        >
                         <span>{{ props.customer.emergency_phone }}</span>
                     </li>
                 </ul>
@@ -56,7 +66,9 @@ console.log(props.customer);
                 <ul class="list-unstyled mb-4 mt-3">
                     <li class="d-flex align-items-center mb-3">
                         <i class="fas fa-tint"></i>
-                        <span class="fw-medium mx-2 text-heading">Tipo de Sangre:</span>
+                        <span class="fw-medium mx-2 text-heading"
+                            >Tipo de Sangre:</span
+                        >
                         <span>{{ props.customer.blood_group.name }}</span>
                     </li>
                 </ul>
