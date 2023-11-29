@@ -35,6 +35,12 @@ class FareController extends Controller
     {
         $this->validate($request, $this->validator);
 
+        if (Fare::where('fare_period_id', $request->fare_period_id)->exists()) {
+            return redirect()
+                ->back()
+                ->withErrors(['internal_error' => 'No es posible tener más tarifas en un mismo periodo de tiempo.']);
+        }
+
         Fare::create($request->all());
 
         return redirect()
