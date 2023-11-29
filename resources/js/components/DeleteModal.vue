@@ -14,7 +14,6 @@ const props = defineProps({
 </script>
 
 <template>
-    {{ props.id }}
     <form
         method="POST"
         id="deleteUserForm"

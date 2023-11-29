@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from "vue";
 import AddNewRecord from "../AddNewRecord.vue";
 import DeleteModal from "../DeleteModal.vue";
 const props = defineProps({
@@ -6,6 +7,7 @@ const props = defineProps({
         type: Object,
     },
 });
+const selectedId = ref(0);
 console.log(props.fares);
 </script>
 <template>
@@ -33,6 +35,7 @@ console.log(props.fares);
                     <div
                         class="col-lg mb-md-0 mb-4"
                         v-for="fare in props.fares"
+                        :key="fare.id"
                     >
                         <div class="card border rounded shadow-none">
                             <div class="card-body">
@@ -70,7 +73,7 @@ console.log(props.fares);
                                         <i class="ti ti-pencil"></i>
                                     </a>
                                     <button
-                                        @click="selectedUserId = user.id"
+                                        @click="selectedId = fare.id"
                                         class="btn btn-danger"
                                         style="margin: 5px"
                                         href="javascript:void(0);"
@@ -79,11 +82,10 @@ console.log(props.fares);
                                     >
                                         <i class="ti ti-trash me-1"></i>
                                     </button>
+                                    <DeleteModal type="fares" :id="selectedId" />
                                 </div>
                             </div>
                         </div>
-                        <h1>{{ fare.id }}</h1>
-                        <DeleteModal type="fares" :id="fare.id" />
                     </div>
                 </div>
             </div>
