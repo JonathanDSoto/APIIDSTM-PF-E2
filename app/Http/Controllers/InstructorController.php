@@ -32,7 +32,7 @@ class InstructorController extends Controller
         return view('instructors.index', [
             'instructors' => Instructor::orderBy('name')->simplePaginate(15),
             'bloodGroups' => BloodGroup::orderBy('name')->get(),
-            'exerciseTypes' => ExerciseType::all()
+            'exerciseTypes' => ExerciseType::orderBy('name')->get()
         ]);
     }
 
