@@ -44,6 +44,7 @@ class FareController extends Controller
 
     public function update(Request $request, string $id)
     {
+        $this->validator['name'] = ['required', 'string', "unique:fares,name,{$id}", 'not_regex:/\d/', 'max:255'];
         $this->validate($request, $this->validator);
 
         $fare = Fare::find($id);
