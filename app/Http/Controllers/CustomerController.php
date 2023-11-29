@@ -70,7 +70,8 @@ class CustomerController extends Controller
         return view('customers.show', [
             'customer' => $customer,
             'sessionNames' => Session::whereIn('id', $attendedSessionIds)
-                ->pluck('name', 'id')
+                ->pluck('name', 'id'),
+            'bloodGroups' => BloodGroup::orderBy('name')->get()
         ]);
     }
 
