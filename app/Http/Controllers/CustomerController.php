@@ -48,7 +48,9 @@ class CustomerController extends Controller
     {
         $customer = Customer::with([
             'attendedSessions' => function ($attendedSessions) {
-                $attendedSessions->orderBy('attendance_date', 'desc');
+                $attendedSessions
+                    ->with('weekDay')
+                    ->orderBy('attendance_date', 'desc');
             },
             'payments' => function ($payments) {
                 $payments
