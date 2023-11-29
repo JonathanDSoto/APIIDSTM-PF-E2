@@ -7,7 +7,7 @@ const props = defineProps({
         required: true,
     },
     type: {
-        type: Boolean,
+        type: String,
         required: true,
     },
 });
@@ -16,7 +16,7 @@ const props = defineProps({
 
 <template>
     <form method="POST" id="deleteUserForm"
-        :action="route((props.type) ? 'instructors.delete' : 'customers.delete', { id: props.idUser })">
+        :action="route(`${props.type}.delete`, { id: props.idUser })">
         <FormAuth method="delete" />
         <div class="modal fade" id="deleteUser" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-simple modal-edit-user">
