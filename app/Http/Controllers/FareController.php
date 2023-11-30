@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Fare;
 use App\Models\FarePeriod;
 use App\Models\Payment;
+use App\Rules\FarePeriodInUse;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
@@ -17,9 +18,9 @@ class FareController extends Controller
         $this->middleware('auth');
         $this->validator = [
             'name' => ['required', 'string', 'unique:fares,name', 'not_regex:/\d/', 'max:255'],
-            'fare_period_id' => ['required', 'integer', 'exists:fare_periods,id'],
-            'price' => ['required', 'numeric', 'between:0,999999999.99'],
-            'description' => ['required', 'string']
+            'fare_period_id' => ['bail', 'required', 'integer', 'exists:fare_periods,id'],
+            'price' => ['bail', 'required', 'numeric', 'between:50,999999999.99'],
+            'description' => ['bail', 'required', 'string']
         ];
     }
 
@@ -34,14 +35,10 @@ class FareController extends Controller
 
     public function store(Request $request)
     {
+        $this->validator['fare_period_id'] = [
+            'bail', 'required', 'integer', 'exists:fare_periods,id', new FarePeriodInUse
+        ];
         $this->validate($request, $this->validator);
-
-        if (Fare::where('fare_period_id', $request->fare_period_id)->exists()) {
-            return back()
-                ->withErrors([
-                    'internal_error' => 'No es posible tener dos tarifas en un mismo periodo.'
-                ]);
-        }
 
         Fare::create($request->all());
 
@@ -56,31 +53,33 @@ class FareController extends Controller
 
         try {
             $fare = Fare::findOrFail($id);
-            $fare->update($request->all());
-
-            return back()
-                ->with('success', 'La información de la tarifa se ha actualizado con éxito.');
         } catch (ModelNotFoundException $modelNotFoundException) {
             return back()
                 ->withErrors([
                     'internal_error' => 'No se ha podido encontrar la tarifa solicitada.'
                 ]);
         }
+
+        $fare->update($request->all());
+
+        return back()
+            ->with('success', 'La información de la tarifa se ha actualizado con éxito.');
     }
 
     public function destroy(string $id)
     {
         try {
             $fare = Fare::findOrFail($id);
-            $fare->delete();
-
-            return back()
-                ->with('success', 'La información de la tarifa se ha eliminado con éxito.');
         } catch (ModelNotFoundException $modelNotFoundException) {
             return back()
                 ->withErrors([
                     'internal_error' => 'No se ha podido encontrar la tarifa solicitada.'
                 ]);
         }
+
+        $fare->delete();
+
+        return back()
+            ->with('success', 'La información de la tarifa se ha eliminado con éxito.');
     }
 }

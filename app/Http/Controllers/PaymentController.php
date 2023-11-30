@@ -7,10 +7,11 @@ use App\Models\Fare;
 use App\Models\Payment;
 use App\Models\PaymentStatus;
 use App\Models\PaymentType;
+use App\Rules\IsCustomerActive;
+use App\Rules\IsPaymentPending;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Database\Query\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Validator;
 
 class PaymentController extends Controller
 {
@@ -46,18 +47,14 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'customer_id' => [
-                'required',
-                'integer',
-                Rule::exists('customers', 'id')->where(function (Builder $query) {
-                    return $query->where('is_active', 1);
-                })
-            ],
-            'fare_id' => ['required', 'integer', 'exists:fares,id'],
-            'payment_type_id' => ['required', 'integer', 'exists:payment_types,id']
+            'customer_id' => ['bail', 'required', 'integer', 'exists:customers,id', new IsCustomerActive],
+            'fare_id' => ['bail', 'required', 'integer', 'exists:fares,id'],
+            'payment_type_id' => ['bail', 'required', 'integer', 'exists:payment_types,id']
         ]);
 
-        $paymentData = $request->only('customer_id', 'fare_id', 'payment_type_id') + ['payment_status_id' => 2];
+        $paymentData = $request->only('customer_id', 'fare_id', 'payment_type_id') + [
+            'payment_status_id' => $this->paymentStatusIds['Pendiente']
+        ];
         Payment::create($paymentData);
 
         return back()
@@ -67,59 +64,67 @@ class PaymentController extends Controller
     public function update(Request $request, string $id)
     {
         $this->validate($request, [
-            'fare_id' => ['required', 'integer', 'exists:fares,id'],
-            'payment_type_id' => ['required', 'integer', 'exists:payment_types,id']
+            'fare_id' => ['bail', 'required', 'integer', 'exists:fares,id'],
+            'payment_type_id' => ['bail', 'required', 'integer', 'exists:payment_types,id']
         ]);
 
         try {
             $payment = Payment::findOrFail($id);
-            $payment->update($request->only('fare_id', 'payment_type_id'));
-
-            return back()
-                ->with('success', 'La información del pago del cliente se ha actualizado con éxito.');
         } catch (ModelNotFoundException $modelNotFoundException) {
             return back()
-                ->withErrors(['internal_error' => 'No se ha podido encontrar el pago del cliente solicitado.']);
+                ->withErrors([
+                    'internal_error' => 'No se ha podido encontrar el pago del cliente solicitado.'
+                ]);
         }
+
+        $payment->update($request->only('fare_id', 'payment_type_id'));
+
+        return back()
+            ->with('success', 'La información del pago del cliente se ha actualizado con éxito.');
     }
 
     public function pay(string $id)
     {
         try {
             $payment = Payment::findOrFail($id);
-
-            if ($payment->payment_status_id === $this->paymentStatusIds['Pendiente']) {
-                $payment->update(['payment_status_id' => 1, 'payment_datetime' => now()]);
-    
-                return back()
-                    ->with('success', 'El pago del cliente se ha concretado con éxito.');
-            }
-
-            return back()
-                ->withErrors(['internal_error' => 'No es posible actualizar el estatus del pago seleccionado.']);
         } catch (ModelNotFoundException $modelNotFoundException) {
             return back()
-                ->withErrors(['internal_error' => 'No se ha podido encontrar el pago del cliente solicitado.']);
+                ->withErrors(
+                    ['internal_error' => 'No se ha podido encontrar el pago del cliente solicitado.']
+                );
         }
+
+        Validator::make(['payment_status_id' => $payment->payment_status_id], [
+            'payment_status_id' => [new IsPaymentPending]
+        ])->validate();
+
+        $payment->update([
+            'payment_status_id' => $this->paymentStatusIds['Pagado'],
+            'payment_datetime' => now()
+        ]);
+
+        return back()
+            ->with('success', 'El pago del cliente se ha concretado con éxito.');
     }
 
     public function cancel(string $id)
     {
         try {
             $payment = Payment::findOrFail($id);
-
-            if ($payment->payment_status_id === $this->paymentStatusIds['Pendiente']) {    
-                $payment->update(['payment_status_id' => 3]);
-
-                return back()
-                    ->with('success', 'El pago del cliente ha sido cancelado con éxito.');
-            }
-
-            return back()
-                ->withErrors(['internal_error' => 'No es posible actualizar el estatus del pago seleccionado.']);
         } catch (ModelNotFoundException $modelNotFoundException) {
             return back()
-                ->withErrors(['internal_error' => 'No se ha podido encontrar el pago del cliente solicitado.']);
+                ->withErrors(
+                    ['internal_error' => 'No se ha podido encontrar el pago del cliente solicitado.']
+                );
         }
+
+        Validator::make(['payment_status_id' => $payment->payment_status_id], [
+            'payment_status_id' => [new IsPaymentPending]
+        ])->validate();
+
+        $payment->update(['payment_status_id' => $this->paymentStatusIds['Cancelado']]);
+
+        return back()
+            ->with('success', 'El pago del cliente ha sido cancelado con éxito.');
     }
 }
