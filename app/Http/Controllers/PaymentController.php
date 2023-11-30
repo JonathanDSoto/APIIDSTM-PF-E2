@@ -60,8 +60,7 @@ class PaymentController extends Controller
         $paymentData = $request->only('customer_id', 'fare_id', 'payment_type_id') + ['payment_status_id' => 2];
         Payment::create($paymentData);
 
-        return redirect()
-            ->back()
+        return back()
             ->with('success', 'El pago del cliente se ha guardado con éxito.');
     }
 
@@ -76,13 +75,11 @@ class PaymentController extends Controller
             $payment = Payment::findOrFail($id);
             $payment->update($request->only('fare_id', 'payment_type_id'));
 
-            return redirect()
-                ->back()
+            return back()
                 ->with('success', 'La información del pago del cliente se ha actualizado con éxito.');
         } catch (ModelNotFoundException $modelNotFoundException) {
-            return redirect()
-                ->back()
-                ->withErrors(['internal_error' => 'No se ha podido encontrar el pago del cliente solicitada.']);
+            return back()
+                ->withErrors(['internal_error' => 'No se ha podido encontrar el pago del cliente solicitado.']);
         }
     }
 
@@ -94,17 +91,14 @@ class PaymentController extends Controller
             if ($payment->payment_status_id === $this->paymentStatusIds['Pendiente']) {
                 $payment->update(['payment_status_id' => 1, 'payment_datetime' => now()]);
     
-                return redirect()
-                    ->back()
+                return back()
                     ->with('success', 'El pago del cliente se ha concretado con éxito.');
             }
 
-            return redirect()
-                ->back()
+            return back()
                 ->withErrors(['internal_error' => 'No es posible actualizar el estatus del pago seleccionado.']);
         } catch (ModelNotFoundException $modelNotFoundException) {
-            return redirect()
-                ->back()
+            return back()
                 ->withErrors(['internal_error' => 'No se ha podido encontrar el pago del cliente solicitado.']);
         }
     }
@@ -117,17 +111,14 @@ class PaymentController extends Controller
             if ($payment->payment_status_id === $this->paymentStatusIds['Pendiente']) {    
                 $payment->update(['payment_status_id' => 3]);
 
-                return redirect()
-                    ->back()
+                return back()
                     ->with('success', 'El pago del cliente ha sido cancelado con éxito.');
             }
 
-            return redirect()
-                ->back()
+            return back()
                 ->withErrors(['internal_error' => 'No es posible actualizar el estatus del pago seleccionado.']);
         } catch (ModelNotFoundException $modelNotFoundException) {
-            return redirect()
-                ->back()
+            return back()
                 ->withErrors(['internal_error' => 'No se ha podido encontrar el pago del cliente solicitado.']);
         }
     }
