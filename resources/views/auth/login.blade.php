@@ -81,7 +81,7 @@
                         <div class="mb-3">
                             <label for="email" class="form-label">Correo electronico</label>
                             <input type="email" class="form-control" id="email" name="email"
-                                placeholder="Ingresa tu correo electronico" autofocus />
+                                placeholder="Ingresa tu correo electronico" value="{{ old('email') }}"autofocus />
                         </div>
                         <div class="mb-3 form-password-toggle">
                             <div class="d-flex justify-content-between">
