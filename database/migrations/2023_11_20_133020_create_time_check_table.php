@@ -11,8 +11,9 @@ return new class extends Migration
         Schema::create('time_check', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')
+                ->nullable()
                 ->constrained()
-                ->cascadeOnDelete()
+                ->nullOnDelete()
                 ->cascadeOnUpdate();
             $table->time('time_in');
             $table->time('time_out')->nullable();

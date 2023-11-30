@@ -16,8 +16,9 @@ return new class extends Migration
                 ->nullOnDelete()
                 ->cascadeOnUpdate();
             $table->foreignId('fare_id')
+                ->nullable()
                 ->constrained()
-                ->cascadeOnDelete()
+                ->nullOnDelete()
                 ->cascadeOnUpdate();
             $table->foreignId('payment_status_id')
                 ->constrained('payment_status')
