@@ -12,10 +12,11 @@
             <thead>
                 <tr>
                     <th>Cliente</th>
-                    <th>Tarifa</th>
                     <th>Status</th>
                     <th>Tipo de Pago</th>
-                    <th></th>
+                    <th>Monto</th>
+                    <th>Fecha de Pago</th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
@@ -30,12 +31,13 @@
                             </ul>
                         </a>
                     </td>
-                    <td>Diario</td>
                     <td>
                         <span class="badge bg-label-success me-1">Pagado</span>
                     </td>
                     <td> Trasferencia</td>
-                    <td class="text-end">
+                    <td>$50.00</td>
+                    <td>24/12/2023<td>
+                    <!-- <td class="text-end">
                         <a class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#newPaymentCustomer" href="javascript:void(0);">
                             <i class="ti ti-cash"></i>  
                         </a>
@@ -45,7 +47,7 @@
                         <a class="btn btn-danger ti-sm" data-bs-toggle="modal" data-bs-target="#deletePaymentCustomer" href="javascript:void(0);">
                             <i class="ti ti-ban"></i> 
                         </a>
-                    </td>
+                    </td> -->
                 </tr>
                 <tr>
                     <td>
@@ -55,11 +57,12 @@
                             </li>
                         </ul>
                     </td>
-                    <td>Mensual</td>
                     <td>
                         <span class="badge bg-label-warning me-1">Pendiente</span>
                     </td>
                     <td> Tarjeta</td>
+                    <td>$50.00</td>
+                    <td> </td>
                     <td class="text-end">
                         <a class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#newPaymentCustomer" href="javascript:void(0);">
                             <i class="ti ti-cash"></i>  
@@ -80,13 +83,14 @@
                             </li>
                         </ul>
                     </td>
-                    <td>Mensual</td>
                     <td>
                         <span class="badge bg-label-success me-1">Pagado</span>
                     </td>
-                    <td> Efectivo</td>
+                    <td>Trasferencia</td>
+                    <td>$450.00</td>
+                    <td>24/12/2023<td>
                     <td class="text-end">
-                        <a class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#newPaymentCustomer" href="javascript:void(0);">
+                        <!-- <a class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#newPaymentCustomer" href="javascript:void(0);">
                             <i class="ti ti-cash"></i>  
                         </a>
                         <a class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#editPaymentCustomer" href="javascript:void(0);">
@@ -94,7 +98,7 @@
                         </a>
                         <a class="btn btn-danger ti-sm" data-bs-toggle="modal" data-bs-target="#deletePaymentCustomer" href="javascript:void(0);">
                             <i class="ti ti-ban"></i> 
-                        </a>
+                        </a> -->
                     </td>
                 </tr>
                 <tr>
@@ -105,11 +109,12 @@
                             </li>
                         </ul>
                     </td>
-                    <td>Mensual</td>
                     <td>
                         <span class="badge bg-label-warning me-1">Pendiente</span>
                     </td>
                     <td>Efectivo</td>
+                    <td>$50.00</td>
+                    <td> </td>
                     <td class="text-end">
                         <a class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#newPaymentCustomer" href="javascript:void(0);">
                             <i class="ti ti-cash"></i>  
@@ -130,13 +135,14 @@
                             </li>
                         </ul>
                     </td>
-                    <td>Anual</td>
                     <td>
-                        <span class="badge bg-label-success me-1">pagado</span>
+                        <span class="badge bg-label-success me-1">Pagado</span>
                     </td>
-                    <td>Transferencia</td>
+                    <td> Trasferencia</td>
+                    <td>$50.00</td>
+                    <td>24/12/2023<td>
                     <td class="text-end">
-                        <a class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#newPaymentCustomer" href="javascript:void(0);">
+                        <!-- <a class="btn btn-primary me-2" data-bs-toggle="modal" data-bs-target="#newPaymentCustomer" href="javascript:void(0);">
                             <i class="ti ti-cash"></i>  
                         </a>
                         <a class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#editPaymentCustomer" href="javascript:void(0);">
@@ -144,7 +150,7 @@
                         </a>
                         <a class="btn btn-danger ti-sm" data-bs-toggle="modal" data-bs-target="#deletePaymentCustomer" href="javascript:void(0);">
                             <i class="ti ti-ban"></i> 
-                        </a>
+                        </a> -->
                     </td>
                 </tr>
             </tbody>
