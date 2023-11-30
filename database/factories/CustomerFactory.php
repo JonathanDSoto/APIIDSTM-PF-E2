@@ -10,7 +10,7 @@ class CustomerFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
+            'name' => fake()->firstName() . " " . fake()->lastName(),
             'phone' => fake()->unique()->numerify('612#######'),
             'emergency_phone' => fake()->numerify('612#######'),
             'email' => fake()->unique()->freeEmail(),
