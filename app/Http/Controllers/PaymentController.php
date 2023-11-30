@@ -30,7 +30,7 @@ class PaymentController extends Controller
             'fare',
             'paymentStatus',
             'paymentType'
-        ])->simplePaginate(15);
+        ])->paginate(15);
 
         return view('payments.index', [
             'payments' => $payments,

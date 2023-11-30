@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BloodGroup;
 use App\Models\Customer;
 use App\Models\Session;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -37,42 +38,55 @@ class CustomerController extends Controller
     {
         $this->validate($request, $this->validator);
 
-        Customer::create($request->all());
+        Customer::create($request->only([
+            'name',
+            'phone',
+            'emergency_phone',
+            'email',
+            'blood_group_id'
+        ]));
 
-        return redirect()
-            ->route('customers')
+        return back()
             ->with('success', 'La información del cliente se ha guardado con éxito.');
     }
 
     public function show(string $id)
     {
-        $customer = Customer::with([
-            'attendedSessions' => function ($attendedSessions) {
-                $attendedSessions
-                    ->with('weekDay')
-                    ->orderBy('attendance_date', 'desc');
-            },
-            'payments' => function ($payments) {
-                $payments
-                    ->with('fare', 'paymentStatus', 'paymentType')
-                    ->orderBy('payment_datetime', 'asc')
-                    ->orderBy('created_at', 'desc');
-            },
-            'bloodGroup'
-        ])->find($id);
+        try {
+            $customer = Customer::with([
+                'attendedSessions' => function ($attendedSessions) {
+                    $attendedSessions
+                        ->wherePivot('attended', 1)
+                        ->with('weekDay')
+                        ->orderBy('attendance_date', 'desc');
+                },
+                'payments' => function ($payments) {
+                    $payments
+                        ->with('fare', 'paymentStatus', 'paymentType')
+                        ->orderBy('payment_datetime', 'asc')
+                        ->orderBy('created_at', 'desc');
+                },
+                'bloodGroup'
+            ])->findOrFail($id);
 
-        $attendedSessionIds = array_unique($customer
-            ->attendedSessions
-            ->pluck('session_id')
-            ->toArray()
-        );
+            $attendedSessionIds = array_unique($customer
+                ->attendedSessions
+                ->pluck('session_id')
+                ->toArray()
+            );
 
-        return view('customers.show', [
-            'customer' => $customer,
-            'sessionNames' => Session::whereIn('id', $attendedSessionIds)
-                ->pluck('name', 'id'),
-            'bloodGroups' => BloodGroup::orderBy('name')->get()
-        ]);
+            return view('customers.show', [
+                'customer' => $customer,
+                'sessionNames' => Session::whereIn('id', $attendedSessionIds)
+                    ->pluck('name', 'id'),
+                'bloodGroups' => BloodGroup::orderBy('name')->get()
+            ]);
+        } catch (ModelNotFoundException $modelNotFoundException) {
+            return to_route('customers')
+                ->withErrors([
+                    'internal_error' => 'No se ha podido encontrar el cliente solicitado.'
+                ]);
+        }
     }
 
     public function update(Request $request, string $id)
@@ -83,27 +97,33 @@ class CustomerController extends Controller
 
         $this->validate($request, $this->validator);
 
-        $customer = Customer::find($id);
-
-        if ($customer) {
+        try {
+            $customer = Customer::findOrFail($id);
             $customer->update($request->all());
 
-            return redirect()
-                ->route('customers.show', ['id'=> $id])
+            return back()
                 ->with('success', 'La información del cliente se ha actualizado con éxito.');
+        } catch (ModelNotFoundException $modelNotFoundException) {
+            return back()
+                ->withErrors([
+                    'internal_error' => 'No se ha podido encontrar el cliente solicitado.'
+                ]);
         }
     }
 
     public function destroy(string $id)
     {
-        $customer = Customer::find($id);
-
-        if ($customer) {
+        try {
+            $customer = Customer::findOrFail($id);
             $customer->delete();
 
-            return redirect()
-                ->route('customers')
+            return back()
                 ->with('success', 'La información del cliente se ha eliminado con éxito.');
+        } catch (ModelNotFoundException $modelNotFoundException) {
+            return back()
+                ->withErrors([
+                    'internal_error' => 'No se ha podido encontrar el cliente solicitado.'
+                ]);
         }
     }
 }

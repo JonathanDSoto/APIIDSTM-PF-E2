@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Fare;
 use App\Models\FarePeriod;
 use App\Models\Payment;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class FareController extends Controller
@@ -36,15 +37,15 @@ class FareController extends Controller
         $this->validate($request, $this->validator);
 
         if (Fare::where('fare_period_id', $request->fare_period_id)->exists()) {
-            return redirect()
-                ->back()
-                ->withErrors(['internal_error' => 'No es posible tener más tarifas en un mismo periodo de tiempo.']);
+            return back()
+                ->withErrors([
+                    'internal_error' => 'No es posible tener dos tarifas en un mismo periodo.'
+                ]);
         }
 
         Fare::create($request->all());
 
-        return redirect()
-            ->route('fares')
+        return back()
             ->with('success', 'La información de la tarifa se ha guardado con éxito.');
     }
 
@@ -53,35 +54,33 @@ class FareController extends Controller
         $this->validator['name'] = ['required', 'string', "unique:fares,name,{$id}", 'not_regex:/\d/', 'max:255'];
         $this->validate($request, $this->validator);
 
-        $fare = Fare::find($id);
-
-        if ($fare) {
+        try {
+            $fare = Fare::findOrFail($id);
             $fare->update($request->all());
 
-            return redirect()
-                ->route('fares')
+            return back()
                 ->with('success', 'La información de la tarifa se ha actualizado con éxito.');
+        } catch (ModelNotFoundException $modelNotFoundException) {
+            return back()
+                ->withErrors([
+                    'internal_error' => 'No se ha podido encontrar la tarifa solicitada.'
+                ]);
         }
-
-        return redirect()
-                ->route('fares')
-                ->withErrors(['internal_error' => 'No se ha podido encontrar la tarifa solicitada.']);
     }
 
     public function destroy(string $id)
     {
-        $fare = Fare::find($id);
-
-        if ($fare) {
+        try {
+            $fare = Fare::findOrFail($id);
             $fare->delete();
 
-            return redirect()
-                ->route('fares')
+            return back()
                 ->with('success', 'La información de la tarifa se ha eliminado con éxito.');
+        } catch (ModelNotFoundException $modelNotFoundException) {
+            return back()
+                ->withErrors([
+                    'internal_error' => 'No se ha podido encontrar la tarifa solicitada.'
+                ]);
         }
-
-        return redirect()
-                ->route('fares')
-                ->withErrors(['internal_error' => 'No se ha podido encontrar la tarifa solicitada.']);
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BloodGroup;
 use App\Models\ExerciseType;
 use App\Models\Instructor;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -30,7 +31,7 @@ class InstructorController extends Controller
     public function index()
     {
         return view('instructors.index', [
-            'instructors' => Instructor::orderBy('name')->simplePaginate(15),
+            'instructors' => Instructor::orderBy('name')->paginate(15),
             'bloodGroups' => BloodGroup::orderBy('name')->get(),
             'exerciseTypes' => ExerciseType::orderBy('name')->get()
         ]);
@@ -41,25 +42,41 @@ class InstructorController extends Controller
         $request['instructor_qualifications'] = json_decode($request->instructor_qualifications);
         $this->validate($request, $this->validator);
 
-        $instructor = Instructor::create($request->all());
+        $instructor = Instructor::create($request->only([
+            'name',
+            'phone',
+            'emergency_phone',
+            'email',
+            'blood_group_id'
+        ]));
         $instructor
             ->exerciseTypes()
             ->attach($request->instructor_qualifications);
 
-        return redirect()
-            ->route('instructors')
+        return back()
             ->with('success', 'La información del instructor se ha guardado con éxito.');
     }
 
     public function show(string $id)
     {
-        $instructor = Instructor::with([
-            'sessions.sessionDays.weekDay',
-            'exerciseTypes',
-            'bloodGroup'
-        ])->find($id);
+        try {
+            $instructor = Instructor::with([
+                'sessions.sessionDays.weekDay',
+                'exerciseTypes',
+                'bloodGroup'
+            ])->findOrFail($id);
 
-        return view('instructors.show', ['instructor' => $instructor]);
+            return view('instructors.show', [
+                'instructor' => $instructor,
+                'bloodGroups' => BloodGroup::orderBy('name')->get(),
+                'exerciseTypes' => ExerciseType::orderBy('name')->get()
+            ]);
+        } catch (ModelNotFoundException $modelNotFoundException) {
+            return to_route('instructors')
+                ->withErrors([
+                    'internal_error' => 'No se ha podido encontrar el instructor solicitado.'
+                ]);
+        }
     }
 
     public function update(Request $request, string $id)
@@ -72,30 +89,36 @@ class InstructorController extends Controller
 
         $this->validate($request, $this->validator);
 
-        $instructor = Instructor::find($id);
-
-        if ($instructor) {
+        try {
+            $instructor = Instructor::findOrFail($id);
             $instructor->update($request->all());
             $instructor
                 ->exerciseTypes()
                 ->sync($request->instructor_qualifications);
 
-            return redirect()
-                ->route('instructors.show', ['id' => $id])
+            return back()
                 ->with('success', 'La información del instructor se ha actualizado con éxito.');
+        } catch (ModelNotFoundException $modelNotFoundException) {
+            return back()
+                ->withErrors([
+                    'internal_error' => 'No se ha podido encontrar el instructor solicitado.'
+                ]);
         }
     }
 
     public function destroy(string $id)
     {
-        $instructor = Instructor::find($id);
-
-        if ($instructor) {
+        try {
+            $instructor = Instructor::findOrFail($id);
             $instructor->delete();
 
-            return redirect()
-                ->route('instructors')
+            return back()
                 ->with('success', 'La información del instructor se ha eliminado con éxito.');
+        } catch (ModelNotFoundException $modelNotFoundException) {
+            return back()
+                ->withErrors([
+                    'internal_error' => 'No se ha podido encontrar el instructor solicitado.'
+                ]);
         }
     }
 }
