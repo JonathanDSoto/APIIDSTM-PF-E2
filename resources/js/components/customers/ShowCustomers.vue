@@ -1,8 +1,8 @@
 <script setup>
 import AssistanceCard from "../AssistanceCard.vue";
-import CustomerInfo from "../CustomerInfo.vue";
+import CustomerInfo from "./CustomerInfo.vue";
 import PaymentsCard from "../PaymentsCard.vue";
-import EditCustomerForm from "../EditCustomerForm.vue";
+import EditCustomerForm from "../edit_record/EditCustomerForm.vue";
 const props = defineProps({
     customer: {
         type: Object,

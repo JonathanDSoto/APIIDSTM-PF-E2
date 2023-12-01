@@ -1,5 +1,5 @@
 <script setup>
-import AddCustomerRecord from "../records/AddCustomerRecord.vue";
+import AddCustomerRecord from "../add_record/AddCustomerRecord.vue";
 import Pagination from "../Pagination.vue";
 import Table from "../Table.vue";
 import { reactive, ref } from "vue";

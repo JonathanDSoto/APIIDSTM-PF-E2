@@ -1,5 +1,5 @@
 <script setup>
-import FormAuth from './FormAuth.vue';
+import FormAuth from '../FormAuth.vue';
 
 const props = defineProps({
     user: {

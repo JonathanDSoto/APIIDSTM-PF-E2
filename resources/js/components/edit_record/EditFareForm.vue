@@ -1,4 +1,5 @@
 <script setup>
+import FormAuth from '../FormAuth.vue';
 const props = defineProps({
     fare: {
         type: Object,

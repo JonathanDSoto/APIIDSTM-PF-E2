@@ -2,5 +2,5 @@
 @section('contenido')
 <!-- {{$customer}} -->
 <!-- {{$bloodGroups}} -->
-<show-clients :customer="{{ json_encode($customer) }}" :blood_groups="{{json_encode($bloodGroups)}}"></show-clients>
+<show-customers :customer="{{ json_encode($customer) }}" :blood_groups="{{json_encode($bloodGroups)}}"></show-customers>
  @endsection

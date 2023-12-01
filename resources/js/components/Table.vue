@@ -1,8 +1,8 @@
 <script setup>
 import DeleteModal from "./DeleteModal.vue";
 import { ref } from "vue";
-import EditCustomerForm from "./EditCustomerForm.vue";
-import EditInstructorForm from "./EditInstructorForm.vue";
+import EditCustomerForm from "./edit_record/EditCustomerForm.vue";
+import EditInstructorForm from "./edit_record/EditInstructorForm.vue";
 
 const props = defineProps({
     users: {

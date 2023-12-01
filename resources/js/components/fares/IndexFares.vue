@@ -1,7 +1,7 @@
 <script setup>
 import { computed, ref } from "vue";
-import EditFareForm from "../EditFareForm.vue";
-import AddFareRecord from "../records/AddFareRecord.vue";
+import EditFareForm from "../edit_record/EditFareForm.vue";
+import AddFareRecord from "../add_record/AddFareRecord.vue";
 import DeleteModal from "../DeleteModal.vue";
 
 const props = defineProps({
