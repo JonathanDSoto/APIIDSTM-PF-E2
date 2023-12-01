@@ -50,7 +50,7 @@ class ExerciseTypeController extends Controller
                 ]);
         }
 
-        $exerciseType::update($request->all());
+        $exerciseType->update($request->all());
 
         return back()
             ->with('success', 'El nombre del tipo de ejercicio se ha actualizado con éxito');

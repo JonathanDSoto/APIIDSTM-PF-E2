@@ -5,6 +5,7 @@ use App\Http\Controllers\ExerciseTypeController;
 use App\Http\Controllers\FareController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PaymentTypeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -46,6 +47,13 @@ Route::controller(ExerciseTypeController::class)->prefix('/exercise-types')->gro
     Route::post('/', 'store')->name('exercise_types.store');
     Route::put('/{id}', 'update')->name('exercise_types.update');
     Route::delete('/{id}', 'destroy')->name('exercise_types.delete');
+});
+
+Route::controller(PaymentTypeController::class)->prefix('payment-types')->group(function () {
+    Route::get('/', 'index')->name('payment_types');
+    Route::post('/', 'store')->name('payment_types.store');
+    Route::put('/{id}', 'update')->name('payment_types.update');
+    Route::delete('/{id}', 'destroy')->name('payment_types.delete');
 });
 
 Route::middleware('auth')->group(function () {
