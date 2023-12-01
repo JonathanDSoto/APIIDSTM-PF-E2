@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\ExerciseType;
+use App\Rules\ExerciseTypeHasInstructors;
+use App\Rules\ExerciseTypeHasSessions;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ExerciseTypeController extends Controller
 {
@@ -17,7 +20,7 @@ class ExerciseTypeController extends Controller
 
     public function index()
     {
-        // TODO: Add return view to fares view.
+        // TODO: Add return view to exercise types view.
     }
 
     public function store(Request $request)
@@ -63,6 +66,10 @@ class ExerciseTypeController extends Controller
                     'internal_error' => 'No se ha podido encontrar el tipo de ejercicio solicitado.'
                 ]);
         }
+
+        Validator::make(['exercise_type_id' => $id], [
+            'exercise_type_id' => [new ExerciseTypeHasInstructors, new ExerciseTypeHasSessions]
+        ])->validate();
 
         $exerciseType->delete();
 
