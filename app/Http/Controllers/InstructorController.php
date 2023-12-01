@@ -24,7 +24,7 @@ class InstructorController extends Controller
             'emergency_phone' => ['required', 'integer', 'different:phone', 'digits:10'],
             'email' => ['bail', 'email', 'unique:instructors,email', 'nullable', 'max:255'],
             'blood_group_id' => ['bail', 'required', 'integer', 'exists:blood_groups,id'],
-            'is_active' => ['bail', 'integer', Rule::in([0, 1])],
+            'is_active' => ['bail', 'required', 'integer', Rule::in([0, 1])],
             'instructor_qualifications' => ['bail', 'required', 'array'],
             'instructor_qualifications.*' => ['bail', 'required', 'integer', 'exists:exercise_types,id']
         ];
@@ -44,13 +44,7 @@ class InstructorController extends Controller
         $request['instructor_qualifications'] = json_decode($request->instructor_qualifications);
         $this->validate($request, $this->validator);
 
-        $instructor = Instructor::create($request->only([
-            'name',
-            'phone',
-            'emergency_phone',
-            'email',
-            'blood_group_id'
-        ]));
+        $instructor = Instructor::create($request->all());
         $instructor
             ->exerciseTypes()
             ->attach($request->instructor_qualifications);
@@ -62,7 +56,8 @@ class InstructorController extends Controller
     public function show(string $id)
     {
         $relationships = [
-            'sessions.sessionDays.weekDay',
+            'sessionDays.weekDay',
+            'sessionDays.session ',
             'exerciseTypes',
             'bloodGroup'
         ];
@@ -87,7 +82,6 @@ class InstructorController extends Controller
     {
         $request['instructor_qualifications'] = json_decode($request->instructor_qualifications);
 
-        $this->validator['is_active'] = ['bail', 'required', 'integer', Rule::in([0, 1])];
         $this->validator['phone'] = ['required', 'integer', "unique:instructors,phone,{$id}", 'digits:10'];
         $this->validator['email'] = ['bail', 'email', "unique:instructors,email,{$id}", 'nullable', 'max:255'];
 

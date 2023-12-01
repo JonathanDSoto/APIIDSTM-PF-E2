@@ -24,7 +24,7 @@ class CustomerController extends Controller
             'emergency_phone' => ['required', 'required', 'different:phone', 'digits:10'],
             'email' => ['bail', 'email', 'unique:customers,email', 'nullable', 'max:255'],
             'blood_group_id' => ['bail', 'required', 'integer', 'exists:blood_groups,id'],
-            'is_active' => ['bail', 'integer', Rule::in([0, 1])]
+            'is_active' => ['bail', 'required', 'integer', Rule::in([0, 1])]
         ];
     }
 
@@ -40,13 +40,7 @@ class CustomerController extends Controller
     {
         $this->validate($request, $this->validator);
 
-        Customer::create($request->only([
-            'name',
-            'phone',
-            'emergency_phone',
-            'email',
-            'blood_group_id'
-        ]));
+        Customer::create($request->all());
 
         return back()
             ->with('success', 'La información del cliente se ha guardado con éxito.');
@@ -58,7 +52,7 @@ class CustomerController extends Controller
             'attendedSessions' => function ($attendedSessions) {
                 $attendedSessions
                     ->wherePivot('attended', 1)
-                    ->with('weekDay')
+                    ->with('weekDay', 'session')
                     ->orderBy('attendance_date', 'desc');
             },
             'payments' => function ($payments) {
@@ -79,25 +73,16 @@ class CustomerController extends Controller
                 ]);
         }
 
-        $attendedSessionIds = array_unique($customer
-            ->attendedSessions
-            ->pluck('session_id')
-            ->toArray()
-        );
-
         return view('customers.show', [
             'customer' => $customer,
-            'sessionNames' => Session::whereIn('id', $attendedSessionIds)
-                ->pluck('name', 'id'),
             'bloodGroups' => BloodGroup::orderBy('name')->get()
         ]);
     }
 
     public function update(Request $request, string $id)
     {
-        $this->validator['phone'] = ['required', 'integer', "unique:customers,phone,{$id}", 'digits:10'];
+        $this->validator['phone'] = ['bail', 'required', 'integer', 'digits:10', "unique:customers,phone,{$id}"];
         $this->validator['email'] = ['bail', 'email', "unique:customers,email,{$id}", 'nullable', 'max:255'];
-        $this->validator['is_active'] = ['bail', 'required', 'integer', Rule::in([0, 1])];
 
         $this->validate($request, $this->validator);
 
