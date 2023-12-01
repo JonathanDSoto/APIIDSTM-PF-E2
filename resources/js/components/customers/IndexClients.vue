@@ -1,5 +1,5 @@
 <script setup>
-import AddNewRecord from "../AddNewRecord.vue";
+import AddCustomerRecord from "../records/AddCustomerRecord.vue";
 import Pagination from "../Pagination.vue";
 import Table from "../Table.vue";
 import { reactive, ref } from "vue";
@@ -24,11 +24,10 @@ const props = defineProps({
 });
 
 const toggle = ref(false);
-
 </script>
 
 <template>
-    <AddNewRecord what="customers"/>
+    <AddCustomerRecord />
     <h4 class="py-3 mb-4">
         <span class="text-muted fw-light">Clientes /</span> Lista de clientes
     </h4>
