@@ -52,5 +52,5 @@ const toggle = ref(false);
             tipo="customers"
         />
     </div>
-    <Pagination :users="props.customers" />
+    <Pagination :users="props.customers" ruta="customers" />
 </template>

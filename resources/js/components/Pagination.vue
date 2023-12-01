@@ -6,6 +6,7 @@ const props = defineProps({
     },
     ruta: {
         type: String,
+        required: true,
     },
 });
 const canGoNext = props.users.to < props.users.total ? true : false;
