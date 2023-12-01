@@ -1,5 +1,7 @@
 <script setup>
-import FormAuth from './FormAuth.vue';
+import FormAuth from "./FormAuth.vue";
+import Aside from "./Aside.vue";
+import { ref } from "vue";
 
 const props = defineProps({
     user: {
@@ -9,6 +11,7 @@ const props = defineProps({
 });
 </script>
 <template>
+    <Aside />
     <nav
         class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
         id="layout-navbar"
@@ -16,9 +19,12 @@ const props = defineProps({
         <div
             class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none"
         >
-            <i class="ti ti-menu-2 ti-sm"></i>
-            <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-            </a>
+            <i
+                data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasStart"
+                aria-controls="offcanvasStart"
+                class="ti ti-menu-2 ti-sm"
+            ></i>
         </div>
         <div
             class="navbar-nav-right d-flex align-items-center"
@@ -68,9 +74,9 @@ const props = defineProps({
                                         </div>
                                     </div>
                                     <div class="flex-grow-1">
-                                        <span class="fw-medium d-block"
-                                            >{{ user.name }}</span
-                                        >
+                                        <span class="fw-medium d-block">{{
+                                            user.name
+                                        }}</span>
                                         <small class="text-muted">Admin</small>
                                     </div>
                                 </div>
@@ -88,14 +94,14 @@ const props = defineProps({
                                 :action="route('logout')"
                                 method="POST"
                             >
-                            <FormAuth method="POST"/>
-                                <button
-                                class="dropdown-item"
-                                >
-                                <i class="ti ti-logout me-2 ti-sm"></i>
-                                <span class="align-middle">Cerrar Sesion</span>
-                            </button>
-                        </form>
+                                <FormAuth method="POST" />
+                                <button class="dropdown-item">
+                                    <i class="ti ti-logout me-2 ti-sm"></i>
+                                    <span class="align-middle"
+                                        >Cerrar Sesion</span
+                                    >
+                                </button>
+                            </form>
                         </li>
                     </ul>
                 </li>
