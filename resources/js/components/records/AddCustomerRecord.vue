@@ -1,13 +1,14 @@
 <script setup>
 import FormAuth from "../FormAuth.vue";
-const recordData = {
-    name: "",
-    email: "",
-    phone: "",
-    emergency_phone: "",
-    blood_type_id: "",
-};
+import { ref, computed } from "vue";
 
+const phone = ref("");
+const emergency_phone = ref("");
+
+const isValidPhone = computed(() => {
+    if(phone.value == "" || emergency_phone.value == "") return false;
+    return phone.value == emergency_phone.value;
+});
 const emit = defineEmits(["close", "alert"]);
 </script>
 <template>
@@ -46,7 +47,7 @@ const emit = defineEmits(["close", "alert"]);
                                 required
                             />
                         </div>
-                        <div class="col-12 col-md-6">
+                        <div class="col-12">
                             <label class="form-label" for="modalAddUserEmail"
                                 >Correo Electronico</label
                             >
@@ -67,7 +68,7 @@ const emit = defineEmits(["close", "alert"]);
                                 <span class="input-group-text">MX (+52)</span>
                                 <input
                                     required
-                                    v-model="recordData.phone"
+                                    v-model="phone"
                                     type="tel"
                                     id="modalAddUserPhone"
                                     name="phone"
@@ -75,6 +76,9 @@ const emit = defineEmits(["close", "alert"]);
                                     placeholder="612 1234 124"
                                 />
                             </div>
+                        </div>
+                        <div v-if="isValidPhone" class="text-danger">
+                            <span>Los numeros no deben ser iguales</span>
                         </div>
                         <div class="col-12 col-md-6">
                             <label class="form-label" for="modalAddUserEmPhone"
@@ -84,7 +88,7 @@ const emit = defineEmits(["close", "alert"]);
                                 <span class="input-group-text">MX (+52)</span>
                                 <input
                                     required
-                                    v-model="recordData.emergency_phone"
+                                    v-model="emergency_phone"
                                     type="number"
                                     id="modalAddUserEmPhone"
                                     name="emergency_phone"
@@ -115,13 +119,13 @@ const emit = defineEmits(["close", "alert"]);
                                 <option value="4">AB+</option>
                             </select>
                         </div>
-                        <div>
+                        <div class="col-6">
                             <label for="smallSelect" class="form-label"
                                 >Estatus</label
                             >
                             <select
                                 id="statusSelect"
-                                class="form-select form-select-sm"
+                                class="form-select form-select"
                                 name="is_active"
                             >
                                 <option value="1">Activo</option>
