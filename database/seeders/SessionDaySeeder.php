@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Instructor;
 use App\Models\Session;
 use App\Models\SessionDay;
 use App\Models\WeekDay;
@@ -23,6 +24,7 @@ class SessionDaySeeder extends Seeder
 
                 SessionDay::create([
                     'session_id' => $session->id,
+                    'instructor_id' => fake()->randomElement(Instructor::all())->id,
                     'week_day_id' => $weekDay->id,
                     'start_hour' => $startHour,
                     'end_hour' => $endHour,
