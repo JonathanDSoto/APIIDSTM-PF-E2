@@ -2,17 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class SessionDay extends Model
 {
-    use HasFactory;
-
     protected $fillable = [
         'session_id',
+        'instructor_id',
         'week_day_id',
         'start_hour',
         'end_hour',
@@ -22,6 +20,11 @@ class SessionDay extends Model
     public function session(): BelongsTo
     {
         return $this->belongsTo(Session::class);
+    }
+
+    public function instructor(): BelongsTo
+    {
+        return $this->belongsTo(Instructor::class);
     }
 
     public function weekDay(): BelongsTo

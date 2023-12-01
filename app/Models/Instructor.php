@@ -32,8 +32,8 @@ class Instructor extends Model
             ->withTimestamps();
     }
 
-    public function sessions(): HasMany
+    public function sessionDays(): HasMany
     {
-        return $this->hasMany(Session::class);
+        return $this->hasMany(SessionDay::class);
     }
 }
