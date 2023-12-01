@@ -10,7 +10,7 @@ return new class extends Migration
     {
         Schema::create('fare_periods', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 50)->unique();
+            $table->string('name')->unique();
             $table->timestamps();
         });
     }

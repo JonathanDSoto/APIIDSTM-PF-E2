@@ -14,6 +14,10 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete()
                 ->cascadeOnUpdate();
+            $table->foreignId('instructor_id')
+                ->constrained()
+                ->restrictOnDelete()
+                ->cascadeOnUpdate();
             $table->foreignId('week_day_id')
                 ->constrained()
                 ->restrictOnDelete()
