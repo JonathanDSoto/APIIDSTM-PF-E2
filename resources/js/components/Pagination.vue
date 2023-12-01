@@ -4,8 +4,10 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    ruta: {
+        type: String,
+    },
 });
-
 const canGoNext = props.users.to < props.users.total ? true : false;
 const canGoPrev = props.users.current_page > 1 ? true : false;
 </script>
@@ -15,7 +17,7 @@ const canGoPrev = props.users.current_page > 1 ? true : false;
             v-if="canGoPrev"
             class="btn btn-secondary waves-effect"
             type="button"
-            :href="route('customers', { page: props.users.current_page - 1 })"
+            :href="route(props.ruta, { page: props.users.current_page - 1 })"
             >Prev</a
         >
         <button v-if="canGoPrev" class="btn btn-outline-secondary">
@@ -27,7 +29,7 @@ const canGoPrev = props.users.current_page > 1 ? true : false;
         <a
             v-if="canGoNext"
             class="btn btn-primary waves-effect"
-            :href="route('customers', { page: props.users.current_page + 1 })"
+            :href="route(props.ruta, { page: props.users.current_page + 1 })"
             >Next</a
         >
     </div>
