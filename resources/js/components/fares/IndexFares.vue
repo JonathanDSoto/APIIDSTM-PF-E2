@@ -23,7 +23,6 @@ const toggleButton = () => {
 <template>
     <AddFareRecord />
     <div class="card">
-        <h1>{{ buttonToggle }}</h1>
         <div class="pb-sm-5 pb-2 rounded-top">
             <div class="container py-5">
                 <div class="d-flex flex-column align-items-center">
@@ -87,8 +86,7 @@ const toggleButton = () => {
                                     </button>
                                     <button
                                         @click="selectedId = fare.id"
-                                        class="btn btn-danger"
-                                        style="margin: 5px"
+                                        class="btn btn-danger mx-3"
                                         href="javascript:void(0);"
                                         data-bs-toggle="modal"
                                         data-bs-target="#deleteUser"
