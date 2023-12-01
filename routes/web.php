@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\ExerciseTypeController;
 use App\Http\Controllers\FareController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\PaymentController;
@@ -38,6 +39,13 @@ Route::controller(PaymentController::class)->prefix('/payments')->group(function
     Route::patch('/{id}', 'update')->name('payments.update');
     Route::patch('/pay/{id}', 'pay')->name('payments.pay');
     Route::patch('/cancel/{id}', 'cancel')->name('payments.cancel');
+});
+
+Route::controller(ExerciseTypeController::class)->prefix('/exercise-types')->group(function () {
+    Route::get('/', 'index')->name('exercise_types');
+    Route::post('/', 'store')->name('exercise_types.store');
+    Route::put('/{id}', 'update')->name('exercise_types.update');
+    Route::delete('/{id}', 'destroy')->name('exercise_types.delete');
 });
 
 Route::middleware('auth')->group(function () {
