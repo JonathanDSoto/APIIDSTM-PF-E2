@@ -1,8 +1,9 @@
 <script setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import EditFareForm from "../EditFareForm.vue";
 import AddFareRecord from "../records/AddFareRecord.vue";
 import DeleteModal from "../DeleteModal.vue";
+
 const props = defineProps({
     fares: {
         type: Object,
@@ -12,7 +13,13 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    fares_count: {
+        type: Object,
+    },
 });
+
+const keyFareCount = Object.keys(props.fares_count)[0];
+
 const selectedId = ref(0);
 const selectedIndex = ref(0);
 const buttonToggle = ref(false);
@@ -50,6 +57,11 @@ const toggleButton = () => {
                     >
                         <div class="card border rounded shadow-none">
                             <div class="card-body">
+                                <span
+                                    v-if="keyFareCount == fare.id"
+                                    class="position-absolute top-0 end-0 m-3 badge bg-label-primary"
+                                    >Mas popular</span
+                                >
                                 <h3
                                     class="card-title text-center text-capitalize mb-1 fs-5"
                                 >
