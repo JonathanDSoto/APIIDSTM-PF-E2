@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\BloodGroup;
 use App\Models\Customer;
-use App\Models\Session;
 use App\Rules\CustomerHasPendingPayment;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
