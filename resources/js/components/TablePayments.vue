@@ -6,6 +6,11 @@ const props = defineProps({
         required: true,
     },
 });
+const options = {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+};
 </script>
 <template>
     <div class="table-responsive text-nowrap">
@@ -23,32 +28,41 @@ const props = defineProps({
             <tbody class="table-border-bottom-0">
                 <tr v-for="payment in props.payments.data" :key="payment.id">
                     <td>
-                        <a href="/payment">
-                            <ul
-                                class="list-unstyled users-list m-0 avatar-group d-flex align-items-center"
-                            >
-                                <li
-                                    data-bs-toggle="tooltip"
-                                    data-popup="tooltip-custom"
-                                    data-bs-placement="top"
-                                    class="avatar avatar-xs pull-up"
-                                    title="Albert Cook"
-                                >
-                                    <img
-                                        src="/assets/img/avatars/5.png"
-                                        alt="Avatar"
-                                        class="rounded-circle"
-                                    />Alb
-                                </li>
-                            </ul>
-                        </a>
+                        <span>
+                            {{ payment.customer.name }}
+                        </span>
                     </td>
                     <td>
-                        <span class="badge bg-label-success me-1">Pagado</span>
+                        <span
+                            v-if="payment.payment_status.name === 'Cancelado'"
+                            class="badge bg-label-danger me-1"
+                            >{{ payment.payment_status.name }}</span
+                        >
+                        <span
+                            v-if="payment.payment_status.name === 'Pendiente'"
+                            class="badge bg-label-warning me-1"
+                            >{{ payment.payment_status.name }}</span
+                        >
+                        <span
+                            v-if="payment.payment_status.name === 'Pagado'"
+                            class="badge bg-label-success me-1"
+                            >{{ payment.payment_status.name }}</span
+                        >
                     </td>
-                    <td>Trasferencia</td>
-                    <td>$50.00</td>
-                    <td>24/12/2023</td>
+                    <td style="max-width: 100px">
+                        {{ payment.payment_type.name }}
+                    </td>
+                    <td>$ {{ payment.fare.price }}</td>
+                    <td>
+                        <span class="text-wrap">
+                            {{
+                                new Date(payment.created_at).toLocaleString(
+                                    "es-MX",
+                                    options,
+                                )
+                            }}
+                        </span>
+                    </td>
                 </tr>
             </tbody>
         </table>
