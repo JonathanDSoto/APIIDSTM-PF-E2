@@ -57,7 +57,7 @@ class InstructorController extends Controller
     {
         $relationships = [
             'sessionDays.weekDay',
-            'sessionDays.session ',
+            'sessionDays.session',
             'exerciseTypes',
             'bloodGroup'
         ];
