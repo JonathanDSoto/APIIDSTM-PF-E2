@@ -14,11 +14,21 @@ class Customer extends Model
 
     protected $fillable = [
         'name',
+        'code',
         'phone',
         'emergency_phone',
         'email',
         'blood_group_id',
-        'is_active'
+        'is_active',
+        'password'
+    ];
+
+    protected $hidden = [
+        'password'
+    ];
+
+    protected $casts = [
+        'password' => 'hashed'
     ];
 
     public function bloodGroup(): BelongsTo

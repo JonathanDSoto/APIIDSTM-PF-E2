@@ -11,16 +11,18 @@ return new class extends Migration
         Schema::create('customers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('phone', 10)->unique();
-            $table->string('emergency_phone', 10);
-            $table->string('email')
+            $table->string('code', 6);
+            $table->string('phone', 10)
                 ->nullable()
                 ->unique();
+            $table->string('emergency_phone', 10);
+            $table->string('email')->unique();
             $table->foreignId('blood_group_id')
                 ->constrained()
                 ->restrictOnDelete()
                 ->cascadeOnUpdate();
             $table->boolean('is_active');
+            $table->string('password')->nullable();
             $table->timestamps();
         });
     }

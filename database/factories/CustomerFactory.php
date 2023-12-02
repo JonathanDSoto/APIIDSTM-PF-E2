@@ -11,11 +11,12 @@ class CustomerFactory extends Factory
     {
         return [
             'name' => fake()->firstName() . " " . fake()->lastName(),
-            'phone' => fake()->unique()->numerify('612#######'),
+            'code' => str_pad(fake()->randomNumber(6), 6, '0', STR_PAD_LEFT),
+            'phone' => fake()->boolean(80) ? fake()->unique()->numerify('612#######') : null,
             'emergency_phone' => fake()->numerify('612#######'),
             'email' => fake()->unique()->freeEmail(),
             'blood_group_id' => fake()->randomElement(BloodGroup::all()),
-            'is_active' => fake()->boolean()
+            'is_active' => fake()->boolean(),
         ];
     }
 }
