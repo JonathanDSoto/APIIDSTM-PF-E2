@@ -3,6 +3,7 @@
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ExerciseTypeController;
 use App\Http\Controllers\FareController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\PaymentTypeController;
@@ -10,6 +11,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Auth::routes();
+
+Route::controller(HomeController::class)->prefix('/')->group(function () {
+    Route::get('/', 'index')->name('home');
+});
 
 Route::controller(CustomerController::class)->prefix('/customers')->group(function () {
     Route::get('/', 'index')->name('customers');
@@ -57,10 +62,6 @@ Route::controller(PaymentTypeController::class)->prefix('payment-types')->group(
 });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/', function () {
-        return view('home');
-    });
-
     Route::get('/modals', function () {
         return view('modals');
     });
