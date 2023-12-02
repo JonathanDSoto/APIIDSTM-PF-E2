@@ -11,7 +11,7 @@ class CustomerSeeder extends Seeder
     {
         for ($i = 0; $i < 75; $i++) {
             Customer::factory()
-                ->hasCheckingTimes(fake()->numberBetween(1, 150))
+                ->hasCheckingTimes(fake()->numberBetween(1, 100))
                 ->create();
         }
     }
