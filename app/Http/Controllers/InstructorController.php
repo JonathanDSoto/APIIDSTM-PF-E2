@@ -32,8 +32,12 @@ class InstructorController extends Controller
 
     public function index()
     {
+        $instructors = Instructor::with(['exerciseTypes', 'bloodGroup'])
+            ->orderBy('name')
+            ->paginate(15);
+
         return view('instructors.index', [
-            'instructors' => Instructor::orderBy('name')->paginate(15),
+            'instructors' => $instructors,
             'bloodGroups' => BloodGroup::orderBy('name')->get(),
             'exerciseTypes' => ExerciseType::orderBy('name')->get()
         ]);
