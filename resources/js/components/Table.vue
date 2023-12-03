@@ -93,7 +93,7 @@ editRef.value = props.tipo === "instructors" ? "#editInstructor" : "#editCustome
             :user="users[selectedIndex]"
             :blood_groups="props.blood_groups"
         />
-        <delete-modal :type="props.tipo" :id="selectedUserId" />
+        <delete-modal function="delete" :type="props.tipo" :id="selectedUserId" />
     </div>
 </template>
 <style scoped>

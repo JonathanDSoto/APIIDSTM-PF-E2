@@ -15,7 +15,6 @@ const props = defineProps({
         required: true,
     }
 });
-
 const getTranslation = (type) => {
     switch (type) {
         case "customers":
@@ -31,17 +30,16 @@ const getTranslation = (type) => {
     }
 };
 </script>
-
 <template>
     <form
         method="POST"
         id="deleteUserForm"
         :action="route(`${props.type}.${props.function}`, { id: props.id })"
     >
-        <FormAuth method="delete" />
+        <FormAuth method="patch" />
         <div
             class="modal fade"
-            id="deleteUser"
+            id="cancelPayment"
             tabindex="-1"
             aria-hidden="true"
         >
@@ -58,11 +56,11 @@ const getTranslation = (type) => {
                         ></button>
                         <div class="text-center mb-4">
                             <h3 class="mb-2">
-                                Eliminar
+                                Cancelar
                                 {{ getTranslation(props.type) }}
                             </h3>
                             <p class="text-muted">
-                                ¿Estás seguro que deseas eliminar
+                                ¿Estás seguro que deseas cancelar
                                 {{ getTranslation(props.type) }}?
                             </p>
                         </div>

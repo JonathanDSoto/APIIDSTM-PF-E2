@@ -1,5 +1,7 @@
 <script setup>
 import Pagination from "./Pagination.vue";
+import CancelModal from "./CancelModal.vue";
+import { ref } from "vue";
 const props = defineProps({
     payments: {
         type: Object,
@@ -11,6 +13,8 @@ const options = {
     month: "long",
     day: "numeric",
 };
+
+const selectedUserId = ref(0);
 </script>
 <template>
     <div class="table-responsive text-nowrap">
@@ -28,9 +32,7 @@ const options = {
             <tbody class="table-border-bottom-0">
                 <tr v-for="payment in props.payments.data" :key="payment.id">
                     <td>
-                        <span>
-                            {{ payment.customer.name }}
-                        </span>
+                        <span>{{ payment.customer.name }}</span>
                     </td>
                     <td>
                         <span
@@ -54,17 +56,33 @@ const options = {
                     </td>
                     <td>$ {{ payment.fare.price }}</td>
                     <td>
-                        <span class="text-wrap">
+                        <span
+                            v-if="payment.payment_status.name === 'Pagado'"
+                            class="text-wrap"
+                        >
                             {{
                                 new Date(payment.created_at).toLocaleString(
                                     "es-MX",
-                                    options,
+                                    options
                                 )
                             }}
                         </span>
                     </td>
+                    <td>
+                        <button class="btn btn-success">E</button>
+                        <button
+                            @click="selectedUserId = payment.id"
+                            class="btn btn-danger"
+                            href="javascript:void(0);"
+                            data-bs-toggle="modal"
+                            data-bs-target="#cancelPayment"
+                        >
+                            <i class="fa-solid fa-xmark"></i>
+                        </button>
+                    </td>
                 </tr>
             </tbody>
         </table>
+        <CancelModal type="payments" function="cancel" :id="selectedUserId" />
     </div>
 </template>
