@@ -113,7 +113,7 @@ const toggleButton = () => {
                         :fare="props.fares[selectedIndex]"
                         :fare_periods="props.fare_periods"
                     />
-                    <DeleteModal type="fares" :id="selectedId" />
+                    <DeleteModal function="delete" type="fares" :id="selectedId" />
                 </div>
             </div>
         </div>
