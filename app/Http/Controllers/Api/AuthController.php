@@ -53,6 +53,17 @@ class AuthController extends Controller
             ]);
         }
 
+        if (!$customer->is_active) {
+            return response()->json([
+                'status' => 'failed',
+                'errors' => [
+                    'internal_error' => [
+                        'La cuenta solicitada del cliente no se encuentra activa.'
+                    ]
+                ]
+            ]);
+        }
+
         if ($customer->getAttribute('password') !== null) {
             return response()->json([
                 'status' => 'failed',
