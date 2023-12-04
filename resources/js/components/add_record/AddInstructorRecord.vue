@@ -1,13 +1,9 @@
 <script setup>
-import { ref, watchEffect } from 'vue';
+import { ref } from 'vue';
 import FormAuth from '../FormAuth.vue';
 import SelectInput from '../SelectInput.vue';
 
 const props = defineProps({
-    user: {
-        type: Object,
-        required: false,
-    },
     blood_groups: {
         type: Object,
         required: true,
@@ -16,85 +12,96 @@ const props = defineProps({
         type: Object,
         required: true,
     }
-})
-const instructor_especialities = ref([]);
-watchEffect(() => {
-  instructor_especialities.value = props.user.exercise_types.map(exercise => exercise.id);
 });
+
+const dataForm = ref({
+    name: "",
+    email: "",
+    phone: "",
+    emergency_phone: "",
+    blood_group_id: 1,
+    is_active: 1,
+    exercise_types: []
+});
+
 </script>
 <template>
     <div class="d-flex justify-content-center align-items-center">
-        <div class="modal fade" id="editInstructor" tabindex="-1" aria-hidden="true">
+        <div class="modal fade" id="addInstructor" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg modal-simple modal-edit-user">
                 <div class="modal-content p-3 p-md-5">
                     <div class="modal-body">
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         <div class="text-center mb-4">
-                            <h3 class="mb-2">Editar a un instructor</h3>
+                            <h3 class="mb-2">Agregar un instructor</h3>
                             <p class="text-muted">
-                                Editar un instructor en la base de datos<br>
+                                Agregar un instructor en la base de datos<br>
                             </p>
                         </div>
-                        <form id="editInstructorForm" class="row g-3" :action="route('instructors.update', { id: props.user.id })
+                        <form id="addInstructorForm" class="row g-3" :action="route('instructors.store')
                             " method="POST">
-                            <FormAuth method="PUT" />
+                            <FormAuth method="POST" />
                             <div class="col-12">
-                                <label class="form-label" for="modalEditInstructorName">Nombre completo</label>
-                                <input v-model="props.user.name" type="text" id="modalEditInstructorName" name="name"
+                                <label class="form-label" for="modalAddInstructorName">Nombre completo</label>
+                                <input v-model="dataForm.name" type="text" id="modalAddInstructorName" name="name"
                                     class="form-control" />
                             </div>
                             <div class="col-12">
-                                <label class="form-label" for="modalEditInstructorEmail">Correo electronico</label>
-                                <input v-model="props.user.email" type="text" id="modalEditInstructorEmail" name="email"
+                                <label class="form-label" for="modalAddInstructorEmail">Correo electronico</label>
+                                <input v-model="dataForm.email" type="text" id="modalAddInstructorEmail" name="email"
                                     class="form-control" />
                             </div>
                             <div class="col-12 col-md-6">
-                                <label class="form-label" for="modalEditInstructorPhone">Numero de telefono</label>
+                                <label class="form-label" for="modalAddInstructorPhone">Numero de telefono</label>
                                 <div class="input-group">
                                     <span class="input-group-text">MX (+52)</span>
-                                    <input v-model="props.user.phone" type="text" id="modalEditInstructorPhone" name="phone"
+                                    <input v-model="dataForm.phone" type="text" id="modalAddInstructorPhone" name="phone"
                                         class="form-control phone-number-mask" />
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
-                                <label class="form-label" for="modalEditInstructorEmPhone">Numero de telefono de
+                                <label class="form-label" for="modalAddInstructorEmPhone">Numero de telefono de
                                     emergencia</label>
                                 <div class="input-group">
                                     <span class="input-group-text">MX (+52)</span>
-                                    <input v-model="props.user.emergency_phone" type="text" id="modalEditInstructorEmPhone"
+                                    <input v-model="dataForm.emergency_phone" type="text" id="modalAddInstructorEmPhone"
                                         name="emergency_phone" class="form-control phone-number-mask" />
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
-                                <label class="form-label" for="modalEditInstructorBloodType">Tipo de sangre</label>
-                                <select v-model="props.user.blood_group_id" id="modalEditInstructorBloodType"
-                                    name="blood_group_id" class="select form-select" data-allow-clear="true">
+                                <label class="form-label" for="modalAddInstructorBloodType">Tipo de sangre</label>
+                                <select v-model="dataForm.blood_group_id" id="modalAddInstructorBloodType"
+                                    name="blood_group_id" class="form-select form-select" data-allow-clear="true">
                                     <option v-for="blood in props.blood_groups" :key="blood.id" :value="blood.id">
                                         {{ blood.name }}
                                     </option>
                                 </select>
                             </div>
                             <div class="col-12 col-md-6">
-                                <label class="form-label" for="modalEditIsActive">Estatus</label>
-                                <select id="modalEditIsActive" name="is_active" class="select form-select"
-                                    data-allow-clear="true">
-                                    <option selected :value="(user.is_active) ? 1 : 0">
-                                        {{ (user.is_active) ? 'Activo' : 'Inactivo' }}
-                                    </option>
-                                    <option :value="(!user.is_active) ? 1 : 0">{{ (user.is_active) ? 'Inactivo' : 'Activo'
-                                    }}
-                                    </option>
+                                <label for="statusSelect" class="form-label">Estatus</label>
+                                <select id="statusSelect" class="form-select form-select" name="is_active">
+                                    <option value="1" selected>Activo</option>
+                                    <option value="0">Inactivo</option>
                                 </select>
                             </div>
+                            <!-- Primary -->
                             <div class="col-12">
                                 <SelectInput
                                     title="Especialidad(es)"
-                                    name="editInstructorQualifications"
                                     input-name="instructor_qualifications"
+                                    name="AddInstructorQualifications"
                                     :options="exercise_types"
-                                    :selected="instructor_especialities"
                                 />
                             </div>
+                            <!-- <div class="col-12">
+                                <label for="select2Primary" class="form-label">Especialidad(es)</label>
+                                <div class="select2-primary">
+                                    <select id="select2Primary" class="select2 form-select" multiple>
+                                        <option v-for="exercise in props.exercise_types" :value="exercise.name"> {{ exercise.name }}</option>
+                                    </select>
+                                </div>
+                                <input type="hidden" name="instructor_qualifications" :value="'{{json_encode('+dataForm.exercise_types+')}}'">
+                            </div> -->
                             <div class="col-12 text-center">
                                 <button type="submit" class="btn btn-primary me-sm-3 me-1">
                                     Guardar
