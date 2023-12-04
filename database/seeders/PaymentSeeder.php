@@ -23,13 +23,15 @@ class PaymentSeeder extends Seeder
                 continue;
             }
 
-            Payment::create([
-                'customer_id' => $customer->id,
-                'fare_id' => fake()->randomElement(Fare::all())->id,
-                'payment_status_id' => 2,
-                'payment_type_id' => fake()->randomElement(PaymentType::all())->id,
-                'payment_datetime' => null
-            ]);
+            if (!$customer->is_active) {
+                Payment::create([
+                    'customer_id' => $customer->id,
+                    'fare_id' => fake()->randomElement(Fare::all())->id,
+                    'payment_status_id' => 2,
+                    'payment_type_id' => fake()->randomElement(PaymentType::all())->id,
+                    'payment_datetime' => null
+                ]);
+            }
 
             $numOfPayments = fake()->numberBetween(self::$minAmountOfPayments, self::$maxAmountOfPayments);
 

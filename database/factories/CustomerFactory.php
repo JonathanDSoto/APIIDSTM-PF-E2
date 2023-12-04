@@ -16,7 +16,7 @@ class CustomerFactory extends Factory
             'emergency_phone' => fake()->numerify('612#######'),
             'email' => fake()->unique()->freeEmail(),
             'blood_group_id' => fake()->randomElement(BloodGroup::all()),
-            'is_active' => fake()->boolean(),
+            'is_active' => fake()->boolean(80),
         ];
     }
 }

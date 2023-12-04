@@ -8,6 +8,7 @@ use App\Models\BloodGroup;
 use App\Models\Customer;
 use App\Rules\CustomerHasPendingPayment;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class CustomerController extends Controller
@@ -22,7 +23,9 @@ class CustomerController extends Controller
     public function index()
     {
         return view('customers.index', [
-            'customers' => Customer::orderBy('name')->paginate(15),
+            'customers' => DB::table('view_customers_pending_payment')
+                ->orderBy('name')
+                ->paginate(15),
             'bloodGroups' => BloodGroup::orderBy('name')->get()
         ]);
     }
@@ -93,14 +96,23 @@ class CustomerController extends Controller
                 ]);
         }
 
-        $customer->update($request->only([
+        $validator = Validator::make(['customer_id' => $id], [
+            'customer_id' => [new CustomerHasPendingPayment]
+        ]);
+
+        $requestFields = [
             'name',
             'phone',
             'emergency_phone',
             'email',
-            'blood_group_id',
-            'is_active'
-        ]));
+            'blood_group_id'
+        ];
+
+        if (!$validator->fails()) {
+            array_push($requestFields, 'is_active');
+        }
+
+        $customer->update($request->only($requestFields));
 
         return back()
             ->with('success', 'La información del cliente se ha actualizado con éxito.');
