@@ -1,6 +1,6 @@
 <script setup>
-import Pagination from "./Pagination.vue";
 import CancelModal from "./CancelModal.vue";
+import EditPaymentForm from "./edit_record/EditPaymentForm.vue";
 import { ref } from "vue";
 const props = defineProps({
     payments: {
@@ -63,26 +63,68 @@ const selectedUserId = ref(0);
                             {{
                                 new Date(payment.created_at).toLocaleString(
                                     "es-MX",
-                                    options
+                                    options,
                                 )
                             }}
                         </span>
                     </td>
                     <td>
-                        <button class="btn btn-success">E</button>
-                        <button
-                            @click="selectedUserId = payment.id"
-                            class="btn btn-danger"
-                            href="javascript:void(0);"
-                            data-bs-toggle="modal"
-                            data-bs-target="#cancelPayment"
-                        >
-                            <i class="fa-solid fa-xmark"></i>
-                        </button>
+                        <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="demo-inline-spacing">
+                                <div class="btn-group">
+                                    <button
+                                        type="button"
+                                        class="btn btn-outline-info btn-icon rounded-pill dropdown-toggle hide-arrow"
+                                        data-bs-toggle="dropdown"
+                                        aria-expanded="false"
+                                    >
+                                        <i class="ti ti-dots-vertical"></i>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li>
+                                            <a
+                                                class="dropdown-item btn btn-success"
+                                                href="javascript:void(0);"
+                                                ><i
+                                                    class="fa-solid fa-money-bill"
+                                                ></i
+                                                >Pagar</a
+                                            >
+                                        </li>
+                                        <li>
+                                            <a
+                                                class="dropdown-item btn btn-primary"
+                                                href="javascript:void(0);"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#editPaymentCustomer"
+                                                ><i
+                                                    class="fa-solid fa-pen-to-square"
+                                                ></i
+                                                >Editar</a
+                                            >
+                                        </li>
+                                        <li>
+                                            <a
+                                                class="dropdown-item btn btn-danger"
+                                                @click="
+                                                    selectedUserId = payment.id
+                                                "
+                                                href="javascript:void(0);"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#cancelPayment"
+                                                ><i class="fa-solid fa-ban"></i
+                                                >Cancelar</a
+                                            >
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <EditPaymentForm />
         <CancelModal type="payments" function="cancel" :id="selectedUserId" />
     </div>
 </template>
