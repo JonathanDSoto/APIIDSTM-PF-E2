@@ -18,6 +18,9 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    exercise_types: {
+        type: Object,
+    }
 });
 const selectedUserId = ref(0);
 const selectedIndex = ref(0);
@@ -83,8 +86,10 @@ editRef.value = props.tipo === "instructors" ? "#editInstructor" : "#editCustome
                 </tr>
             </tbody>
         </table>
+
         <edit-instructor-form
-            v-if="props.tipo == 'instructors'"
+            v-if="props.tipo == 'instructors' && props.exercise_types"
+            :exercise_types="props.exercise_types"
             :user="users[selectedIndex]"
             :blood_groups="props.blood_groups"
         />
