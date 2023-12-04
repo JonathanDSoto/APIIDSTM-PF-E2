@@ -231,6 +231,7 @@ return [
         'year' => 'año',
 
         'blood_group_id' => 'tipo de sangre',
+        'code' => 'código',
         'customer_id' => 'cliente',
         'description' => 'descripción',
         'email' => 'correo electrónico',
