@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCustomerRequest;
+use App\Http\Requests\UpdateCustomerRequest;
 use App\Models\BloodGroup;
 use App\Models\Customer;
 use App\Rules\CustomerHasPendingPayment;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\Rule;
 
 class CustomerController extends Controller
 {
@@ -17,14 +17,6 @@ class CustomerController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->validator = [
-            'name' => ['required', 'string', 'not_regex:/\d/', 'max:255'],
-            'phone' => ['integer', 'unique:customers,phone', 'digits:10'],
-            'emergency_phone' => ['required', 'required', 'different:phone', 'digits:10'],
-            'email' => ['bail', 'required', 'email', 'unique:customers,email', 'nullable', 'max:255'],
-            'blood_group_id' => ['bail', 'required', 'integer', 'exists:blood_groups,id'],
-            'is_active' => ['bail', 'required', 'integer', Rule::in([0, 1])]
-        ];
     }
 
     public function index()
@@ -35,10 +27,8 @@ class CustomerController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreCustomerRequest $request)
     {
-        $this->validate($request, $this->validator);
-
         // Most inefficient thing, but it will do for now.
         do {
             $code = str_pad(mt_rand(1, 999999), 6, '0', STR_PAD_LEFT);
@@ -92,13 +82,8 @@ class CustomerController extends Controller
         ]);
     }
 
-    public function update(Request $request, string $id)
+    public function update(UpdateCustomerRequest $request, string $id)
     {
-        $this->validator['phone'] = ['bail', 'integer', 'digits:10', "unique:customers,phone,{$id}"];
-        $this->validator['email'] = ['bail', 'required', 'email', "unique:customers,email,{$id}", 'nullable', 'max:255'];
-
-        $this->validate($request, $this->validator);
-
         try {
             $customer = Customer::findOrFail($id);
         } catch (ModelNotFoundException $modelNotFoundException) {
