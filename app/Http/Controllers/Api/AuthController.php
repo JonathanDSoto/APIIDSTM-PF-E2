@@ -7,7 +7,6 @@ use App\Http\Requests\LoginAuthRequest;
 use App\Http\Requests\SignUpAuthRequest;
 use App\Http\Requests\SyncAccountAuthRequest;
 use App\Models\Customer;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -69,11 +68,10 @@ class AuthController extends Controller
             'password' => Hash::make($request->password)
         ]);
 
-        Auth::login($customer);
-
         return response()->json([
             'status' => 'success',
-            'message' => 'La cuenta ha sido sincronizada con éxito.'
+            'message' => 'La cuenta ha sido sincronizada con éxito.',
+            'customer_id' => $customer->id
         ]);
     }
 
