@@ -85,11 +85,12 @@ class AuthController extends Controller
         $request['is_active'] = true;
         $request['code'] = $code;
         $request['password'] = Hash::make($request->password);
-        Customer::create($request->all());
+        $customer = Customer::create($request->all());
 
         return response()->json([
             'status' => 'success',
-            'message' => 'La información del cliente se ha guardado con éxito.'
+            'message' => 'La información del cliente se ha guardado con éxito.',
+            'customer_id' => $customer->id
         ]);
     }
 
