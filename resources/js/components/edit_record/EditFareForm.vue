@@ -27,25 +27,25 @@ const props = defineProps({
                             <FormAuth method="PUT" />
                             <div class="col-12 col-md-12">
                                 <label class="form-label" for="newFareName">Nombre de la Tarifa</label>
-                                <input type="text" id="newFareName" name="name" v-model="props.fare.name"
+                                <input type="text" id="newFareName" name="name" v-model="fare.name"
                                     class="form-control" placeholder="Tarifa" />
                             </div>
                             <div class="col-12 col-md-6">
                                 <label class="form-label" for="newFareCost">Costo</label>
-                                <input type="text" id="newFareCost" name="price" v-model="props.fare.price"
+                                <input type="text" id="newFareCost" name="price" v-model="fare.price"
                                     class="form-control" placeholder="$200" />
                             </div>
                             <div class="col-12 col-md-6">
-                                <label class="form-label" for="editInstructorBlood">Periodo</label>
-                                <select id="editInstructorBlood" name="fare_period_id" class="select2 form-select"
-                                    aria-label="Default select example" v-model="props.fare.fare_period_id">
+                                <label class="form-label" for="editFarePeriod">Periodo</label>
+                                <select id="editFarePeriod" name="fare_period_id" class="select form-select"
+                                    aria-label="Default select example" v-model="fare.fare_period_id">
                                     <option v-for=" farePeriod  in props.fare_periods" :value="farePeriod.id"
                                         :key="farePeriod.id">{{ farePeriod.name }}</option>
                                 </select>
                             </div>
                             <div class="col-12 col-md-12">
                                 <label for="descripcionFare" class="form-label">Descripción:</label>
-                                <textarea class="form-control" id="descripcionFare" v-model="props.fare.description"
+                                <textarea class="form-control" id="descripcionFare" v-model="fare.description"
                                     name="description" rows="2"></textarea>
                             </div>
                             <div class="col-12 text-center">
