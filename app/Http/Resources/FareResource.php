@@ -12,6 +12,7 @@ class FareResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'price' => $this->price,
             'fare_period_id' => new FarePeriodResource($this->whenLoaded('farePeriod')),
             'description' => $this->description
         ];
