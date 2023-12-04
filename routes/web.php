@@ -84,4 +84,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', function () {
         return view('profile');
     });
+
+    Route::get('/tipoPago', function () {
+        return view('paymentsType');
+    });
+
+    Route::get('/tipoEjercicio', function () {
+        return view('typesExercises');
+    });
+
 });
