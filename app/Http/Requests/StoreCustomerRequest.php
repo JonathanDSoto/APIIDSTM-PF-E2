@@ -16,9 +16,9 @@ class StoreCustomerRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'not_regex:/\d/', 'max:255'],
-            'phone' => ['integer', 'unique:customers,phone', 'digits:10'],
-            'emergency_phone' => ['required', 'integer', 'different:phone', 'digits:10'],
-            'email' => ['bail', 'required', 'email', 'unique:customers,email', 'nullable', 'max:255'],
+            'phone' => ['string', 'numeric', 'digits:10', 'unique:customers,phone', 'nullable'],
+            'emergency_phone' => ['required', 'string', 'numeric', 'digits:10', 'different:phone'],
+            'email' => ['bail', 'required', 'email', 'max:255', 'unique:customers,email', ],
             'blood_group_id' => ['bail', 'required', 'integer', 'exists:blood_groups,id'],
             'is_active' => ['bail', 'required', 'integer', Rule::in([0, 1])]
         ];
