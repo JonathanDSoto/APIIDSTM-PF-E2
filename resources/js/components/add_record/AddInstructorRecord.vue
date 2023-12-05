@@ -1,19 +1,10 @@
 <script setup>
-import { ref } from 'vue';
+import { ref,inject } from 'vue';
 import FormAuth from '../FormAuth.vue';
 import SelectInput from '../SelectInput.vue';
 
-const props = defineProps({
-    blood_groups: {
-        type: Object,
-        required: true,
-    },
-    exercise_types: {
-        type: Object,
-        required: true,
-    }
-});
-
+const bloodGroups = ref(inject('blood_groups'));
+const exerciseTypes = ref(inject('exercise_types'));
 const dataForm = ref({
     name: "",
     email: "",
@@ -72,7 +63,7 @@ const dataForm = ref({
                                 <label class="form-label" for="modalAddInstructorBloodType">Tipo de sangre</label>
                                 <select v-model="dataForm.blood_group_id" id="modalAddInstructorBloodType"
                                     name="blood_group_id" class="form-select form-select" data-allow-clear="true">
-                                    <option v-for="blood in props.blood_groups" :key="blood.id" :value="blood.id">
+                                    <option v-for="blood in bloodGroups" :key="blood.id" :value="blood.id">
                                         {{ blood.name }}
                                     </option>
                                 </select>
@@ -90,18 +81,9 @@ const dataForm = ref({
                                     title="Especialidad(es)"
                                     input-name="instructor_qualifications"
                                     name="AddInstructorQualifications"
-                                    :options="exercise_types"
+                                    :options="exerciseTypes"
                                 />
                             </div>
-                            <!-- <div class="col-12">
-                                <label for="select2Primary" class="form-label">Especialidad(es)</label>
-                                <div class="select2-primary">
-                                    <select id="select2Primary" class="select2 form-select" multiple>
-                                        <option v-for="exercise in props.exercise_types" :value="exercise.name"> {{ exercise.name }}</option>
-                                    </select>
-                                </div>
-                                <input type="hidden" name="instructor_qualifications" :value="'{{json_encode('+dataForm.exercise_types+')}}'">
-                            </div> -->
                             <div class="col-12 text-center">
                                 <button type="submit" class="btn btn-primary me-sm-3 me-1">
                                     Guardar
