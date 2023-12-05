@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref } from "vue";
+import { computed, provide, ref } from "vue";
 import EditFareForm from "../edit_record/EditFareForm.vue";
 import AddFareRecord from "../add_record/AddFareRecord.vue";
 import DeleteModal from "../DeleteModal.vue";
@@ -18,14 +18,12 @@ const props = defineProps({
     },
 });
 
+provide('fare_periods',props.fare_periods);
+
 const keyFareCount = Object.keys(props.fares_count)[0];
 
 const selectedId = ref(0);
 const selectedIndex = ref(0);
-const buttonToggle = ref(false);
-const toggleButton = () => {
-    buttonToggle.value = !buttonToggle.value;
-};
 </script>
 <template>
     <AddFareRecord />
@@ -38,7 +36,6 @@ const toggleButton = () => {
                     </h2>
                     <div class="ms-auto mb-3 me-5">
                         <a
-                            @click="toggleButton"
                             class="btn btn-primary"
                             data-bs-toggle="modal"
                             href="javascript:void(0);"
