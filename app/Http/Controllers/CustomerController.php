@@ -138,4 +138,9 @@ class CustomerController extends Controller
         return back()
             ->with('success', 'La información del cliente se ha eliminado con éxito.');
     }
+
+    public function showPayments(string $id)
+    {
+        return view('customers.showPayments');
+    }
 }

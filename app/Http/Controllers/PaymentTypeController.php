@@ -15,7 +15,9 @@ class PaymentTypeController extends Controller
 
     public function index()
     {
-        // TODO: Add return view to payment types view.
+        return view('paymentTypes.index', [
+            'paymentTypes' => PaymentType::orderBy('name')->get()
+        ]);
     }
 
     public function store(Request $request)

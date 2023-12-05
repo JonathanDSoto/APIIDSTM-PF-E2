@@ -26,7 +26,7 @@ class FareController extends Controller
 
     public function index()
     {
-        return view('fares', [
+        return view('fares.index', [
             'fares' => Fare::all(),
             'faresCount' => Payment::all()->countBy('fare_id'),
             'farePeriods' => FarePeriod::all()

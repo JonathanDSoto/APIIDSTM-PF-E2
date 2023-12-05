@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use App\Models\SessionDay;
-use DateInterval;
 use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
@@ -15,7 +14,7 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function __invoke()
     {
         $active = Customer::where('is_active', true)->count();
         $inactive = Customer::where('is_active', false)->count();
