@@ -1,17 +1,14 @@
 <script setup>
 import FormAuth from '../FormAuth.vue';
+import { ref, inject } from 'vue';
 
 const props = defineProps({
     user: {
         type: Object,
         required: true,
     },
-    blood_groups: {
-        type: Object,
-        required: true,
-    }
 })
-
+const bloodGroups = ref(inject('blood_groups'));
 </script>
 <template>
     <div class="d-flex justify-content-center align-items-center">
@@ -60,7 +57,7 @@ const props = defineProps({
                                     <label class="form-label" for="modalEditCustomerBloodType">Tipo de sangre</label>
                                     <select v-model="props.user.blood_group_id" id="modalEditCustomerBloodType"
                                         name="blood_group_id" class="select2 form-select" data-allow-clear="true">
-                                        <option v-for="blood in props.blood_groups" :key="blood.id" :value="blood.id">
+                                        <option v-for="blood in bloodGroups" :key="blood.id" :value="blood.id">
                                             {{ blood.name }}
                                         </option>
                                     </select>
@@ -93,3 +90,5 @@ const props = defineProps({
             </div>
     </div>
 </template>
+<script>
+</script>

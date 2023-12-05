@@ -2,9 +2,7 @@
 import AddCustomerRecord from "../add_record/AddCustomerRecord.vue";
 import Pagination from "../Pagination.vue";
 import Table from "../Table.vue";
-import { reactive, ref } from "vue";
-
-const clientes = false;
+import { provide } from 'vue';
 
 const props = defineProps({
     customers: {
@@ -22,8 +20,7 @@ const props = defineProps({
         required: true,
     },
 });
-
-const toggle = ref(false);
+provide('blood_groups',props.blood_groups);
 </script>
 
 <template>
@@ -37,18 +34,16 @@ const toggle = ref(false);
         >
             <span>CLIENTES</span>
             <button
-                @click="toggle = !toggle"
                 class="btn btn-primary"
                 href="javascript:void(0);"
                 data-bs-toggle="modal"
-                data-bs-target="#addUser"
+                data-bs-target="#addCustomer"
             >
                 <i class="ti ti-plus me-1"></i> Añadir Cliente nuevo
             </button>
         </h5>
         <Table
             :users="props.customers.data"
-            :blood_groups="props.blood_groups"
             tipo="customers"
         />
     </div>

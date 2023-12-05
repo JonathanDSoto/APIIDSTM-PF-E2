@@ -9,18 +9,10 @@ const props = defineProps({
         type: Object,
         required: true,
     },
-    // 1 - For Instructors, 0 - For Clients
     tipo: {
         type: String,
         required: true,
     },
-    blood_groups: {
-        type: Object,
-        required: true,
-    },
-    exercise_types: {
-        type: Object,
-    }
 });
 const selectedUserId = ref(0);
 const selectedIndex = ref(0);
@@ -87,18 +79,15 @@ editRef.value = props.tipo === "instructors" ? "#editInstructor" : "#editCustome
             </tbody>
         </table>
 
-        <edit-instructor-form
-            v-if="props.tipo == 'instructors' && props.exercise_types"
-            :exercise_types="props.exercise_types"
+        <EditInstructorForm
+            v-if="tipo == 'instructors'"
             :user="users[selectedIndex]"
-            :blood_groups="props.blood_groups"
         />
-        <edit-customer-form
+        <EditCustomerForm
             v-else
             :user="users[selectedIndex]"
-            :blood_groups="props.blood_groups"
         />
-        <delete-modal function="delete" :type="props.tipo" :id="selectedUserId" />
+        <delete-modal function="delete" :type="tipo" :id="selectedUserId" />
     </div>
 </template>
 <style scoped>

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watchEffect } from 'vue';
+import { ref, inject, watchEffect } from 'vue';
 import FormAuth from '../FormAuth.vue';
 import SelectInput from '../SelectInput.vue';
 
@@ -8,18 +8,12 @@ const props = defineProps({
         type: Object,
         required: false,
     },
-    blood_groups: {
-        type: Object,
-        required: true,
-    },
-    exercise_types: {
-        type: Object,
-        required: true,
-    }
 })
+const bloodGroups = ref(inject('blood_groups'));
+const exerciseTypes = ref(inject('exercise_types'));
 const instructor_especialities = ref([]);
 watchEffect(() => {
-  instructor_especialities.value = props.user.exercise_types.map(exercise => exercise.id);
+    instructor_especialities.value = props.user.exercise_types.map(exercise => exercise.id);
 });
 </script>
 <template>
@@ -69,7 +63,7 @@ watchEffect(() => {
                                 <label class="form-label" for="modalEditInstructorBloodType">Tipo de sangre</label>
                                 <select v-model="props.user.blood_group_id" id="modalEditInstructorBloodType"
                                     name="blood_group_id" class="select form-select" data-allow-clear="true">
-                                    <option v-for="blood in props.blood_groups" :key="blood.id" :value="blood.id">
+                                    <option v-for="blood in bloodGroups" :key="blood.id" :value="blood.id">
                                         {{ blood.name }}
                                     </option>
                                 </select>
@@ -87,13 +81,9 @@ watchEffect(() => {
                                 </select>
                             </div>
                             <div class="col-12">
-                                <SelectInput
-                                    title="Especialidad(es)"
-                                    name="editInstructorQualifications"
-                                    input-name="instructor_qualifications"
-                                    :options="exercise_types"
-                                    :selected="instructor_especialities"
-                                />
+                                <SelectInput title="Especialidad(es)" name="editInstructorQualifications"
+                                    input-name="instructor_qualifications" :options="exerciseTypes"
+                                    :selected="instructor_especialities" />
                             </div>
                             <div class="col-12 text-center">
                                 <button type="submit" class="btn btn-primary me-sm-3 me-1">
