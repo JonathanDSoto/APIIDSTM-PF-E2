@@ -24,6 +24,7 @@ Route::controller(CustomerController::class)->prefix('customers')->group(functio
     Route::post('/', 'store')->name('customers.store');
     Route::get('/{id}', 'show')->name('customers.show');
     Route::get('/{id}/payments', 'showPayments')->name('customers.show_payments');
+    Route::get('/{id}/attendances', 'showAttendances')->name('customers.show_attendances');
     Route::put('/{id}', 'update')->name('customers.update');
     Route::delete('/{id}', 'destroy')->name('customers.delete');
 });

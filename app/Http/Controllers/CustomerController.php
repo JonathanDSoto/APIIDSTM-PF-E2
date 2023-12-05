@@ -8,6 +8,7 @@ use App\Models\BloodGroup;
 use App\Models\Customer;
 use App\Rules\CustomerHasPendingPayment;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -141,6 +142,44 @@ class CustomerController extends Controller
 
     public function showPayments(string $id)
     {
-        return view('customers.showPayments');
+        try {
+            $customer = Customer::with([
+                'payments' => function ($payments) {
+                    $payments
+                        ->with('fare', 'paymentStatus', 'paymentType')
+                        ->orderBy('payment_datetime', 'asc')
+                        ->orderBy('created_at', 'desc');
+                }
+            ])->findOrFail($id);
+        } catch (ModelNotFoundException $modelNotFoundException) {
+            return back()
+                ->withErrors([
+                    'internal_error' => 'No se ha podido encontrar el cliente solicitado'
+                ]);
+        }
+
+        return view('customers.showPayments', [
+            'customer' => $customer
+        ]);
+    }
+
+    public function showAttendances(string $id)
+    {
+        try {
+            $customer = Customer::with([
+                'attendedSessions' => function ($attendedSessions) {
+                    $attendedSessions
+                        ->with('session', 'instructor', 'weekDay')
+                        ->orderBy('attendance_date', 'desc');
+                }
+            ])->findOrFail($id);
+        } catch (ModelNotFoundException $modelNotFoundException) {
+            return back()
+                ->withErrors([
+                    'internal_error' => 'No se ha podido encontrar el cliente solicitado'
+                ]);
+        }
+
+        return $customer; // TODO: Return view when made.
     }
 }
