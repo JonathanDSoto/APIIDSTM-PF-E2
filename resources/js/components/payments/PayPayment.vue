@@ -1,24 +1,9 @@
 <script setup>
-import FormAuth from "../FormAuth.vue";
-const props = defineProps({
-    payment: {
-        type: Object,
-        required: true,
-    },
-    fares: {
-        type: Object,
-        required: true,
-    },
-    types: {
-        type: Array,
-        required: true,
-    },
-});
 </script>
 <template>
     <div
         class="modal fade"
-        id="editPaymentCustomer"
+        id="newPaymentCustomer"
         tabindex="-1"
         aria-hidden="true"
     >
@@ -32,57 +17,76 @@ const props = defineProps({
                         aria-label="Close"
                     ></button>
                     <div class="text-center mb-4">
-                        <h3 class="mb-2">Editar Pago de Cliente</h3>
+                        <h3 class="mb-2">Pagar tarifa de Cliente</h3>
                         <p class="text-muted">Completa los datos.</p>
                     </div>
                     <form
-                        method="post"
                         id="paymentCustomer"
                         class="row g-3"
-                        :action="
-                            route('payments.update', { id: props.payment.id })
-                        "
+                        onsubmit="return false"
                     >
-                        <FormAuth method="PATCH" />
+                        <div class="col-12 col-md-6">
+                            <label class="form-label" for="payCustomerName"
+                                >Nombre Completo</label
+                            >
+                            <input
+                                type="text"
+                                id="payCustomerName"
+                                name="payCustomerName"
+                                class="form-control"
+                                placeholder="Albert Cook"
+                            />
+                        </div>
                         <div class="col-12 col-md-6">
                             <label class="form-label" for="payCustomerFare"
                                 >Tarifa</label
                             >
-                            <select
+                            <input
+                                type="text"
                                 id="payCustomerFare"
-                                name="fare_id"
-                                class="select2 form-select"
-                                aria-label="Default select example"
-                            >
-                                <option
-                                    v-for="fare in fares"
-                                    :key="fare.id"
-                                    :value="fare.id"
-                                    :selected="props.payment.fare_id"
-                                >
-                                    {{ fare.name }}, ${{ fare.price }}
-                                </option>
-                            </select>
+                                name="payCustomerFare"
+                                class="form-control"
+                                placeholder="Diario $50"
+                            />
                         </div>
                         <div class="col-12 col-md-6">
+                            <label for="dobBasic" class="form-label"
+                                >Fecha de Pago</label
+                            >
+                            <input
+                                type="date"
+                                id="dobBasic"
+                                class="form-control"
+                            />
+                        </div>
+                        <div class="col-12 col-md-4">
                             <label class="form-label" for="payCustomerFare"
                                 >Tipo de pago</label
                             >
                             <select
                                 id="payCustomerFare"
-                                name="payment_type_id"
+                                name="payCustomerFare"
                                 class="select2 form-select"
                                 aria-label="Default select example"
                             >
-                                <option
-                                    v-for="type in types"
-                                    :key="type.id"
-                                    :value="type.id"
-                                    :selected="props.payment.payment_type.id"
-                                >
-                                    {{ type.name }}
+                                <option value="efectivo" selected>
+                                    Efectivo
+                                </option>
+                                <option value="tarjeta">Tarjeta</option>
+                                <option value="tranferencia">
+                                    Transferencia
                                 </option>
                             </select>
+                        </div>
+                        <div class="col-12 col-md-1 d-flex align-items-end">
+                            <a
+                                class="btn btn-primary"
+                                data-bs-toggle="modal"
+                                data-bs-target="#newPeriod"
+                                href="javascript:void(0);"
+                            >
+                                <i class="ti ti-plus me-1"></i>
+                            </a>
                         </div>
                         <div class="col-12 text-center">
                             <button

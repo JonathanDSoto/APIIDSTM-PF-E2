@@ -2,8 +2,17 @@
 import CancelModal from "./CancelModal.vue";
 import EditPaymentForm from "./edit_record/EditPaymentForm.vue";
 import { ref } from "vue";
+
 const props = defineProps({
     payments: {
+        type: Array,
+        required: true,
+    },
+    types: {
+        type: Object,
+        required: true,
+    },
+    fares: {
         type: Object,
         required: true,
     },
@@ -15,6 +24,7 @@ const options = {
 };
 
 const selectedUserId = ref(0);
+const selectedIndex = ref(0);
 </script>
 <template>
     <div class="table-responsive text-nowrap">
@@ -30,7 +40,10 @@ const selectedUserId = ref(0);
                 </tr>
             </thead>
             <tbody class="table-border-bottom-0">
-                <tr v-for="payment in props.payments.data" :key="payment.id">
+                <tr
+                    v-for="(payment, index) in props.payments.data"
+                    :key="payment.id"
+                >
                     <td>
                         <span>{{ payment.customer.name }}</span>
                     </td>
@@ -61,30 +74,37 @@ const selectedUserId = ref(0);
                             class="text-wrap"
                         >
                             {{
-                                new Date(payment.created_at).toLocaleString(
-                                    "es-MX",
-                                    options,
-                                )
+                                new Date(
+                                    payment.payment_datetime,
+                                ).toLocaleString("es-MX", options)
                             }}
                         </span>
                     </td>
                     <td>
-                        <div class="col-lg-3 col-sm-6 col-12">
-                            <div class="demo-inline-spacing">
+                        <div
+                            v-if="payment.payment_status.name === 'Pendiente'"
+                            class="col-lg-3 col-sm-6 col-12"
+                        >
+                            <div class="">
                                 <div class="btn-group">
-                                    <button
+                                    <a
                                         type="button"
-                                        class="btn btn-outline-info btn-icon rounded-pill dropdown-toggle hide-arrow"
+                                        class="dropdown-toggle hide-arrow"
                                         data-bs-toggle="dropdown"
                                         aria-expanded="false"
                                     >
-                                        <i class="ti ti-dots-vertical"></i>
-                                    </button>
+                                        <i
+                                            @click="selectedUserId = payment.id"
+                                            class="ti ti-dots-vertical"
+                                        ></i>
+                                    </a>
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li>
                                             <a
                                                 class="dropdown-item btn btn-success"
                                                 href="javascript:void(0);"
+                                                data-bs-toggle="modal"
+                                                data-bs-target="#newPaymentCustomer"
                                                 ><i
                                                     class="fa-solid fa-money-bill"
                                                 ></i
@@ -94,6 +114,7 @@ const selectedUserId = ref(0);
                                         <li>
                                             <a
                                                 class="dropdown-item btn btn-primary"
+                                                @click="selectedIndex = index"
                                                 href="javascript:void(0);"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#editPaymentCustomer"
@@ -106,9 +127,6 @@ const selectedUserId = ref(0);
                                         <li>
                                             <a
                                                 class="dropdown-item btn btn-danger"
-                                                @click="
-                                                    selectedUserId = payment.id
-                                                "
                                                 href="javascript:void(0);"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#cancelPayment"
@@ -124,7 +142,7 @@ const selectedUserId = ref(0);
                 </tr>
             </tbody>
         </table>
-        <EditPaymentForm />
+        <EditPaymentForm :types="props.types" :fares="props.fares" :payment="props.payments.data[selectedIndex]" />
         <CancelModal type="payments" function="cancel" :id="selectedUserId" />
     </div>
 </template>

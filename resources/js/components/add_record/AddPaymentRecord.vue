@@ -1,6 +1,5 @@
 <script setup></script>
 <template>
-    <h1>Payment Modal</h1>
     <div class="modal fade" id="newPayment" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-simple modal-new-customer">
             <div class="modal-content p-3 p-md-5">
@@ -12,7 +11,7 @@
                         aria-label="Close"
                     ></button>
                     <div class="text-center mb-4">
-                        <h3 class="mb-2">Pagar tarifa de Cliente</h3>
+                        <h3 class="mb-2">Crea un nuevo pago</h3>
                         <p class="text-muted">Completa los datos.</p>
                     </div>
                     <form

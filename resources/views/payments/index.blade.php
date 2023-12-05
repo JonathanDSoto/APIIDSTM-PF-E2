@@ -16,5 +16,6 @@
             </button>
         </div>
     @endif
-    <index-payments :customers="{{json_encode($customers)}}" :paymentTypes="{{ json_encode($paymentTypes)}}" :payments="{{ json_encode($payments) }}"></index-payments>
+    <index-payments :types="{{ json_encode($paymentTypes) }}" :fares="{{ json_encode($fares) }}"
+        :payments="{{ json_encode($payments) }}"></index-payments>
 @endsection
