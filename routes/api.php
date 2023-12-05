@@ -12,21 +12,37 @@ use App\Http\Controllers\Api\SessionDayController;
 use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function () {
-    Route::post('sync-account', [AuthController::class, 'syncAccount']);
-    Route::post('login', [AuthController::class, 'login']);
-    Route::post('sign-up', [AuthController::class, 'SignUp']);
+    Route::post('sync-account', [AuthController::class, 'syncAccount'])->name('api.auth.sync-account');
+    Route::post('login', [AuthController::class, 'login'])->name('api.auth.login');
+    Route::post('sign-up', [AuthController::class, 'SignUp'])->name('api.auth.sign-up');
 
-    Route::post('session-days/subscribe', [SessionDayController::class, 'subscribe']);
-    Route::delete('session-days/cancel-subscription', [SessionDayController::class, 'cancelSubscription']);
+    Route::post('session-days/subscribe', [SessionDayController::class, 'subscribe'])->name('api.session-days.subscribe');
+    Route::delete('session-days/cancel-subscription', [SessionDayController::class, 'cancelSubscription'])->name('api.session-days.cancel-subscription');
 
-    Route::post('fares/pay', [FareController::class, 'pay']);
+    Route::post('fares/pay', [FareController::class, 'pay'])->name('api.fares.pay');
 
-    Route::apiResource('customers', CustomerController::class)->only(['show', 'update']);
-    Route::apiResource('sessions', SessionController::class)->only(['index', 'show']);
-    Route::apiResource('fares', FareController::class)->only(['index', 'show']);
-    Route::apiResource('blood-groups', BloodGroupController::class)->only(['index', 'show']);
-    Route::apiResource('payments', PaymentController::class)->only(['index', 'show']);
-    Route::apiResource('payment-types', PaymentTypeController::class)->only(['index', 'show']);
-    Route::apiResource('fare-periods', FarePeriodController::class)->only(['index', 'show']);
-    Route::apiResource('session-days', SessionDayController::class)->only(['index', 'show']);
+    Route::apiResource('customers', CustomerController::class, [
+        'as' => 'api'
+    ])->only(['show', 'update']);
+    Route::apiResource('sessions', SessionController::class, [
+        'as' => 'api'
+    ])->only(['index', 'show']);
+    Route::apiResource('fares', FareController::class, [
+        'as' => 'api'
+    ])->only(['index', 'show']);
+    Route::apiResource('blood-groups', BloodGroupController::class, [
+        'as' => 'api'
+    ])->only(['index', 'show']);
+    Route::apiResource('payments', PaymentController::class, [
+        'as' => 'api'
+    ])->only(['index', 'show']);
+    Route::apiResource('payment-types', PaymentTypeController::class, [
+        'as' => 'api'
+    ])->only(['index', 'show']);
+    Route::apiResource('fare-periods', FarePeriodController::class, [
+        'as' => 'api'
+    ])->only(['index', 'show']);
+    Route::apiResource('session-days', SessionDayController::class, [
+        'as' => 'api'
+    ])->only(['index', 'show']);
 });

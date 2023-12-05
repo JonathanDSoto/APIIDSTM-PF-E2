@@ -20,7 +20,10 @@ class ExerciseTypeController extends Controller
 
     public function index()
     {
-        // TODO: Add return view to exercise types view.
+        return view('exerciseTypes.index', [
+            'exerciseTypes' => ExerciseType::orderBy('name')
+                ->paginate(15)
+        ]);
     }
 
     public function store(Request $request)
