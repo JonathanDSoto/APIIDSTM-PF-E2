@@ -1,7 +1,6 @@
 <script setup>
 import FormAuth from "./FormAuth.vue";
 import Aside from "./Aside.vue";
-import { ref } from "vue";
 
 const props = defineProps({
     user: {
@@ -54,7 +53,7 @@ const props = defineProps({
                     >
                         <div class="avatar avatar-online">
                             <img
-                                src="/assets/img/avatars/2.png"
+                                :src="`https://ui-avatars.com/api/?name=${user.name}`"
                                 alt
                                 class="h-auto rounded-circle"
                             />
@@ -80,12 +79,6 @@ const props = defineProps({
                                         <small class="text-muted">Admin</small>
                                     </div>
                                 </div>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="/profile">
-                                <i class="ti ti-user-check me-2 ti-sm"></i>
-                                <span class="align-middle">Mi Perfil</span>
                             </a>
                         </li>
                         <li>
