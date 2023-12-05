@@ -26,6 +26,8 @@ const getTranslation = (type) => {
             return "la tarifa";
         case "payments":
             return "el pago";
+        case "exercise_types":
+            return "el tipo de ejercicio";
         default:
             return "";
     }
