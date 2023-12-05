@@ -17,7 +17,7 @@ Auth::routes([
     'reset' => false
 ]);
 
-Route::get('/', HomeController::class);
+Route::get('/', HomeController::class)->name('home');
 
 Route::controller(CustomerController::class)->prefix('customers')->group(function () {
     Route::get('/', 'index')->name('customers');
