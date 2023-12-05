@@ -14,7 +14,7 @@ class LoginAuthRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => ['bail', 'required', 'integer', 'digits:6'],
+            'code' => ['bail', 'required', 'string', 'numeric', 'digits:6'],
             'password' => ['bail', 'required', 'string', 'between:8,255']
         ];
     }
