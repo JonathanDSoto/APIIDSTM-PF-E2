@@ -26,7 +26,7 @@ class CustomerResource extends JsonResource
                         'attendance_date' => $session->pivot->attendance_date,
                         'attended' => $session->pivot->attended
                     ];
-                })->sortByDesc('attendance_date');
+                })->sortByDesc('attendance_date')->values();
             })
         ];
     }
