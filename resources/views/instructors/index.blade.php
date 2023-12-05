@@ -16,5 +16,9 @@
             </button>
         </div>
     @endif
-<index :instructors="{{json_encode($instructors)}}" :exercise_types="{{json_encode($exerciseTypes)}}" :blood_groups="{{json_encode($bloodGroups)}}"></index>
+<index
+    :instructors="{{json_encode($instructors)}}"
+    :exercise_types="{{json_encode($exerciseTypes)}}"
+    :blood_groups="{{json_encode($bloodGroups)}}">
+</index>
 @endsection
