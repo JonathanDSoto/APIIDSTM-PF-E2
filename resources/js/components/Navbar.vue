@@ -37,22 +37,20 @@ const props = defineProps({
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li>
-                            <a class="dropdown-item" href="/profile">
-                                <div class="d-flex">
-                                    <div class="flex-shrink-0 me-3">
-                                        <div class="avatar avatar-online">
-                                            <img :src="`https://ui-avatars.com/api/?name=${user.name}`" alt
-                                                class="h-auto rounded-circle" />
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <span class="fw-medium d-block">{{
-                                            user.name
-                                        }}</span>
-                                        <small class="text-muted">Admin</small>
+                            <div class="d-flex w-100 mx-3">
+                                <div class="flex-shrink-0 me-3">
+                                    <div class="avatar avatar-online">
+                                        <img :src="`https://ui-avatars.com/api/?name=${user.name}`" alt
+                                            class="h-auto rounded-circle" />
                                     </div>
                                 </div>
-                            </a>
+                                <div class="flex-grow-1">
+                                    <span class="fw-medium d-block">{{
+                                        user.name
+                                    }}</span>
+                                    <small class="text-muted">Admin</small>
+                                </div>
+                            </div>
                         </li>
                         <li>
                             <form id="logout-form" :action="route('logout')" method="POST">
