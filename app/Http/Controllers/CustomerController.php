@@ -180,6 +180,8 @@ class CustomerController extends Controller
                 ]);
         }
 
-        return $customer; // TODO: Return view when made.
+        return view('customers.showAttendances', [
+            'customer' => $customer
+        ]);
     }
 }

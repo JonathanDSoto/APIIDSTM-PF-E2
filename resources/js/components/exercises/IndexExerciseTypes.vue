@@ -6,7 +6,7 @@ const props = defineProps({
     exercises: {
         type: Object,
         required: true,
-    }
+    },
 });
 provide('exercises',props.exercises);
 </script>
