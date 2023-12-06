@@ -60,7 +60,7 @@ const props = defineProps({
                                     :key="fare.id"
                                     :value="fare.id"
                                 >
-                                {{ fare.name }}, ${{ fare.price }}
+                                    {{ fare.name }}, ${{ fare.price }}
                                 </option>
                             </select>
                         </div>

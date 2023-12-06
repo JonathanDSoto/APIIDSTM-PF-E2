@@ -63,6 +63,7 @@ const props = defineProps({
                                 class="select2 form-select"
                                 aria-label="Default select example"
                                 v-model="payments.fare_id"
+                                disabled
                             >
                                 <option
                                     v-for="fare in fares"
@@ -82,6 +83,7 @@ const props = defineProps({
                                 name="payment_type_id"
                                 class="select2 form-select"
                                 v-model="payments.payment_type.id"
+                                disabled
                             >
                                 <option
                                     v-for="type in types"
