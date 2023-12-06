@@ -1,5 +1,7 @@
 import "./bootstrap";
 import { createApp } from "vue";
+import Toast from 'vue-toastification'
+import 'vue-toastification/dist/index.css'
 
 const app = createApp({});
 
@@ -14,6 +16,8 @@ Object.entries(import.meta.glob("./**/*.vue", { eager: true })).forEach(
         );
     },
 );
+
+app.use(Toast);
 
 app.mixin({
     methods: {
