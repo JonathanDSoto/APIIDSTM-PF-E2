@@ -1,6 +1,15 @@
 <script setup>
-import { ref } from 'vue';
-const name = ref('');
+import { useForm } from '../hooks/useForm';
+const  {name, showError,validateName} = useForm();
+const onSubmit = (event) => {
+    event.preventDefault();
+    if (validateName()) {
+        const form = document.querySelector('#addExerciseTypeForm');
+        form.submit();
+    } else {
+        showError();
+    }
+};
 </script>
 <template>
     <div class="d-flex justify-content-center align-items-center">
@@ -15,7 +24,7 @@ const name = ref('');
                                 Agregar un tipo de ejercicio en la base de datos<br>
                             </p>
                         </div>
-                        <form id="addExerciseTypeForm" class="row g-3" :action="route('exercise_types.store')
+                        <form id="addExerciseTypeForm" class="row g-3" @submit.prevent="onSubmit" :action="route('exercise_types.store')
                             " method="POST">
                             <FormAuth method="POST" />
                             <div class="col-12">
