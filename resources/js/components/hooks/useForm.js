@@ -22,12 +22,22 @@ export function useForm() {
     };
     const validatePrice = () => {
         const priceRegex = /^\d+(\.\d{1,2})?$/;
-        const isPriceValid = price.value.trim() !== '' && priceRegex.test(price.value.trim());
-        if (!isPriceValid) {
-            showError('El precio solo deben ser números');
+        console.log(price.value);
+        if (price.value == 0 || price.value == '0') {
+            showError('El campo del precio no puede ser cero');
+            return false;
         }
-        return isPriceValid;
-    }
+        if (!priceRegex.test(price.value)) {
+            showError('El precio solo debe contener números');
+            return false;
+        }
+        if (price.value === '' || price.value.trim() === '') {
+            showError('El campo del precio no debe estar vacío');
+            return false;
+        }
+        return true;
+    };
+
     const validatePhone = () => {
         const phoneRegex = /^\+(?:[0-9] ?){6,14}[0-9]$/;
         const isValid = phoneRegex.test(phone.value);
@@ -35,7 +45,7 @@ export function useForm() {
         if (!isValid) {
             showError('El número de teléfono no cumple con el formato requerido');
         }
-        if(phone.value === emergency_phone.value){
+        if (phone.value === emergency_phone.value) {
             showError('Los números telefonicos deben ser diferentes.');
             return false;
         }
@@ -54,7 +64,7 @@ export function useForm() {
         }
 
         return isValid;
-      }
+    }
 
     const showError = (text, timeout = 3000, position = "top-right") => {
         toast.error(text, {

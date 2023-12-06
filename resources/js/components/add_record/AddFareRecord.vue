@@ -4,6 +4,7 @@ import FormAuth from "../FormAuth.vue";
 import { useForm } from '../hooks/useForm.js'
 
 const { name, price, description, fare_period_id, validateName, validatePrice } = useForm();
+price.value = 0;
 const farePeroids = ref(inject('fare_periods'));
 fare_period_id.value = farePeroids.value[0].id;
 const onSubmit = (event) => {
