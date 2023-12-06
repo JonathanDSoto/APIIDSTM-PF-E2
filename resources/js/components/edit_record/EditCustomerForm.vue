@@ -1,6 +1,7 @@
 <script setup>
 import FormAuth from '../FormAuth.vue';
 import { ref, inject } from 'vue';
+import { useForm } from '../hooks/useForm';
 
 const props = defineProps({
     user: {
@@ -8,7 +9,33 @@ const props = defineProps({
         required: true,
     },
 })
+const {
+    name,
+    email,
+    phone,
+    emergency_phone,
+    validateName,
+    validateEmail,
+    validatePhone,
+    validateEmergencyPhone,
+} = useForm();
 const bloodGroups = ref(inject('blood_groups'));
+
+name.value = props.user.name;
+email.value = props.user.email;
+phone.value = props.user.phone;
+emergency_phone.value = props.user.emergency_phone;
+const onSubmit = (event) => {
+    event.preventDefault();
+    if (validateName()
+        && validateEmail()
+        && validatePhone()
+        && validateEmergencyPhone()) {
+        const form = document.querySelector('#editCustomerForm');
+        form.submit();
+    }
+};
+
 </script>
 <template>
     <div class="d-flex justify-content-center align-items-center">
@@ -23,24 +50,24 @@ const bloodGroups = ref(inject('blood_groups'));
                                     Editar un cliente en la base de datos<br>
                                 </p>
                             </div>
-                            <form id="editCustomerForm" class="row g-3" :action="route('customers.update', { id: props.user.id })
+                            <form id="editCustomerForm" class="row g-3" @submit.prevent="onSubmit" :action="route('customers.update', { id: props.user.id })
                                 " method="POST">
                                 <FormAuth method="PUT" />
                                 <div class="col-12">
                                     <label class="form-label" for="modalEditCustomerName">Nombre completo</label>
-                                    <input v-model="props.user.name" type="text" id="modalEditCustomerName" name="name"
+                                    <input v-model="name" type="text" id="modalEditCustomerName" name="name"
                                         class="form-control" />
                                 </div>
                                 <div class="col-12">
                                     <label class="form-label" for="modalEditCustomerEmail">Correo electronico</label>
-                                    <input v-model="props.user.email" type="text" id="modalEditCustomerEmail" name="email"
+                                    <input v-model="email" type="text" id="modalEditCustomerEmail" name="email"
                                         class="form-control" />
                                 </div>
                                 <div class="col-12 col-md-6">
                                     <label class="form-label" for="modalEditCustomerPhone">Numero de telefono</label>
                                     <div class="input-group">
                                         <span class="input-group-text">MX (+52)</span>
-                                        <input v-model="props.user.phone" type="text" id="modalEditCustomerPhone" name="phone"
+                                        <input v-model="phone" type="text" id="modalEditCustomerPhone" name="phone"
                                             class="form-control phone-number-mask" />
                                     </div>
                                 </div>
@@ -49,7 +76,7 @@ const bloodGroups = ref(inject('blood_groups'));
                                         emergencia</label>
                                     <div class="input-group">
                                         <span class="input-group-text">MX (+52)</span>
-                                        <input v-model="props.user.emergency_phone" type="text" id="modalEditCustomerEmPhone"
+                                        <input v-model="emergency_phone" type="text" id="modalEditCustomerEmPhone"
                                             name="emergency_phone" class="form-control phone-number-mask" />
                                     </div>
                                 </div>
@@ -78,7 +105,7 @@ const bloodGroups = ref(inject('blood_groups'));
                                     <button type="submit" class="btn btn-primary me-sm-3 me-1">
                                         Guardar
                                     </button>
-                                    <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal"
+                                    <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal"
                                         aria-label="Close">
                                         Cancel
                                     </button>

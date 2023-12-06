@@ -39,13 +39,27 @@ export function useForm() {
     };
 
     const validatePhone = () => {
-        const phoneRegex = /^\+(?:[0-9] ?){6,14}[0-9]$/;
+        const phoneRegex = /^\d{10}$/;
         const isValid = phoneRegex.test(phone.value);
 
         if (!isValid) {
             showError('El número de teléfono no cumple con el formato requerido');
         }
         if (phone.value === emergency_phone.value) {
+            showError('Los números telefonicos deben ser diferentes.');
+            return false;
+        }
+
+        return isValid;
+    }
+    const validateEmergencyPhone = () => {
+        const phoneRegex = /^\d{10}$/;
+        const isValid = phoneRegex.test(emergency_phone.value);
+
+        if (!isValid) {
+            showError('El teléfono de emergencia no cumple con el formato requerido');
+        }
+        if (emergency_phone.value === phone.value) {
             showError('Los números telefonicos deben ser diferentes.');
             return false;
         }
@@ -91,6 +105,7 @@ export function useForm() {
         validatePrice,
         validatePhone,
         validateEmail,
+        validateEmergencyPhone,
         showError,
         showSuccess
     };
