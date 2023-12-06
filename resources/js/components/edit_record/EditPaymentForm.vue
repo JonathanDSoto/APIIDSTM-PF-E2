@@ -53,14 +53,14 @@ const props = defineProps({
                                 name="fare_id"
                                 class="select2 form-select"
                                 aria-label="Default select example"
+                                v-model="props.payment.fare_id"
                             >
                                 <option
                                     v-for="fare in fares"
                                     :key="fare.id"
                                     :value="fare.id"
-                                    :selected="props.payment.fare_id"
                                 >
-                                    {{ fare.name }}, ${{ fare.price }}
+                                {{ fare.name }}, ${{ fare.price }}
                                 </option>
                             </select>
                         </div>
@@ -73,12 +73,12 @@ const props = defineProps({
                                 name="payment_type_id"
                                 class="select2 form-select"
                                 aria-label="Default select example"
+                                v-model="props.payment.payment_type.id"
                             >
                                 <option
                                     v-for="type in types"
                                     :key="type.id"
                                     :value="type.id"
-                                    :selected="props.payment.payment_type.id"
                                 >
                                     {{ type.name }}
                                 </option>
