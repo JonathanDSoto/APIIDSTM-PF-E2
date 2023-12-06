@@ -1,14 +1,36 @@
 <script setup>
 import FormAuth from "../FormAuth.vue";
 import { ref, computed, inject } from "vue";
+import { useForm } from '../hooks/useForm';
 
 const bloodGroups = ref(inject('blood_groups'));
-const name = ref(null);
-const email = ref(null);
-const phone = ref(null);
-const emergency_phone = ref(null);
-const blood_group = ref(null);
+const {
+    name,
+    email,
+    phone,
+    emergency_phone,
+    validateName,
+    validateEmail,
+    validatePhone,
+    validateEmergencyPhone,
+} = useForm();
+const blood_group = ref(bloodGroups.value[0].id);
 const is_active = ref(1);
+
+const onSubmit = (event) => {
+    event.preventDefault();
+    if (validateName()
+        && validateEmail()
+        && validatePhone()
+        && validateEmergencyPhone()) {
+        const form = document.querySelector('#addUserForm');
+        form.submit();
+    }
+};
+const validateNumericInput = () => {
+  // Eliminar cualquier carácter que no sea un número
+  phone.value = phone.value.replace(/[^0-9]/g, '');
+}
 
 const isValidPhone = computed(() => {
     if (phone.value == "" || emergency_phone.value == "") return false;
@@ -29,7 +51,8 @@ const emit = defineEmits(["close", "alert"]);
                                 Añade un nuevo cliente a la base de datos
                             </p>
                         </div>
-                        <form id="addUserForm" class="row g-3" :action="route('customers.store')" method="POST">
+                        <form id="addUserForm" class="row g-3" @submit.prevent="onSubmit" :action="route('customers.store')"
+                            method="POST">
                             <FormAuth method="POST" />
                             <div class="col-12">
                                 <label class="form-label" for="bs-validation-name">Nombre</label>
@@ -45,8 +68,18 @@ const emit = defineEmits(["close", "alert"]);
                                 <label class="form-label" for="modalAddUserPhone">Numero de telefono</label>
                                 <div class="input-group">
                                     <span class="input-group-text">MX (+52)</span>
-                                    <input required v-model="phone" type="tel" id="modalAddUserPhone" name="phone"
-                                        class="form-control phone-number-mask" placeholder="612 1234 124" />
+                                    <input v-model="phone" type="tel"
+                                        id="modalAddUserPhone"
+                                        name="phone"
+                                        class="form-control phone-number-mask"
+                                        pattern="[0-9]+"
+                                        maxlength="10"
+                                        onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                        placeholder="612 1234 124"
+                                        required
+                                        />
+                                    <!-- <input required v-model="phone" type="number" id="modalAddUserPhone" name="phone"
+                                        class="form-control phone-number-mask" placeholder="612 1234 124" /> -->
                                 </div>
                                 <div v-if="isValidPhone" class="text-danger">
                                     <span>Los numeros no deben ser iguales</span>
@@ -56,16 +89,22 @@ const emit = defineEmits(["close", "alert"]);
                                 <label class="form-label" for="modalAddUserEmPhone">Numero de telefono de emergencia</label>
                                 <div class="input-group">
                                     <span class="input-group-text">MX (+52)</span>
-                                    <input required v-model="emergency_phone" type="number" id="modalAddUserEmPhone"
-                                        name="emergency_phone" class="form-control phone-number-mask"
-                                        placeholder="612 1234 124" />
+                                    <input v-model="emergency_phone" type="tel"
+                                    id="modalAddUserEmPhone"
+                                    name="emergency_phone"
+                                    class="form-control phone-number-mask"
+                                    pattern="[0-9]+"
+                                    maxlength="10"
+                                    onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                    placeholder="612 1234 124"
+                                    required
+                                    />
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <label class="form-label" for="modalAddCustomerBloodType">Tipo de sangre</label>
                                 <select id="modalAddCustomerBloodType" v-model="blood_group" name="blood_group_id"
-                                    class="select2 form-select" data-allow-clear="true">
-                                    <option value="null" selected>Selecciona un tipo de sangre</option>
+                                    class="select form-select" data-allow-clear="true">
                                     <option v-for="blood in bloodGroups" :key="blood.id" :value="blood.id">
                                         {{ blood.name }}
                                     </option>
@@ -83,7 +122,7 @@ const emit = defineEmits(["close", "alert"]);
                                 <button type="submit" class="btn btn-primary me-sm-3 me-1">
                                     Guardar
                                 </button>
-                                <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal"
+                                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal"
                                     aria-label="Close">
                                     Cancel
                                 </button>
