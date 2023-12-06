@@ -6,8 +6,6 @@ const onSubmit = (event) => {
     if (validateName()) {
         const form = document.querySelector('#addExerciseTypeForm');
         form.submit();
-    } else {
-        showError();
     }
 };
 </script>

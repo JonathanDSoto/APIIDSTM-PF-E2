@@ -11,18 +11,6 @@ export function useForm() {
     const errors = ref('');
     const toast = useToast();
 
-    const showError = (text,timeout = 3000, position = "top-right") => {
-        toast.error(text, {
-            timeout: timeout,
-            position: position,
-        });
-    };
-    const showSuccess = (text, timeout = 3000, position = "top-right") => {
-        toast.success(text, {
-            timeout: timeout,
-            position: position,
-        });
-    }
     const validateName = () => {
         const nameRegex = /^[A-Za-z\s]+$/;
         const isValid = name.value.trim() !== '' && nameRegex.test(name.value.trim());
@@ -39,7 +27,46 @@ export function useForm() {
         }
         return isPriceValid;
     }
+    const validatePhone = () => {
+        const phoneRegex = /^\+(?:[0-9] ?){6,14}[0-9]$/;
+        const isValid = phoneRegex.test(phone.value);
 
+        if (!isValid) {
+            showError('El número de teléfono no cumple con el formato requerido');
+        }
+        if(phone.value === emergency_phone.value){
+            showError('Los números telefonicos deben ser diferentes.');
+            return false;
+        }
+
+        return isValid;
+    }
+    function validateEmail() {
+        // Expresión regular para validar un correo electrónico
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        // Verificar si el correo electrónico coincide con la expresión regular
+        const isValid = emailRegex.test(email.value);
+
+        if (!isValid) {
+            showError('La dirección de correo electrónico no es válida');
+        }
+
+        return isValid;
+      }
+
+    const showError = (text, timeout = 3000, position = "top-right") => {
+        toast.error(text, {
+            timeout: timeout,
+            position: position,
+        });
+    };
+    const showSuccess = (text, timeout = 3000, position = "top-right") => {
+        toast.success(text, {
+            timeout: timeout,
+            position: position,
+        });
+    }
     return {
         name,
         email,
@@ -50,6 +77,9 @@ export function useForm() {
         errors,
         validateName,
         validatePrice,
-        showError
+        validatePhone,
+        validateEmail,
+        showError,
+        showSuccess
     };
 }

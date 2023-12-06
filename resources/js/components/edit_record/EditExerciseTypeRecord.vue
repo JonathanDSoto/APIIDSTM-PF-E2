@@ -6,7 +6,7 @@ const props = defineProps({
         required: true,
     }
 });
-const { name, showError, validateName } = useForm();
+const { name, validateName } = useForm();
 name.value = props.exercise.name;
 const onSubmit = (event) => {
     event.preventDefault();
