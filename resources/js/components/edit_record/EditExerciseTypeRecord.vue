@@ -1,10 +1,22 @@
 <script setup>
+import { useForm } from '../hooks/useForm';
 const props = defineProps({
     exercise: {
         type: Object,
         required: true,
     }
 });
+const { name, showError, validateName } = useForm();
+name.value = props.exercise.name;
+const onSubmit = (event) => {
+    event.preventDefault();
+    if (validateName()) {
+        const form = document.querySelector('#editExerciseTypeForm');
+        form.submit();
+    } else {
+        showError();
+    }
+};
 </script>
 <template>
     <div class="d-flex justify-content-center align-items-center">
@@ -19,20 +31,20 @@ const props = defineProps({
                                 Editar un tipo de ejercicio en la base de datos<br>
                             </p>
                         </div>
-                        <form id="editExerciseTypeForm" class="row g-3" :action="route('exercise_types.update', { id: props.exercise.id })
+                        <form id="editExerciseTypeForm" class="row g-3" @submit.prevent="onSubmit" :action="route('exercise_types.update', { id: props.exercise.id })
                             " method="POST">
                             <FormAuth method="PUT" />
                             <div class="col-12">
                                 <label class="form-label" for="modaleditExerciseName">Nombre del tipo de
                                     ejercicio</label>
-                                <input v-model="props.exercise.name" type="text" id="modaleditExerciseName" name="name"
+                                <input v-model="name" type="text" id="modaleditExerciseName" name="name"
                                     class="form-control" />
                             </div>
                             <div class="col-12 text-center">
                                 <button type="submit" class="btn btn-primary me-sm-3 me-1">
                                     Guardar
                                 </button>
-                                <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal"
+                                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal"
                                     aria-label="Close">
                                     Cancel
                                 </button>
