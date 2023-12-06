@@ -13,8 +13,6 @@ const onSubmit = (event) => {
     if (validateName()) {
         const form = document.querySelector('#editExerciseTypeForm');
         form.submit();
-    } else {
-        showError();
     }
 };
 </script>
