@@ -1,4 +1,20 @@
-<script setup></script>
+<script setup>
+ import FormAuth from '../FormAuth.vue';
+const props = defineProps({
+    customers: {
+        type: Object,
+        required: true,
+    },
+    fares: {
+        type: Object,
+        required: true,
+    },
+    types: {
+        type: Array,
+        required: true,
+    },
+});
+</script>
 <template>
     <div class="modal fade" id="newPayment" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-simple modal-new-customer">
@@ -17,116 +33,51 @@
                     <form
                         id="paymentCustomer"
                         class="row g-3"
-                        onsubmit="return false"
+                        method="POST"
+                        :action="route('payments.store')"
                     >
+                        <FormAuth method="POST" />
                         <div class="col-md-6 mb-4">
+                            <label class="form-label" for="payCustomerFare"
+                                >Nombre del cliente</label
+                            >
                             <select
                                 id="select2Basic"
                                 class="select2 form-select form-select-lg"
                                 data-allow-clear="true"
+                                name="customer_id"
                             >
-                                <option value="AK">Alaska</option>
-                                <option value="HI">Hawaii</option>
-                                <option value="CA">California</option>
-                                <option value="NV">Nevada</option>
-                                <option value="OR">Oregon</option>
-                                <option value="WA">Washington</option>
-                                <option value="AZ">Arizona</option>
-                                <option value="CO">Colorado</option>
-                                <option value="ID">Idaho</option>
-                                <option value="MT">Montana</option>
-                                <option value="NE">Nebraska</option>
-                                <option value="NM">New Mexico</option>
-                                <option value="ND">North Dakota</option>
-                                <option value="UT">Utah</option>
-                                <option value="WY">Wyoming</option>
-                                <option value="AL">Alabama</option>
-                                <option value="AR">Arkansas</option>
-                                <option value="IL">Illinois</option>
-                                <option value="IA">Iowa</option>
-                                <option value="KS">Kansas</option>
-                                <option value="KY">Kentucky</option>
-                                <option value="LA">Louisiana</option>
-                                <option value="MN">Minnesota</option>
-                                <option value="MS">Mississippi</option>
-                                <option value="MO">Missouri</option>
-                                <option value="OK">Oklahoma</option>
-                                <option value="SD">South Dakota</option>
-                                <option value="TX">Texas</option>
-                                <option value="TN">Tennessee</option>
-                                <option value="WI">Wisconsin</option>
-                                <option value="CT">Connecticut</option>
-                                <option value="DE">Delaware</option>
-                                <option value="FL">Florida</option>
-                                <option value="GA">Georgia</option>
-                                <option value="IN">Indiana</option>
-                                <option value="ME">Maine</option>
-                                <option value="MD">Maryland</option>
-                                <option value="MA">Massachusetts</option>
-                                <option value="MI">Michigan</option>
-                                <option value="NH">New Hampshire</option>
-                                <option value="NJ">New Jersey</option>
-                                <option value="NY">New York</option>
-                                <option value="NC">North Carolina</option>
-                                <option value="OH">Ohio</option>
-                                <option value="PA">Pennsylvania</option>
-                                <option value="RI">Rhode Island</option>
-                                <option value="SC">South Carolina</option>
-                                <option value="VT">Vermont</option>
-                                <option value="VA">Virginia</option>
-                                <option value="WV">West Virginia</option>
+                                <option selected>Seleccion un cliente</option>
+                                <option v-for="customer in props.customers" :key="customer.id" :value="customer.id">{{ customer.email }}</option>
                             </select>
                         </div>
                         <div class="col-12 col-md-6">
                             <label class="form-label" for="payCustomerFare"
                                 >Tarifa</label
                             >
-                            <input
-                                type="text"
-                                id="payCustomerFare"
-                                name="payCustomerFare"
-                                class="form-control"
-                                placeholder="Diario $50"
-                            />
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <label for="dobBasic" class="form-label"
-                                >Fecha de Pago</label
-                            >
-                            <input
-                                type="date"
-                                id="dobBasic"
-                                class="form-control"
-                            />
-                        </div>
-                        <div class="col-12 col-md-4">
-                            <label class="form-label" for="payCustomerFare"
-                                >Tipo de pago</label
-                            >
                             <select
                                 id="payCustomerFare"
-                                name="payCustomerFare"
-                                class="select2 form-select"
+                                name="fare_id"
+                                class="form-select"
                                 aria-label="Default select example"
                             >
-                                <option value="efectivo" selected>
-                                    Efectivo
-                                </option>
-                                <option value="tarjeta">Tarjeta</option>
-                                <option value="tranferencia">
-                                    Transferencia
+                                <option selected>Selecciona una tarifa</option>
+                                <option v-for="fare in fares" :key="fare.id" :value="fare.id" >
+                                {{ fare.name }}, ${{ fare.price }}
                                 </option>
                             </select>
                         </div>
-                        <div class="col-12 col-md-1 d-flex align-items-end">
-                            <a
-                                class="btn btn-primary"
-                                data-bs-toggle="modal"
-                                data-bs-target="#newPeriod"
-                                href="javascript:void(0);"
-                            >
-                                <i class="ti ti-plus me-1"></i>
-                            </a>
+                        <div class="col-12 col-md-12">
+                            <label class="form-label" for="payCustomerFare"
+                                >Tipo de pago</label>
+                            <select
+                                id="payCustomerFare"
+                                name="payment_type_id"
+                                class="form-select"
+                                aria-label="Default select example">
+                            <option selected>Selecciona un tipo de pago</option>
+                            <option v-for="type in types" :key="type.id" :value="type.id" > {{ type.name }} </option>
+                            </select>
                         </div>
                         <div class="col-12 text-center">
                             <button

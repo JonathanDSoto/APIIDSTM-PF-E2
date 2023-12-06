@@ -1,6 +1,7 @@
 <script setup>
 import CancelModal from "./CancelModal.vue";
 import EditPaymentForm from "./edit_record/EditPaymentForm.vue";
+import PayPayment from "./payments/PayPayment.vue";
 import { ref } from "vue";
 
 const props = defineProps({
@@ -75,7 +76,7 @@ const selectedIndex = ref(0);
                         >
                             {{
                                 new Date(
-                                    payment.payment_datetime,
+                                    payment.payment_datetime
                                 ).toLocaleString("es-MX", options)
                             }}
                         </span>
@@ -93,10 +94,7 @@ const selectedIndex = ref(0);
                                         data-bs-toggle="dropdown"
                                         aria-expanded="false"
                                     >
-                                        <i
-                                            @click="selectedUserId = payment.id"
-                                            class="ti ti-dots-vertical"
-                                        ></i>
+                                        <i class="ti ti-dots-vertical"></i>
                                     </a>
                                     <ul class="dropdown-menu dropdown-menu-end">
                                         <li>
@@ -104,6 +102,7 @@ const selectedIndex = ref(0);
                                                 class="dropdown-item btn btn-success"
                                                 href="javascript:void(0);"
                                                 data-bs-toggle="modal"
+                                                @click="selectedIndex = index"
                                                 data-bs-target="#newPaymentCustomer"
                                                 ><i
                                                     class="fa-solid fa-money-bill"
@@ -130,6 +129,9 @@ const selectedIndex = ref(0);
                                                 href="javascript:void(0);"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#cancelPayment"
+                                                @click="
+                                                    selectedUserId = payment.id
+                                                "
                                                 ><i class="fa-solid fa-ban"></i
                                                 >Cancelar</a
                                             >
@@ -142,7 +144,16 @@ const selectedIndex = ref(0);
                 </tr>
             </tbody>
         </table>
-        <EditPaymentForm :types="props.types" :fares="props.fares" :payment="props.payments.data[selectedIndex]" />
+        <PayPayment
+            :fares="props.fares"
+            :types="props.types"
+            :payments="props.payments.data[selectedIndex]"
+        />
+        <EditPaymentForm
+            :types="props.types"
+            :fares="props.fares"
+            :payment="props.payments.data[selectedIndex]"
+        />
         <CancelModal type="payments" function="cancel" :id="selectedUserId" />
     </div>
 </template>

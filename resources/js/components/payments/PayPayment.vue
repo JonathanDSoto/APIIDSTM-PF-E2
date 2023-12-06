@@ -1,4 +1,17 @@
 <script setup>
+const props = defineProps({
+    payments: {
+        type: Object,
+    },
+    fares: {
+        type: Object,
+        required: true,
+    },
+    types: {
+        type: Array,
+        required: true,
+    },
+});
 </script>
 <template>
     <div
@@ -20,11 +33,7 @@
                         <h3 class="mb-2">Pagar tarifa de Cliente</h3>
                         <p class="text-muted">Completa los datos.</p>
                     </div>
-                    <form
-                        id="paymentCustomer"
-                        class="row g-3"
-                        onsubmit="return false"
-                    >
+                    <form id="paymentCustomer" class="row g-3">
                         <div class="col-12 col-md-6">
                             <label class="form-label" for="payCustomerName"
                                 >Nombre Completo</label
@@ -34,32 +43,31 @@
                                 id="payCustomerName"
                                 name="payCustomerName"
                                 class="form-control"
-                                placeholder="Albert Cook"
+                                v-model="payments.customer.name"
+                                disabled
                             />
                         </div>
                         <div class="col-12 col-md-6">
                             <label class="form-label" for="payCustomerFare"
                                 >Tarifa</label
                             >
-                            <input
-                                type="text"
+                            <select
                                 id="payCustomerFare"
-                                name="payCustomerFare"
-                                class="form-control"
-                                placeholder="Diario $50"
-                            />
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <label for="dobBasic" class="form-label"
-                                >Fecha de Pago</label
+                                name="fare_id"
+                                class="select2 form-select"
+                                aria-label="Default select example"
+                                v-model="payments.fare_id"
                             >
-                            <input
-                                type="date"
-                                id="dobBasic"
-                                class="form-control"
-                            />
+                                <option
+                                    v-for="fare in fares"
+                                    :key="fare.id"
+                                    :value="fare.id"
+                                >
+                                    {{ fare.name }}, ${{ fare.price }}
+                                </option>
+                            </select>
                         </div>
-                        <div class="col-12 col-md-4">
+                        <div class="col-12 col-md-12">
                             <label class="form-label" for="payCustomerFare"
                                 >Tipo de pago</label
                             >
@@ -68,6 +76,7 @@
                                 name="payCustomerFare"
                                 class="select2 form-select"
                                 aria-label="Default select example"
+                                v-model="payments.payment_type.id"
                             >
                                 <option value="efectivo" selected>
                                     Efectivo
@@ -77,16 +86,6 @@
                                     Transferencia
                                 </option>
                             </select>
-                        </div>
-                        <div class="col-12 col-md-1 d-flex align-items-end">
-                            <a
-                                class="btn btn-primary"
-                                data-bs-toggle="modal"
-                                data-bs-target="#newPeriod"
-                                href="javascript:void(0);"
-                            >
-                                <i class="ti ti-plus me-1"></i>
-                            </a>
                         </div>
                         <div class="col-12 text-center">
                             <button

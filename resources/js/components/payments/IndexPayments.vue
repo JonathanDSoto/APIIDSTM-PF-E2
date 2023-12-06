@@ -16,8 +16,12 @@ const props = defineProps({
         type: Array,
         required: true,
     },
+    customers: {
+        type: Object,
+        required: true,
+    }
 });
-console.log(props.types);
+console.log(props.customers);
 </script>
 <template>
     <div class="card">
@@ -93,7 +97,6 @@ console.log(props.types);
         </div>
         -->
     </div>
-    <PayPayment />
-    <AddPaymentRecord />
+    <AddPaymentRecord :fares="props.fares" :types="props.types" :customers="props.customers"/>
     <Pagination :users="props.payments" ruta="payments" />
 </template>
