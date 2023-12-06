@@ -1,15 +1,28 @@
 <script setup>
+import { ref, inject, watchEffect } from 'vue';
 import FormAuth from '../FormAuth.vue';
+import { useForm } from '../hooks/useForm.js'
 const props = defineProps({
     fare: {
         type: Object,
         required: true,
     },
-    fare_periods: {
-        type: Object,
-        required: true,
-    }
 });
+const farePeroids = ref(inject('fare_periods'));
+const { name, price, description, fare_period_id, validateName, validatePrice } = useForm();
+watchEffect(()=>{
+    name.value = props.fare.name;
+    price.value = props.fare.price;
+    description.value = props.fare.description;
+    fare_period_id.value = props.fare.fare_period_id;
+})
+const onSubmit = (event) => {
+    event.preventDefault();
+    if (validateName() && validatePrice()) {
+        const form = document.querySelector('#addFareForm');
+        form.submit();
+    }
+};
 </script>
 <template>
     <div class="d-flex justify-content-center align-items-center">
@@ -22,30 +35,30 @@ const props = defineProps({
                             <h3 class="mb-2">Actualizar Tarifas</h3>
                             <p class="text-muted">Actualiza una tarifa</p>
                         </div>
-                        <form id="addFareForm" class="row g-3" :action="route('fares.update', { id: props.fare.id })"
+                        <form id="addFareForm" class="row g-3" @submit.prevent="onSubmit" :action="route('fares.update', { id: fare_period_id })"
                             method="POST">
                             <FormAuth method="PUT" />
                             <div class="col-12 col-md-12">
                                 <label class="form-label" for="newFareName">Nombre de la Tarifa</label>
-                                <input type="text" id="newFareName" name="name" v-model="fare.name"
+                                <input type="text" id="newFareName" name="name" v-model="name"
                                     class="form-control" placeholder="Tarifa" />
                             </div>
                             <div class="col-12 col-md-6">
                                 <label class="form-label" for="newFareCost">Costo</label>
-                                <input type="text" id="newFareCost" name="price" v-model="fare.price"
+                                <input type="text" id="newFareCost" name="price" v-model="price"
                                     class="form-control" placeholder="$200" />
                             </div>
                             <div class="col-12 col-md-6">
                                 <label class="form-label" for="editFarePeriod">Periodo</label>
                                 <select id="editFarePeriod" name="fare_period_id" class="select form-select"
-                                    aria-label="Default select example" v-model="fare.fare_period_id">
-                                    <option v-for=" farePeriod  in props.fare_periods" :value="farePeriod.id"
+                                    aria-label="Default select example" v-model="fare_period_id">
+                                    <option v-for=" farePeriod  in farePeroids" :value="farePeriod.id"
                                         :key="farePeriod.id">{{ farePeriod.name }}</option>
                                 </select>
                             </div>
                             <div class="col-12 col-md-12">
                                 <label for="descripcionFare" class="form-label">Descripción:</label>
-                                <textarea class="form-control" id="descripcionFare" v-model="fare.description"
+                                <textarea class="form-control" id="descripcionFare" v-model="description"
                                     name="description" rows="2"></textarea>
                             </div>
                             <div class="col-12 text-center">
