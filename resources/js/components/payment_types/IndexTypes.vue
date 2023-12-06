@@ -1,5 +1,6 @@
 <script setup>
 import TableTypes from "./TableTypes.vue";
+import AddTypeRecord from "../add_record/AddTypeRecord.vue";
 const props = defineProps({
     types: {
         type: Object,
@@ -15,7 +16,7 @@ const props = defineProps({
             <a
                 class="btn btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target="#newCustomer"
+                data-bs-target="#addPaymentType"
                 href="javascript:void(0);"
             >
                 <i class="ti ti-plus me-1"></i> Añadir Tipo de Pago
@@ -23,4 +24,5 @@ const props = defineProps({
         </h5>
         <TableTypes :types="props.types" />
     </div>
+    <AddTypeRecord />
 </template>
