@@ -1,6 +1,6 @@
 <script setup>
 import { useForm } from '../hooks/useForm';
-const  {name, showError,validateName} = useForm();
+const { name, validateName } = useForm();
 const onSubmit = (event) => {
     event.preventDefault();
     if (validateName()) {

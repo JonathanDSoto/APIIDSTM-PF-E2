@@ -7,6 +7,7 @@ export function useForm() {
     const price = ref(0);
     const phone = ref(0);
     const emergency_phone = ref(0);
+    const fare_period_id = ref(0);
     const description = ref('');
     const errors = ref('');
     const toast = useToast();
@@ -71,6 +72,7 @@ export function useForm() {
         name,
         email,
         price,
+        fare_period_id,
         phone,
         emergency_phone,
         description,
