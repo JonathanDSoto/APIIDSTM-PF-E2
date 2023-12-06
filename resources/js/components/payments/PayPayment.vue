@@ -1,4 +1,5 @@
 <script setup>
+import FormAuth from "../FormAuth.vue";
 const props = defineProps({
     payments: {
         type: Object,
@@ -33,7 +34,13 @@ const props = defineProps({
                         <h3 class="mb-2">Pagar tarifa de Cliente</h3>
                         <p class="text-muted">Completa los datos.</p>
                     </div>
-                    <form id="paymentCustomer" class="row g-3">
+                    <form
+                        id="paymentCustomer"
+                        class="row g-3"
+                        method="post"
+                        :action="route('payments.pay', { id: payments.id })"
+                    >
+                        <FormAuth method="PATCH" />
                         <div class="col-12 col-md-6">
                             <label class="form-label" for="payCustomerName"
                                 >Nombre Completo</label
@@ -41,7 +48,6 @@ const props = defineProps({
                             <input
                                 type="text"
                                 id="payCustomerName"
-                                name="payCustomerName"
                                 class="form-control"
                                 v-model="payments.customer.name"
                                 disabled
@@ -73,17 +79,16 @@ const props = defineProps({
                             >
                             <select
                                 id="payCustomerFare"
-                                name="payCustomerFare"
+                                name="payment_type_id"
                                 class="select2 form-select"
-                                aria-label="Default select example"
                                 v-model="payments.payment_type.id"
                             >
-                                <option value="efectivo" selected>
-                                    Efectivo
-                                </option>
-                                <option value="tarjeta">Tarjeta</option>
-                                <option value="tranferencia">
-                                    Transferencia
+                                <option
+                                    v-for="type in types"
+                                    :key="type.id"
+                                    :value="type.id"
+                                >
+                                    {{ type.name }}
                                 </option>
                             </select>
                         </div>
