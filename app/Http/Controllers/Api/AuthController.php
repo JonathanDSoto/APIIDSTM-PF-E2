@@ -101,7 +101,8 @@ class AuthController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'La información del cliente se ha guardado con éxito.',
-            'customer_id' => $customer->id
+            'customer_id' => $customer->id,
+            'code' => $code
         ]);
     }
 
