@@ -9,6 +9,10 @@ export function useForm() {
     const emergency_phone = ref(0);
     const fare_period_id = ref(0);
     const description = ref('');
+    const time = ref({
+        start_hour: 0,
+        end_hour: 24,
+    });
     const errors = ref('');
     const toast = useToast();
 
@@ -79,6 +83,23 @@ export function useForm() {
 
         return isValid;
     }
+    const validateTime = () => {
+        let isValid = true;
+        if (time.value.end_hour === time.value.start_hour) {
+            showError("Las horas no pueden ser las mismas.");
+            isValid = false;
+        } else {
+            if (time.value.end_hour < time.value.start_hour) {
+                if (time.value.end_hour <= 12) {
+                    showError("La hora de salida no puede ser menor a la de inicio.");
+                }else{
+                    showError("La hora de inicio no puede ser mayor a la de salida.");
+                }
+                isValid = false;
+            }
+        }
+        return isValid;
+    };
 
     const showError = (text, timeout = 3000, position = "top-right") => {
         toast.error(text, {
@@ -100,12 +121,14 @@ export function useForm() {
         phone,
         emergency_phone,
         description,
+        time,
         errors,
         validateName,
         validatePrice,
         validatePhone,
         validateEmail,
         validateEmergencyPhone,
+        validateTime,
         showError,
         showSuccess
     };
