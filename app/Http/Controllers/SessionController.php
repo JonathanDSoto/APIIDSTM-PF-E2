@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-// use App\Http\Requests\StoreSessionRequest;
-// use App\Http\Requests\UpdateSessionRequest;
+use App\Http\Requests\StoreSessionRequest;
+use App\Http\Requests\UpdateSessionRequest;
 use App\Models\ExerciseType;
 use App\Models\Instructor;
 use App\Models\Session;
+use App\Models\SessionDay;
 use App\Models\WeekDay;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
 
 class SessionController extends Controller
 {
@@ -36,9 +36,27 @@ class SessionController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreSessionRequest $request)
     {
+        $session = Session::create($request->only([
+            'name',
+            'exercise_type_id',
+            'max_capacity',
+            'description'
+        ]));
 
+        foreach($request->input('session_days') as $sessionDay) {
+            SessionDay::create([
+                'session_id' => $session->id,
+                'instructor_id' => $sessionDay['instructor_id'],
+                'week_day_id' => $sessionDay['week_day_id'],
+                'start_hour' => $sessionDay['start_hour'],
+                'end_hour' => $sessionDay['end_hour']
+            ]);
+        }
+
+        return back()
+            ->with('success', 'La información de la clase se ha guardado con éxito.');
     }
 
     public function show(string $id)
@@ -99,7 +117,7 @@ class SessionController extends Controller
         ]);
     }
 
-    public function update(Request $request, string $id)
+    public function update(UpdateSessionRequest $request, string $id)
     {
 
     }
