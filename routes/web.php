@@ -39,7 +39,12 @@ Route::controller(InstructorController::class)->prefix('instructors')->group(fun
 
 Route::controller(SessionController::class)->prefix('sessions')->group(function () {
     Route::get('/', 'index')->name('sessions');
+    Route::get('/create', 'create')->name('sessions.create');
+    Route::post('/', 'store')->name('sessions.store');
     Route::get('/{id}', 'show')->name('sessions.show');
+    Route::get('/{id}/edit', 'edit')->name('sessions.edit');
+    Route::put('/{id}', 'update')->name('sessions.update');
+    Route::delete('/{id}', 'destroy')->name('sessions.delete');
 });
 
 Route::controller(FareController::class)->prefix('fares')->group(function () {

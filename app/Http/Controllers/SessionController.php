@@ -21,7 +21,15 @@ class SessionController extends Controller
     public function index()
     {
         return view('sessions.index', [
-            'sessions' => Session::with('exerciseType')->get(),
+            'sessions' => Session::with('exerciseType')
+                ->orderBy('name')
+                ->paginate(8)
+        ]);
+    }
+    
+    public function create()
+    {
+        return view('sessions.create', [
             'instructors' => Instructor::orderBy('name')->get(),
             'weekDays' => WeekDay::all(),
             'exerciseTypes' => ExerciseType::orderBy('name')->get()
@@ -61,6 +69,33 @@ class SessionController extends Controller
 
         return view('sessions.show', [
             'session' => $session
+        ]);
+    }
+
+    public function edit(string $id)
+    {
+        try {
+            $session = Session::with([
+                'exerciseType',
+                'sessionDays' => function ($sessionDays) {
+                    $sessionDays->with([
+                        'instructor',
+                        'weekDay'
+                    ]);
+                }
+            ])->findOrFail($id);
+        } catch (ModelNotFoundException $modelNotFoundException) {
+            return back()
+                ->withErrors([
+                    'internal_error' => 'No se ha podido encontrar la clase solicitada.'
+                ]);
+        }
+
+        return view('sessions.edit', [
+            'session' => $session,
+            'instructors' => Instructor::orderBy('name')->get(),
+            'weekDays' => WeekDay::all(),
+            'exerciseTypes' => ExerciseType::orderBy('name')->get()
         ]);
     }
 
