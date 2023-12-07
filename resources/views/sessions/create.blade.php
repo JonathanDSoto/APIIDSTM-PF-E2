@@ -40,7 +40,7 @@
                 <h5 class="text-center">Horarios</h5>
             
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-5">
                         <div class="form-group">
                             <label for="instructor">Seleccionar un Instructor:</label>
                             <select class="form-control" id="instructor">
@@ -74,7 +74,17 @@
                             <input type="text" class="form-control" id="horaFinal">
                         </div>
                     </div>
+                    <div class="col-md-1">
+                        <div class="form-group mt-4">
+                            <button type="submit" class="btn btn-danger ti ti-trash"></button>
+                        </div>
+                    </div>
                 </div>
+                <div class="row">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary ti ti-plus w-100 mt-2 bi-lg"></button>
+                    </div>
+                </div>    
                 <div class="col-12 text-center mt-3">
                     <button type="submit" class="btn btn-primary me-sm-3 me-1">Añadir</button>
                     <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal" aria-label="Close">Cancelar</button>
