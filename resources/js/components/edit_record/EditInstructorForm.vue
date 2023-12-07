@@ -2,6 +2,7 @@
 import { ref, inject, watchEffect } from 'vue';
 import FormAuth from '../FormAuth.vue';
 import SelectInput from '../SelectInput.vue';
+import { useForm } from '../hooks/useForm';
 
 const props = defineProps({
     user: {
@@ -9,12 +10,36 @@ const props = defineProps({
         required: false,
     },
 })
+const {
+    name,
+    email,
+    phone,
+    emergency_phone,
+    validateName,
+    validateEmail,
+    validatePhone,
+    validateEmergencyPhone,
+} = useForm();
 const bloodGroups = ref(inject('blood_groups'));
 const exerciseTypes = ref(inject('exercise_types'));
-const instructor_especialities = ref([]);
+const especialities = ref([]);
 watchEffect(() => {
-    instructor_especialities.value = props.user.exercise_types.map(exercise => exercise.id);
+    name.value = props.user.name;
+    email.value = props.user.email;
+    phone.value = props.user.phone;
+    emergency_phone.value = props.user.emergency_phone;
+    especialities.value = props.user.exercise_types.map(exercise => exercise.id);
 });
+const onSubmit = (event) => {
+    event.preventDefault();
+    if (validateName()
+        && validateEmail()
+        && validatePhone()
+        && validateEmergencyPhone()) {
+        const form = document.querySelector('#editInstructorForm');
+        form.submit();
+    }
+};
 </script>
 <template>
     <div class="d-flex justify-content-center align-items-center">
@@ -29,25 +54,26 @@ watchEffect(() => {
                                 Editar un instructor en la base de datos<br>
                             </p>
                         </div>
-                        <form id="editInstructorForm" class="row g-3" :action="route('instructors.update', { id: props.user.id })
+                        <form id="editInstructorForm" class="row g-3" @submit.prevent="onSubmit" :action="route('instructors.update', { id: props.user.id })
                             " method="POST">
                             <FormAuth method="PUT" />
                             <div class="col-12">
                                 <label class="form-label" for="modalEditInstructorName">Nombre completo</label>
-                                <input v-model="props.user.name" type="text" id="modalEditInstructorName" name="name"
+                                <input v-model="name" type="text" id="modalEditInstructorName" name="name"
                                     class="form-control" />
                             </div>
                             <div class="col-12">
                                 <label class="form-label" for="modalEditInstructorEmail">Correo electronico</label>
-                                <input v-model="props.user.email" type="text" id="modalEditInstructorEmail" name="email"
+                                <input v-model="email" type="text" id="modalEditInstructorEmail" name="email"
                                     class="form-control" />
                             </div>
                             <div class="col-12 col-md-6">
                                 <label class="form-label" for="modalEditInstructorPhone">Numero de telefono</label>
                                 <div class="input-group">
                                     <span class="input-group-text">MX (+52)</span>
-                                    <input v-model="props.user.phone" type="text" id="modalEditInstructorPhone" name="phone"
-                                        class="form-control phone-number-mask" />
+                                    <input v-model="phone" type="tel" id="modalEditInstructorPhone" name="phone"
+                                        class="form-control phone-number-mask" pattern="[0-9]+" maxlength="10"
+                                        onkeypress='return event.charCode >= 48 && event.charCode <= 57' />
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
@@ -55,8 +81,10 @@ watchEffect(() => {
                                     emergencia</label>
                                 <div class="input-group">
                                     <span class="input-group-text">MX (+52)</span>
-                                    <input v-model="props.user.emergency_phone" type="text" id="modalEditInstructorEmPhone"
-                                        name="emergency_phone" class="form-control phone-number-mask" />
+                                    <input v-model="emergency_phone" type="tel" id="modalEditInstructorEmPhone"
+                                        name="emergency_phone" class="form-control phone-number-mask" pattern="[0-9]+"
+                                        maxlength="10" onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                        required />
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
@@ -83,13 +111,13 @@ watchEffect(() => {
                             <div class="col-12">
                                 <SelectInput title="Especialidad(es)" name="editInstructorQualifications"
                                     input-name="instructor_qualifications" :options="exerciseTypes"
-                                    :selected="instructor_especialities" />
+                                    :selected="especialities" />
                             </div>
                             <div class="col-12 text-center">
                                 <button type="submit" class="btn btn-primary me-sm-3 me-1">
                                     Guardar
                                 </button>
-                                <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal"
+                                <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal"
                                     aria-label="Close">
                                     Cancel
                                 </button>

@@ -66,7 +66,7 @@ export function useForm() {
 
         return isValid;
     }
-    function validateEmail() {
+    const validateEmail = () => {
         // Expresión regular para validar un correo electrónico
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

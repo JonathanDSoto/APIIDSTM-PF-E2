@@ -32,7 +32,6 @@ const props = defineProps({
 });
 
 let selectElement;
-
 const selectedOptions = ref();
 
 watch(() => props.selected, () => {
@@ -47,7 +46,6 @@ onMounted(() => {
         const selects = selectElement.select2('data').map(option => +option.id);
 
         selectedOptions.value = JSON.stringify(selects);
-        console.log(selectedOptions.value);
     });
 })
 </script>
@@ -55,7 +53,7 @@ onMounted(() => {
 <template>
     <label :for="`select2-${name}`" class="form-label">{{title}}</label>
     <div class="select2-primary">
-        <select :id="`select2-${name}`" class="select2 form-select" multiple>
+        <select :id="`select2-${name}`" class="select2 form-select" required multiple>
             <option
                 v-for="option in options"
                 :value="option[keys.id]"
