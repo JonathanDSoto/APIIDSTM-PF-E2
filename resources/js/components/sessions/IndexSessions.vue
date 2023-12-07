@@ -1,5 +1,6 @@
 <script setup>
 import { provide } from 'vue';
+import Pagination from '../Pagination.vue';
 const props = defineProps({
     sessions: {
         type: Object,
@@ -12,18 +13,24 @@ console.log(props.sessions.data);
 const selectedIndex = 0;
 </script>
 <template>
-    <div class="row mb-3">
-        <h4 class="col-9 py-3">
+    <div class="row my-3">
+        <h4 class="col-9">
             <span class="text-muted fw-light">Clases /</span> Clases Disponibles
         </h4>
         <div class="col-3 text-end">
-            <a type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#newSession"
-                href="javascript:void(0);">
+            <a type="button" class="btn btn-primary mt-3" :href="route('sessions.create')">
                 <i class="ti ti-plus me-1"></i> Añadir Clase
             </a>
         </div>
-        <SessionCard v-for="(session, index) in sessions.data" :session="session" />
-
+        </div>
+        <div class="row">
+            <SessionCard v-for="(session, index) in sessions.data" :session="session" />
+        </div>
+        <div class="row">
+            <div class="col-12 d-flex justify-content-start align-items-center">
+                <Pagination :users="sessions" ruta="sessions" />
+            </div>
+        </div>
         <!-- MODAL RESERVAR EN UNA CLASE -->
         <div class="modal fade" id="reserveSession" tabindex="-1" aria-hidden="true">
             <div class="modal-dialog modal-lg modal-simple modal-enable-otp modal-dialog-centered">
@@ -117,6 +124,6 @@ const selectedIndex = 0;
                     </div>
                 </div>
             </div>
-    </div>
-    <!--/ ELIMINAR CLASE -->
-</div></template>
+        </div>
+        <!--/ ELIMINAR CLASE -->
+</template>

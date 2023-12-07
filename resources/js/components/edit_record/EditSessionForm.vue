@@ -103,5 +103,6 @@ console.log(props.session);
                     </div>
                 </form>
             </div>
+        </div>
     </div>
-</div></template>
+</template>
