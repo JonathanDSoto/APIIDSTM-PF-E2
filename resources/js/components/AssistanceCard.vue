@@ -1,10 +1,12 @@
 <script setup>
+import { ref, inject } from 'vue';
 const props = defineProps({
     sessions: {
         type: Object,
         required: true,
     },
 });
+const id = ref(inject('customer_id'));
 </script>
 <template>
     <div class="col-lg-12 col-xl-6">
@@ -16,9 +18,9 @@ const props = defineProps({
                 <h5 class="card-action-title mb-0">Asistencias</h5>
                 <div class="card-action-element">
                     <div>
-                        <span>
-                            <i class="ti ti-calendar ti-sm"></i>
-                        </span>
+                        <a :href="route('customers.show_attendances',{id:id})" class="btn btn-primary btn-sm">
+                            <i class="ti ti-calendar ti-sm" style="color:#FFFFFF;"></i>
+                        </a>
                     </div>
                 </div>
             </div>

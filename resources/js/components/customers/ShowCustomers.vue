@@ -3,6 +3,7 @@ import AssistanceCard from "../AssistanceCard.vue";
 import CustomerInfo from "./CustomerInfo.vue";
 import PaymentsCard from "../PaymentsCard.vue";
 import EditCustomerForm from "../edit_record/EditCustomerForm.vue";
+import { provide } from 'vue';
 const props = defineProps({
     customer: {
         type: Object,
@@ -13,6 +14,8 @@ const props = defineProps({
         required: true,
     }
 });
+provide('customer_id',props.customer.id);
+provide('blood_groups',props.blood_groups);
 </script>
 <template>
     <div class="row">
@@ -61,7 +64,7 @@ const props = defineProps({
                 </div>
             </div>
         </div>
-        <EditCustomerForm :user="props.customer" :blood_groups="props.blood_groups" />
+        <EditCustomerForm :user="props.customer"/>
     </div>
 </template>
 

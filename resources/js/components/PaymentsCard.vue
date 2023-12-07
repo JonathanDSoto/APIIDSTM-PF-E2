@@ -1,57 +1,37 @@
 <script setup>
+import { ref, inject } from 'vue';
 const props = defineProps({
     payments: {
         type: Object,
         required: true,
     },
 });
+const id = ref(inject('customer_id'));
 const therePayments = props.payments.length == 0 ? true : false;
 </script>
 <template>
     <div class="col-lg-12 col-xl-6">
-        <div
-            v-if="therePayments"
-            class="alert alert-danger alert-dismissible"
-            role="alert"
-        >
+        <div v-if="therePayments" class="alert alert-danger alert-dismissible" role="alert">
             No hay pagos
         </div>
-        <div
-            class="card card-action mb-4"
-            style="max-height: 500px; overflow: auto"
-        >
+        <div class="card card-action mb-4" style="max-height: 500px; overflow: auto">
             <div class="card-header align-items-center">
                 <h5 class="card-action-title mb-0">Pagos</h5>
                 <div class="card-action-element">
-                    <div>
-                        <!--  <button class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                            data-bs-target="#paymentCustomer" type="button"> -->
-                        <i class="ti ti-currency-dollar ti-sm"></i>
-                        <!-- </button> -->
-                    </div>
+                    <a :href="route('customers.show_payments',{id:id})" class="btn btn-primary btn-sm">
+                        <i class="ti ti-currency-dollar ti-sm" style="color:#FFFFFF;"></i>
+                    </a>
                 </div>
             </div>
             <div class="card-body">
                 <div class="card-body pb-0">
                     <ul class="timeline ms-1 mb-0">
-                        <li
-                            v-for="payment in props.payments"
-                            class="timeline-item timeline-item-transparent"
-                        >
-                            <span
-                                v-if="payment.payment_status.name == 'Pagado'"
-                                class="timeline-point timeline-point-success"
-                            ></span>
-                            <span
-                                v-else-if="
-                                    payment.payment_status.name == 'Cancelado'
-                                "
-                                class="timeline-point timeline-point-danger"
-                            ></span>
-                            <span
-                                v-else
-                                class="timeline-point timeline-point-warning"
-                            ></span>
+                        <li v-for="payment in props.payments" class="timeline-item timeline-item-transparent">
+                            <span v-if="payment.payment_status.name == 'Pagado'"
+                                class="timeline-point timeline-point-success"></span>
+                            <span v-else-if="payment.payment_status.name == 'Cancelado'
+                                " class="timeline-point timeline-point-danger"></span>
+                            <span v-else class="timeline-point timeline-point-warning"></span>
                             <div class="timeline-event">
                                 <div class="timeline-header">
                                     <h6 class="mb-0">
@@ -60,9 +40,7 @@ const therePayments = props.payments.length == 0 ? true : false;
                                     </h6>
                                 </div>
                                 <div class="d-flex flex-wrap">
-                                    <small class="text-muted"
-                                        >Pago: {{ payment.fare.name }}</small
-                                    >
+                                    <small class="text-muted">Pago: {{ payment.fare.name }}</small>
                                 </div>
                             </div>
                         </li>
