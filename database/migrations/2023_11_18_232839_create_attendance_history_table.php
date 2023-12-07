@@ -11,8 +11,9 @@ return new class extends Migration
         Schema::create('attendance_history', function (Blueprint $table) {
             $table->id();
             $table->foreignId('customer_id')
+                ->nullable()
                 ->constrained()
-                ->cascadeOnDelete()
+                ->nullOnDelete()
                 ->cascadeOnUpdate();
             $table->foreignId('session_day_id')
                 ->constrained()
