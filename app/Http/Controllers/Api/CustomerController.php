@@ -19,7 +19,9 @@ class CustomerController extends Controller
                 'payments.fare',
                 'attendedSessions.session',
                 'attendedSessions.instructor',
-                'attendedSessions.weekDay'
+                'attendedSessions.weekDay',
+                'subscribedSessions.weekDay',
+                'subscribedSessions.session'
             ]));
     }
 

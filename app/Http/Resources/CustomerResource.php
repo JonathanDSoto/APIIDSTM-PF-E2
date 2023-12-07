@@ -2,6 +2,8 @@
 
 namespace App\Http\Resources;
 
+use App\Models\Session;
+use App\Models\SessionDay;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -27,7 +29,8 @@ class CustomerResource extends JsonResource
                         'attended' => $session->pivot->attended
                     ];
                 })->sortByDesc('attendance_date')->values();
-            })
+            }),
+            'subscribed_sessions' => SessionDayResource::collection($this->whenLoaded('subscribedSessions'))
         ];
     }
 }
