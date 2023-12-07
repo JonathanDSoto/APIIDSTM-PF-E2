@@ -23,7 +23,7 @@ provide('blood_groups',props.blood_groups);
             <div class="card mb-4">
                 <div class="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-4">
                     <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto text-center">
-                        <img src="/assets/img/avatars/5.png" alt="user image"
+                        <img :src="`https://ui-avatars.com/api/?name=${props.customer.name}&background=A6CF98`" alt="user image"
                             class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img">
                     </div>
                     <div class="flex-grow-1 mt-3 mt-sm-5">
