@@ -1,7 +1,9 @@
 import { ref } from 'vue';
-import { useToast } from "vue-toastification";
+import { useAlerts } from './useAlerts';
 
 export function useForm() {
+    const {showError} = useAlerts();
+
     const name = ref('');
     const email = ref('');
     const price = ref(0);
@@ -9,12 +11,12 @@ export function useForm() {
     const emergency_phone = ref(0);
     const fare_period_id = ref(0);
     const description = ref('');
+    const max_capacity = ref(0);
     const time = ref({
         start_hour: 0,
         end_hour: 24,
     });
     const errors = ref('');
-    const toast = useToast();
 
     const validateName = () => {
         const nameRegex = /^[A-Za-z\s]+$/;
@@ -100,19 +102,19 @@ export function useForm() {
         }
         return isValid;
     };
-
-    const showError = (text, timeout = 3000, position = "top-right") => {
-        toast.error(text, {
-            timeout: timeout,
-            position: position,
-        });
+    const validateMaxCapacity = () => {
+        let isValid = true;
+        let limit = {max:50,min:5};
+        if(max_capacity.value > limit.max){
+            showError("La capacidad excede el limite. (50)");
+            isValid=false;
+        }
+        if(max_capacity.value<limit.min){
+            showError("La capacidad es menor el limite. (5)");
+            isValid=false;
+        }
+        return isValid;
     };
-    const showSuccess = (text, timeout = 3000, position = "top-right") => {
-        toast.success(text, {
-            timeout: timeout,
-            position: position,
-        });
-    }
     return {
         name,
         email,
@@ -121,6 +123,7 @@ export function useForm() {
         phone,
         emergency_phone,
         description,
+        max_capacity,
         time,
         errors,
         validateName,
@@ -129,7 +132,6 @@ export function useForm() {
         validateEmail,
         validateEmergencyPhone,
         validateTime,
-        showError,
-        showSuccess
+        validateMaxCapacity,
     };
 }
