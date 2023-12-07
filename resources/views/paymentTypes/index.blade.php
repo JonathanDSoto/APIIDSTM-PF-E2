@@ -3,8 +3,8 @@
     @if ($errors->any())
         <div class="alert alert-danger">
             <ul>
+                @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
-        @foreach ($errors->all() as $error)
                 @endforeach
             </ul>
         </div>
@@ -16,5 +16,5 @@
             </button>
         </div>
     @endif
-<index-types :types="{{ json_encode($paymentTypes) }}"></index-types>
+    <index-types :types="{{ json_encode($paymentTypes) }}"></index-types>
 @endsection

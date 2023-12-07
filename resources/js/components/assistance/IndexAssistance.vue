@@ -21,6 +21,7 @@ import FormAuth from "../FormAuth.vue";
                                     class="form-control phone-number-mask"
                                     required
                                     maxlength="6"
+                                    min="0"
                                 />
                             </div>
                         </div>
