@@ -39,7 +39,7 @@ const isNumber = (e) => {
                             <div class="form-group d-flex flex-row">
                                 <button
                                     type="submit"
-                                    class="btn btn-success mt-3 mx-3"
+                                    class="btn btn-primary mt-3 mx-3"
                                     href="javascript:void(0);"
                                     :formaction="route('time_check.store')"
                                 >
@@ -72,7 +72,7 @@ const isNumber = (e) => {
                             <div class="form-group d-flex flex-row">
                                 <button
                                     type="submit"
-                                    class="btn btn-danger mt-3 mx-3"
+                                    class="btn btn-primary mt-3 mx-3"
                                     href="javascript:void(0);"
                                     :formaction="route('time_check.update')"
                                 >
