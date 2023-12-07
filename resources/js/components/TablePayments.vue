@@ -107,8 +107,7 @@ const selectedIndex = ref(0);
                                                 ><i
                                                     class="fa-solid fa-money-bill"
                                                 ></i
-                                                >Pagar</a
-                                            >
+                                            ></a>
                                         </li>
                                         <li>
                                             <a
@@ -117,11 +116,8 @@ const selectedIndex = ref(0);
                                                 href="javascript:void(0);"
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#editPaymentCustomer"
-                                                ><i
-                                                    class="fa-solid fa-pen-to-square"
-                                                ></i
-                                                >Editar</a
-                                            >
+                                                ><i class="ti ti-pencil"></i
+                                            ></a>
                                         </li>
                                         <li>
                                             <a
@@ -133,8 +129,7 @@ const selectedIndex = ref(0);
                                                     selectedUserId = payment.id
                                                 "
                                                 ><i class="fa-solid fa-ban"></i
-                                                >Cancelar</a
-                                            >
+                                            ></a>
                                         </li>
                                     </ul>
                                 </div>
