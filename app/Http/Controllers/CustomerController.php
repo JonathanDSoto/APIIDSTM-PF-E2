@@ -6,9 +6,10 @@ use App\Http\Requests\StoreCustomerRequest;
 use App\Http\Requests\UpdateCustomerRequest;
 use App\Models\BloodGroup;
 use App\Models\Customer;
+use App\Models\Payment;
 use App\Rules\CustomerHasPendingPayment;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\RedirectResponse;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
@@ -143,14 +144,7 @@ class CustomerController extends Controller
     public function showPayments(string $id)
     {
         try {
-            $customer = Customer::with([
-                'payments' => function ($payments) {
-                    $payments
-                        ->with('fare', 'paymentStatus', 'paymentType')
-                        ->orderBy('payment_datetime', 'asc')
-                        ->orderBy('created_at', 'desc');
-                }
-            ])->findOrFail($id);
+            $customer = Customer::findOrFail($id);
         } catch (ModelNotFoundException $modelNotFoundException) {
             return back()
                 ->withErrors([
@@ -158,21 +152,22 @@ class CustomerController extends Controller
                 ]);
         }
 
+        $payments = Payment::with('fare', 'paymentStatus', 'paymentType')
+            ->where('customer_id', $customer->id)
+            ->orderBy('payment_datetime', 'desc')
+            ->orderBy('created_at', 'desc')
+            ->paginate(15);
+
         return view('customers.showPayments', [
-            'customer' => $customer
+            'customer' => $customer,
+            'payments' => $payments
         ]);
     }
 
     public function showAttendances(string $id)
     {
         try {
-            $customer = Customer::with([
-                'attendedSessions' => function ($attendedSessions) {
-                    $attendedSessions
-                        ->with('session', 'instructor', 'weekDay')
-                        ->orderBy('attendance_date', 'desc');
-                }
-            ])->findOrFail($id);
+            $customer = Customer::findOrFail($id);
         } catch (ModelNotFoundException $modelNotFoundException) {
             return back()
                 ->withErrors([
@@ -180,8 +175,21 @@ class CustomerController extends Controller
                 ]);
         }
 
+        $customerAttendedSessions = $customer
+            ->attendedSessions()
+            ->with('session', 'instructor', 'weekDay')
+            ->orderBy('attendance_date', 'desc')
+            ->get();
+
+        $attendances = new LengthAwarePaginator(
+            $customerAttendedSessions->forPage(request('page'), 15),
+            $customerAttendedSessions->count(),
+            15
+        );
+
         return view('customers.showAttendances', [
-            'customer' => $customer
+            'customer' => $customer,
+            'attendances' => $attendances
         ]);
     }
 }
