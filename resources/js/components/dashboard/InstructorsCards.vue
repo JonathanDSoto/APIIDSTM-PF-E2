@@ -16,13 +16,13 @@ const props = defineProps({
         <div class="card h-100">
             <div class="card-header d-flex justify-content-between">
                 <div class="card-title m-0 me-2">
-                    <a href="/instructors" id="employeeList">
+                    <a :href="route('instructors')" id="employeeList">
                         <h5 class="m-0 me-2">Instructores</h5>
                     </a>
                     <small class="text-muted">Destacados</small>
                 </div>
                 <div class="dropdown">
-                    <a class="btn p-0" href="/instructors" id="employeeList">
+                    <a class="btn p-0" :href="route('instructors')" id="employeeList">
                         <i class="ti ti-users ti-sm text-muted"></i>
                     </a>
                 </div>
@@ -30,7 +30,7 @@ const props = defineProps({
             <div class="card-body " style="max-height: 320px; overflow: hidden">
                 <ul class="p-0 m-0">
                     <li v-for=" instructor in info" class="d-flex mb-4 pb-1 align-items-center">
-                        <img src="../../../../public/assets/img/avatars/5.png" height="28" class="me-3 rounded">
+                        <img src="/assets/img/avatars/5.png" height="28" class="me-3 rounded">
                         <div class="d-flex w-100 align-items-center gap-2">
                             <div class="d-flex justify-content-between flex-grow-1 flex-wrap">
                                 <div>

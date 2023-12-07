@@ -20,7 +20,7 @@ const props = defineProps({
                 <small class="text-muted">Destacadas</small>
             </div>
             <div class="dropdown">
-                <a class="btn p-0" href="/sessions" id="employeeList">
+                <a class="btn p-0" :href="route('sessions')" id="employeeList">
                     <i class="ti ti-users ti-sm text-muted"></i>
                 </a>
             </div>
@@ -28,7 +28,7 @@ const props = defineProps({
         <div class="card-body" style="max-height: 320px; overflow: hidden">
             <ul class="p-0 m-0">
                 <li v-for="exercise in info" class="d-flex mb-4 pb-1 align-items-center">
-                    <img src="../../../../public/assets/img/favicon/ejercicio.png" alt="Chrome" height="28" class="me-3 rounded">
+                    <img src="/assets/img/favicon/ejercicio.png" alt="Chrome" height="28" class="me-3 rounded">
                     <div class="d-flex w-100 align-items-center gap-2">
                         <div class="d-flex justify-content-between flex-grow-1 flex-wrap">
                             <div>

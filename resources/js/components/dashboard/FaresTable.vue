@@ -33,7 +33,7 @@ const props = defineProps({
                             <td>
                                 <div class="d-flex justify-content-start align-items-center">
                                     <div class="me-3">
-                                        <img src="../../../../public/assets/img/illustrations/page-pricing-basic.png"
+                                        <img src="/assets/img/illustrations/page-pricing-basic.png"
                                             alt="Visa" height="45">
                                     </div>
                                     <div class="d-flex flex-column">
