@@ -27,10 +27,6 @@ const onSubmit = (event) => {
         form.submit();
     }
 };
-const validateNumericInput = () => {
-  // Eliminar cualquier carácter que no sea un número
-  phone.value = phone.value.replace(/[^0-9]/g, '');
-}
 
 const isValidPhone = computed(() => {
     if (phone.value == "" || emergency_phone.value == "") return false;

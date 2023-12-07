@@ -2,18 +2,35 @@
 import { ref,inject } from 'vue';
 import FormAuth from '../FormAuth.vue';
 import SelectInput from '../SelectInput.vue';
+import { useForm } from '../hooks/useForm';
 
 const bloodGroups = ref(inject('blood_groups'));
 const exerciseTypes = ref(inject('exercise_types'));
+const {
+    name,
+    email,
+    phone,
+    emergency_phone,
+    validateName,
+    validateEmail,
+    validatePhone,
+    validateEmergencyPhone,
+} = useForm();
 const dataForm = ref({
-    name: "",
-    email: "",
-    phone: "",
-    emergency_phone: "",
     blood_group_id: 1,
     is_active: 1,
     exercise_types: []
 });
+const onSubmit = (event) => {
+    event.preventDefault();
+    if (validateName()
+        && validateEmail()
+        && validatePhone()
+        && validateEmergencyPhone()) {
+        const form = document.querySelector('#addInstructorForm');
+        form.submit();
+    }
+};
 
 </script>
 <template>
@@ -29,25 +46,33 @@ const dataForm = ref({
                                 Agregar un instructor en la base de datos<br>
                             </p>
                         </div>
-                        <form id="addInstructorForm" class="row g-3" :action="route('instructors.store')
+                        <form id="addInstructorForm" class="row g-3" @submit.prevent="onSubmit" :action="route('instructors.store')
                             " method="POST">
                             <FormAuth method="POST" />
                             <div class="col-12">
                                 <label class="form-label" for="modalAddInstructorName">Nombre completo</label>
-                                <input v-model="dataForm.name" type="text" id="modalAddInstructorName" name="name"
+                                <input v-model="name" type="text" id="modalAddInstructorName" name="name"
                                     class="form-control" />
                             </div>
                             <div class="col-12">
                                 <label class="form-label" for="modalAddInstructorEmail">Correo electronico</label>
-                                <input v-model="dataForm.email" type="text" id="modalAddInstructorEmail" name="email"
+                                <input v-model="email" type="text" id="modalAddInstructorEmail" name="email"
                                     class="form-control" />
                             </div>
                             <div class="col-12 col-md-6">
                                 <label class="form-label" for="modalAddInstructorPhone">Numero de telefono</label>
                                 <div class="input-group">
                                     <span class="input-group-text">MX (+52)</span>
-                                    <input v-model="dataForm.phone" type="text" id="modalAddInstructorPhone" name="phone"
-                                        class="form-control phone-number-mask" />
+                                        <input v-model="phone" type="tel"
+                                        id="modalAddInstructorPhone"
+                                        name="phone"
+                                        class="form-control phone-number-mask"
+                                        pattern="[0-9]+"
+                                        maxlength="10"
+                                        onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                        placeholder="612 1234 124"
+                                        required
+                                        />
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
@@ -55,8 +80,16 @@ const dataForm = ref({
                                     emergencia</label>
                                 <div class="input-group">
                                     <span class="input-group-text">MX (+52)</span>
-                                    <input v-model="dataForm.emergency_phone" type="text" id="modalAddInstructorEmPhone"
-                                        name="emergency_phone" class="form-control phone-number-mask" />
+                                    <input v-model="emergency_phone" type="tel"
+                                    id="modalAddInstructorEmPhone"
+                                    name="emergency_phone"
+                                    class="form-control phone-number-mask"
+                                    pattern="[0-9]+"
+                                    maxlength="10"
+                                    onkeypress='return event.charCode >= 48 && event.charCode <= 57'
+                                    placeholder="612 1234 124"
+                                    required
+                                    />
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
