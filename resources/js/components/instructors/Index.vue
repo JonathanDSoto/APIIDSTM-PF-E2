@@ -35,4 +35,5 @@ provide('blood_groups',props.blood_groups);
         </h5>
         <Table :users="props.instructors.data" tipo="instructors" />
     </div>
+    <Pagination :users="props.instructors" ruta="instructors" />
 </template>

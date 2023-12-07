@@ -21,4 +21,5 @@ provide('exercises',props.exercises);
         </h5>
         <ExercisesTable />
     </div>
+    <Pagination :users="props.exercises" ruta="exercise_types" />
 </template>
