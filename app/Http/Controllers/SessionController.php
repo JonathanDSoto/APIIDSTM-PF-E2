@@ -205,6 +205,13 @@ class SessionController extends Controller
                 ]);
         }
 
+        if ($sessionDay->current_capacity === $sessionDay->session->max_capacity) {
+            return back()
+                ->withErrors([
+                    'internal_error' => 'La clase solicitada ya se encuentra llena.'
+                ]);
+        }
+
         $sessionDay
             ->participants()
             ->syncWithoutDetaching([
@@ -213,6 +220,10 @@ class SessionController extends Controller
                 ]
             ]);
         
+        $sessionDay->update([
+            'current_capacity' => $sessionDay->current_capacity + 1
+        ]);
+
         return back()
             ->with('success', 'El cliente se ha suscrito a la clase correctamente.');
     }
