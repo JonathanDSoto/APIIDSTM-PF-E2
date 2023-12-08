@@ -4,6 +4,10 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    attendances: {
+        type: Object,
+        required: true
+    }
 });
 console.log(props.customer);
 </script>
@@ -52,7 +56,7 @@ console.log(props.customer);
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            <tr v-for=" attendance in props.customer.attended_sessions">
+                            <tr v-for=" attendance in props.attendances.data">
                                 <td>{{attendance.session.name}}</td>
                                 <td>{{attendance.week_day.name}}</td>
                                 <td>{{ attendance.start_hour }} hrs - {{ attendance.end_hour }} hrs </td>
@@ -67,4 +71,5 @@ console.log(props.customer);
             </div>
         </div>
     </div>
+    <Pagination :users="props.attendances" :ruta="'customers.show_attendances'" :params='{ id: customer.id }' />
 </template>

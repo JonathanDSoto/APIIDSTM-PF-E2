@@ -8,6 +8,10 @@ const props = defineProps({
         type: String,
         required: true,
     },
+    params: {
+        type: Object,
+        required: true
+    }
 });
 const canGoNext = props.users.to < props.users.total ? true : false;
 const canGoPrev = props.users.current_page > 1 ? true : false;
@@ -18,7 +22,7 @@ const canGoPrev = props.users.current_page > 1 ? true : false;
             v-if="canGoPrev"
             class="btn btn-secondary waves-effect"
             type="button"
-            :href="route(props.ruta, { page: props.users.current_page - 1 })"
+            :href="route(props.ruta, { ...params, page: props.users.current_page - 1 })"
             >Anterior</a
         >
         <button v-if="canGoPrev" class="btn btn-outline-secondary">
@@ -30,7 +34,7 @@ const canGoPrev = props.users.current_page > 1 ? true : false;
         <a
             v-if="canGoNext"
             class="btn btn-primary waves-effect"
-            :href="route(props.ruta, { page: props.users.current_page + 1 })"
+            :href="route(props.ruta, { ...params, page: props.users.current_page + 1 })"
             >Siguiente</a
         >
     </div>

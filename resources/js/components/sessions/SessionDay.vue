@@ -30,31 +30,31 @@ const deleteSessionDay = () => {
     <div class="row mt-3">
         <div class="col-md-5">
             <div class="form-group">
-                <label  :for="'instructor'+index">Seleccionar un Instructor:</label>
-                <select class="select2 form-control" v-model="init_values.instructor_id" :id="'instructor'+index">
-                    <option v-for="instructor in instructors" :value="instructor.id" :key="instructor.id">
+                <label :for="'instructor'+props.index">Seleccionar un Instructor:</label>
+                <select class="select2 form-control" v-model="init_values.instructor_id" :id="'instructor'+props.index">
+                    <option v-for="instructor,i in instructors" :value="instructor.id" :key="i">
                         {{ instructor.name }}</option>
                 </select>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
-                <label :for="'dia'+index">Seleccionar un Día:</label>
-                <select class="select2 form-control" v-model="init_values.week_day_id" :id="'dia'+index">
-                    <option v-for="day in week_days" :value="day.id">{{ day.name }}</option>
+                <label :for="'dia'+props.index">Seleccionar un Día:</label>
+                <select class="select2 form-control" v-model="init_values.week_day_id" :id="'dia'+props.index">
+                    <option v-for="day,i in week_days" :value="day.id" :key="i">{{ day.name }}</option>
                 </select>
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
-                <label :for="'horaInicio'+index">Hora de Inicio:</label>
-                <input type="number" v-model="init_values.start_hour" :id="'horaInicio'+index" min="0" :max="init_values.end_hour-1" class="form-control">
+                <label :for="'horaInicio'+props.index">Hora de Inicio:</label>
+                <input type="number" v-model="init_values.start_hour" :id="'horaInicio'+props.index" min="0" :max="init_values.end_hour-1" class="form-control">
             </div>
         </div>
         <div class="col-md-2">
             <div class="form-group">
-                <label :for="'horaFinal'+index">Hora Final:</label>
-                <input type="number" v-model="init_values.end_hour" :id="'horaFinal'+index" :min="init_values.start_hour+1" max="23" class="form-control">
+                <label :for="'horaFinal'+props.index">Hora Final:</label>
+                <input type="number" v-model="init_values.end_hour" :id="'horaFinal'+props.index" :min="init_values.start_hour+1" max="23" class="form-control">
             </div>
         </div>
         <div class="col-md-1">

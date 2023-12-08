@@ -5,10 +5,13 @@ const props = defineProps({
         type: Object,
         required: true,
     },
+    payments: {
+        type: Object,
+        required: true
+    }
 });
-console.log(props.customer);
 const paymentsDate = ref([]);
-paymentsDate.value = props.customer.payments.map(payment => {
+paymentsDate.value = props.payments.data.map(payment => {
     const date = new Date(payment.payment_datetime);
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
     return `${date.toLocaleDateString('es-MX', options)}`;
@@ -21,14 +24,14 @@ paymentsDate.value = props.customer.payments.map(payment => {
             <div class="card mb-4">
                 <div class="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-4">
                     <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto text-center">
-                        <img :src="`https://ui-avatars.com/api/?name=${props.customer.name}&background=A6CF98`" alt="user image"
-                            class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img">
+                        <img :src="`https://ui-avatars.com/api/?name=${props.customer.name}&background=A6CF98`"
+                            alt="user image" class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img">
                     </div>
                     <div class="flex-grow-1 mt-3 mt-sm-5">
                         <div
                             class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-4 flex-md-row flex-column gap-4">
                             <div class="user-profile-info">
-                                <h4>{{props.customer.name}}</h4>
+                                <h4>{{ props.customer.name }}</h4>
                             </div>
                         </div>
                     </div>
@@ -60,7 +63,7 @@ paymentsDate.value = props.customer.payments.map(payment => {
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            <tr v-for="(payment, index) in props.customer.payments">
+                            <tr v-for="(payment, index) in payments.data">
                                 <td style="width: 30%;">
                                     <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
                                         <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top"
@@ -69,17 +72,18 @@ paymentsDate.value = props.customer.payments.map(payment => {
                                         </li>
                                     </ul>
                                 </td>
-                                <td style="width: 15%;">{{payment.fare.name}}</td>
+                                <td style="width: 15%;">{{ payment.fare.name }}</td>
                                 <td style="width: 15%;">
                                     <span class="badge bg-label-success me-1">Pagado</span>
                                 </td>
-                                <td style="width: 20%;" >{{payment.payment_type.name}}</td>
-                                <td style="width: 20%;">${{payment.fare.price}} MXN</td>
+                                <td style="width: 20%;">{{ payment.payment_type.name }}</td>
+                                <td style="width: 20%;">${{ payment.fare.price }} MXN</td>
                             </tr>
                         </tbody>
                     </table>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <Pagination :users="payments" :ruta="'customers.show_payments'" :params='{ id: customer.id }' />
 </template>
