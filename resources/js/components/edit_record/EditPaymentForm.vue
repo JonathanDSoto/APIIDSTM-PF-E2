@@ -89,7 +89,7 @@ const props = defineProps({
                                 type="submit"
                                 class="btn btn-primary me-sm-3 me-1"
                             >
-                                Pagar
+                                Editar
                             </button>
                             <button
                                 type="reset"

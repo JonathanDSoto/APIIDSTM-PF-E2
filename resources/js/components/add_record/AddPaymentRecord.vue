@@ -116,7 +116,7 @@ const onSubmit = (event) => {
                                 type="submit"
                                 class="btn btn-primary me-sm-3 me-1"
                             >
-                                Pagar
+                                Crear
                             </button>
                             <button
                                 type="reset"
