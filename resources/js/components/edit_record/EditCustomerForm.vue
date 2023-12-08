@@ -1,6 +1,6 @@
 <script setup>
 import FormAuth from '../FormAuth.vue';
-import { ref, inject } from 'vue';
+import { ref, inject, watchEffect } from 'vue';
 import { useForm } from '../hooks/useForm';
 
 const props = defineProps({
@@ -20,11 +20,15 @@ const {
     validateEmergencyPhone,
 } = useForm();
 const bloodGroups = ref(inject('blood_groups'));
+const bloodGroupsModel = ref(0);
+watchEffect(()=>{
+    name.value = props.user.name;
+    email.value = props.user.email;
+    phone.value = props.user.phone;
+    emergency_phone.value = props.user.emergency_phone;
+    bloodGroupsModel.value = props.user.blood_group_id;
+});
 
-name.value = props.user.name;
-email.value = props.user.email;
-phone.value = props.user.phone;
-emergency_phone.value = props.user.emergency_phone;
 const onSubmit = (event) => {
     event.preventDefault();
     if (validateName()
@@ -35,7 +39,6 @@ const onSubmit = (event) => {
         form.submit();
     }
 };
-
 </script>
 <template>
     <div class="d-flex justify-content-center align-items-center">
@@ -92,8 +95,8 @@ const onSubmit = (event) => {
                             </div>
                             <div class="col-12 col-md-6">
                                 <label class="form-label" for="modalEditCustomerBloodType">Tipo de sangre</label>
-                                <select v-model="props.user.blood_group_id" id="modalEditCustomerBloodType"
-                                    name="blood_group_id" class="select2 form-select" data-allow-clear="true">
+                                <select v-model="bloodGroupsModel" id="modalEditCustomerBloodType"
+                                    name="blood_group_id" class="select form-select" data-allow-clear="true">
                                     <option v-for="blood in bloodGroups" :key="blood.id" :value="blood.id">
                                         {{ blood.name }}
                                     </option>
@@ -101,7 +104,7 @@ const onSubmit = (event) => {
                             </div>
                             <div class="col-12 col-md-6">
                                 <label class="form-label" for="modalEditIsActive">Estado</label>
-                                <select id="modalEditIsActive" name="is_active" class="select2 form-select"
+                                <select id="modalEditIsActive" name="is_active" class="select form-select"
                                     data-allow-clear="true">
                                     <option selected :value="(user.is_active) ? 1 : 0">
                                         {{ (user.is_active) ? 'Activo' : 'Inactivo' }}
