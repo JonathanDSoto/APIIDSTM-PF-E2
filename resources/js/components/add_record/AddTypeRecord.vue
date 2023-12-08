@@ -4,6 +4,11 @@ const props = defineProps({
         type: Object,
     },
 });
+const isLetter = (e) => {
+    let char = String.fromCharCode(e.keyCode);
+    if (/^([^0-9]*)+$/.test(char)) return true;
+    else e.preventDefault();
+};
 </script>
 <template>
     <div
@@ -22,7 +27,7 @@ const props = defineProps({
                         aria-label="Close"
                     ></button>
                     <div class="text-center mb-4">
-                        <h3 class="mb-2">Anadir Nuevo Pago de Cliente</h3>
+                        <h3 class="mb-2">Añadir Nuevo Pago de Cliente</h3>
                         <p class="text-muted">Completa los datos.</p>
                     </div>
                     <form
@@ -39,6 +44,7 @@ const props = defineProps({
                                 >Nombre del tipo de pago</label
                             >
                             <input
+                                v-on:keypress="isLetter($event)"
                                 type="text"
                                 id="modalEditCustomerName"
                                 name="name"
@@ -50,7 +56,7 @@ const props = defineProps({
                                 type="submit"
                                 class="btn btn-primary me-sm-3 me-1"
                             >
-                                Pagar
+                                Añadir
                             </button>
                             <button
                                 type="reset"

@@ -4,6 +4,11 @@ const props = defineProps({
         type: Object,
     },
 });
+const isLetter = (e) => {
+    let char = String.fromCharCode(e.keyCode);
+    if (/^([^0-9]*)+$/.test(char)) return true;
+    else e.preventDefault();
+};
 </script>
 <template>
     <div
@@ -42,6 +47,7 @@ const props = defineProps({
                                 type="text"
                                 id="modalEditCustomerName"
                                 name="name"
+                                v-on:keypress="isLetter($event)"
                                 class="form-control"
                                 v-model="tipo.name"
                             />
@@ -51,7 +57,7 @@ const props = defineProps({
                                 type="submit"
                                 class="btn btn-primary me-sm-3 me-1"
                             >
-                                Pagar
+                                Añadir
                             </button>
                             <button
                                 type="reset"
