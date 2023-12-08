@@ -1,5 +1,5 @@
 <script setup>
-import { computed, provide, ref } from "vue";
+import { provide, ref } from "vue";
 import EditFareForm from "../edit_record/EditFareForm.vue";
 import AddFareRecord from "../add_record/AddFareRecord.vue";
 import DeleteModal from "../DeleteModal.vue";
@@ -82,7 +82,7 @@ const returnFareName = (id) => {
                                             {{ fare.price }}
                                         </h1>
                                     </div>
-                                    <span class="fw-bold">{{ returnFareName(fare.id) }}</span>
+                                    <span class="fw-bold">{{ returnFareName(fare.fare_period_id) }}</span>
                                 </div>
 
                                 <div class="text-center m-2">
