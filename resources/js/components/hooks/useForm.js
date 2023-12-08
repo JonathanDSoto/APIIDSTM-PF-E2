@@ -19,7 +19,7 @@ export function useForm() {
     const errors = ref('');
 
     const validateName = () => {
-        const nameRegex = /^[A-Za-z\s]+$/;
+        const nameRegex = /^[A-Za-z\u00C0-\u00FFñÑ\s]+$/;
         const isValid = name.value.trim() !== '' && nameRegex.test(name.value.trim());
         if (!isValid) {
             showError('El nombre solo debe contener letras y espacios');
@@ -30,15 +30,15 @@ export function useForm() {
         const priceRegex = /^\d+(\.\d{1,2})?$/;
         console.log(price.value);
         if (price.value == 0 || price.value == '0') {
-            showError('El campo del precio no puede ser cero');
+            showError('El campo del costo no puede ser cero');
             return false;
         }
         if (!priceRegex.test(price.value)) {
-            showError('El precio solo debe contener números');
+            showError('El costo solo debe contener números');
             return false;
         }
         if (price.value === '' || price.value.trim() === '') {
-            showError('El campo del precio no debe estar vacío');
+            showError('El campo costo no debe estar vacío');
             return false;
         }
         return true;
