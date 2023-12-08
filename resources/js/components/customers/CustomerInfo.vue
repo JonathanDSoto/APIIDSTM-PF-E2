@@ -5,9 +5,10 @@ const props = defineProps({
         required: true,
     },
 });
+console.log(props.customer);
 </script>
 <template>
-    <div class="card mb-4" style="max-height: 500px; overflow: hidden">
+    <div class="card mb-4" style="max-height: 550px; overflow: hidden">
         <div class="card-body">
             <div class="d-flex justify-content-between">
                 <h5 class="card-action-title mb-0">Informacion</h5>
@@ -51,7 +52,9 @@ const props = defineProps({
                     <li class="d-flex align-items-center mb-3">
                         <i class="ti ti-mail"></i>
                         <span class="fw-medium mx-2 text-heading">Email:</span>
-                        <span class="text-break">{{ props.customer.email }}</span>
+                        <span class="text-break">{{
+                            props.customer.email
+                        }}</span>
                     </li>
                     <li class="d-flex align-items-center mb-3">
                         <i class="ti ti-phone-call"></i>
@@ -69,6 +72,18 @@ const props = defineProps({
                             >Tipo de Sangre:</span
                         >
                         <span>{{ props.customer.blood_group.name }}</span>
+                    </li>
+                </ul>
+                <small class="card-text text-uppercase"
+                    >Informacion secreta</small
+                >
+                <ul class="list-unstyled mb-5 mt-3">
+                    <li class="d-flex align-items-center mb-3">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span class="fw-medium mx-2 text-heading">Codigo:</span>
+                        <span>
+                            {{ props.customer.code }}
+                        </span>
                     </li>
                 </ul>
             </div>
