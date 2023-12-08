@@ -26,12 +26,6 @@ provide('session', props.session);
                                 <h4>{{ props.session.name }}</h4>
                                 <p>{{ props.session.description }}</p>
                             </div>
-                            <div class="order-md-2">
-                                <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editSession"
-                                    href="javascript:void(0);">
-                                    <i class="ti ti-pencil me-1"></i> Editar clase
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -45,74 +39,6 @@ provide('session', props.session);
         <SheduleCard />
     </div>
     <!--/ ASISTENCIAS -->
-
-    <!-- CLIENTES POR CLASE  -->
-    <div class="col-lg-12 col-xl-12">
-        <div class="card card-action mb-4">
-            <div class="card-header align-items-center">
-                <h5 class="card-action-title mb-0">Clientes inscritos en la clase</h5>
-                <div class="card-action-element">
-                    <div>
-                        <span>
-                            <i class="ti ti-users ti-sm"></i>
-                        </span>
-                    </div>
-                </div>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive text-nowrap">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Cliente</th>
-                                <th>Horario</th>
-                                <th>Asistencia Mensual</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-border-bottom-0">
-                            <tr>
-                                <td>Albert Cook</td>
-                                <td>8:00 AM - 9:00 AM & 3:00 PM - 4:00 PM</td>
-                                <td>10 veces</td>
-                            </tr>
-                            <tr>
-                                <td>Barry Hunter</td>
-                                <td>3:00 PM - 4:00 PM</td>
-                                <td>1 veces</td>
-                            </tr>
-                            <tr>
-                                <td>Trevor Baker</td>
-                                <td>10:00 AM - 11:00 AM </td>
-                                <td>3 veces</td>
-                            </tr>
-                            <tr>
-                                <td>Emma Johnson</td>
-                                <td>10:00 AM - 11:00 AM & 3:00 PM - 4:00 PM</td>
-                                <td>15 veces</td>
-                            </tr>
-                            <tr>
-                                <td>Noah Smith</td>
-                                <td>9:00 AM - 10:00 AM & 5:00 PM - 6:00 PM</td>
-                                <td>10 veces</td>
-                            </tr>
-                            <tr>
-                                <td>Jeff Pilot</td>
-                                <td>8:00 AM - 9:00 AM & 3:00 PM - 4:00 PM</td>
-                                <td>6 veces</td>
-                            </tr>
-                            <tr>
-                                <td>Michael Jones</td>
-                                <td>3:00 PM - 4:00 PM</td>
-                                <td>5 veces</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--/ CLIENTES POR CLASE -->
-
     <!-- EDITAR CLASE -->
     <div class="modal fade" id="editSession" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-simple modal-enable-otp modal-dialog-centered">
