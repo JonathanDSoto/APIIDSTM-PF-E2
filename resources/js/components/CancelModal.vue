@@ -69,7 +69,7 @@ const getTranslation = (type) => {
                                 type="submit"
                                 class="btn btn-danger me-sm-3 me-1"
                             >
-                                Cancelar
+                                Confirmar
                             </button>
                             <button
                                 type="reset"
