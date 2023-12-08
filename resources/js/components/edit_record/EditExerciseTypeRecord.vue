@@ -40,11 +40,11 @@ const onSubmit = (event) => {
                             </div>
                             <div class="col-12 text-center">
                                 <button type="submit" class="btn btn-primary me-sm-3 me-1">
-                                    Guardar
+                                    Editar
                                 </button>
                                 <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal"
                                     aria-label="Close">
-                                    Cancel
+                                    Cancelar
                                 </button>
                             </div>
                         </form>

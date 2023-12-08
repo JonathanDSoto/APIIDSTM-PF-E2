@@ -36,7 +36,7 @@ const onSubmit = (event) => {
                                 </button>
                                 <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal"
                                     aria-label="Close">
-                                    Cancel
+                                    Cancelar
                                 </button>
                             </div>
                         </form>
