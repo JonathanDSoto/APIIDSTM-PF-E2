@@ -49,7 +49,7 @@ const onSubmit = (event) => {
                         :action="route('payments.store')"
                     >
                         <FormAuth method="POST" />
-                        <div class="col-md-6 mb-4">
+                        <div class="col-md-12 mb-4">
                             <label class="form-label" for="payCustomerFare"
                                 >Nombre del cliente</label
                             >
@@ -69,7 +69,7 @@ const onSubmit = (event) => {
                                 </option>
                             </select>
                         </div>
-                        <div class="col-12 col-md-6">
+                        <div class="col-6 col-md-6">
                             <label class="form-label" for="payCustomerFare"
                                 >Tarifa</label
                             >
@@ -89,7 +89,7 @@ const onSubmit = (event) => {
                                 </option>
                             </select>
                         </div>
-                        <div class="col-12 col-md-12">
+                        <div class="col-6 col-md-6">
                             <label class="form-label" for="payCustomerFare"
                                 >Tipo de pago</label
                             >
