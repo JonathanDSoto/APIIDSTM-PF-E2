@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Diaria",
+    "fare_period_id": 1,
+    "price": 50
+  },
+  {
+    "name": "Mensual",
+    "fare_period_id": 3,
+    "price": 450
+  },
+  {
+    "name": "Anual",
+    "fare_period_id": 4,
+    "price": 3000
+  }
+]
