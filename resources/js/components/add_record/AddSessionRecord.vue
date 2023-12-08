@@ -1,5 +1,5 @@
 <script setup>
-import { ref, provide } from 'vue';
+import { ref, provide, watchEffect } from 'vue';
 import { useForm } from '../hooks/useForm';
 import SessionDay from '../sessions/SessionDay.vue';
 const props = defineProps({
@@ -19,6 +19,8 @@ const props = defineProps({
 provide('instructors', props.instructors);
 provide('week_days', props.week_days);
 const { name, description, max_capacity, validateName, validateMaxCapacity } = useForm();
+const exerciseType = ref();
+exerciseType.value = props.exercise_types[0].id;
 const time = ref({
     start_hour: 0,
     end_hour: 24,
@@ -29,6 +31,7 @@ const sessionDays = ref([{
     start_hour: time.value.start_hour,
     end_hour: time.value.end_hour,
 }]);
+const sessionDayInput = ref();
 const addSessionDay = () => {
     sessionDays.value.push({
         instructor_id: props.instructors[0].id,
@@ -37,9 +40,14 @@ const addSessionDay = () => {
         end_hour: time.value.end_hour,
     });
 };
+watchEffect(()=>{
+    sessionDayInput.value = JSON.stringify(sessionDays.value);
+    console.log(sessionDays);
+})
+
 const onSubmit = (event) => {
-    let isValid = true;
     event.preventDefault();
+    let isValid = true;
     if (!validateName()) { isValid = false; }
     if (!validateMaxCapacity()) { isValid = false; }
     if (isValid) {
@@ -58,7 +66,8 @@ const onSubmit = (event) => {
                 <h5>Añadir una Clase</h5>
             </div>
             <div class="card-body">
-                <form @submit.prevent="onSubmit" id="addSessionForm" :href="route('sessions.store')">
+                <form method="POST" @submit.prevent="onSubmit" id="addSessionForm" :action="route('sessions.store')">
+                    <FormAuth method="POST" />
                     <div class="form-group mt-2">
                         <label for="nombreClase">Nombre de la Clase:</label>
                         <input type="text" v-model="name" name="name" class="form-control" id="nombreClase"
@@ -68,7 +77,7 @@ const onSubmit = (event) => {
                         <div class="col-md-6">
                             <div class="form-group mt-2">
                                 <label for="exercises">Tipo de Ejercicio:</label>
-                                <select class="select2 form-control" name="exercise_types_id" id="exercises">
+                                <select class="select2 form-control" v-model="exerciseType" name="exercise_type_id" id="exercises">
                                     <option v-for="exercise in exercise_types" :value="exercise.id" :key="exercise.id">
                                         {{ exercise.name }}</option>
                                 </select>
@@ -89,8 +98,9 @@ const onSubmit = (event) => {
                     </div>
                     <hr class="mt-4">
                     <h5 class="text-center">Horarios</h5>
-                    <SessionDay v-for="(sessionDay, index) in sessionDays" :init_values="sessionDay" :sessionDays="sessionDays" :index="index" />
-                    <input type="hidden" name="session_days" :value="JSON.stringify(sessionDays)"/>
+                    <SessionDay v-for="(sessionDay, index) in sessionDays" :init_values="sessionDay"
+                        :sessionDays="sessionDays" :index="index" />
+                    <input type="hidden" name="session_days" v-model="sessionDayInput" />
                     <div class="row">
                         <div class="col-12 d-flex justify-content-center align-items-center">
                             <button type="button" @click="addSessionDay()"
@@ -99,8 +109,7 @@ const onSubmit = (event) => {
                     </div>
                     <div class="col-12 text-center mt-3">
                         <button type="submit" class="btn btn-primary me-sm-3 me-1">Guardar</button>
-                        <button type="reset" class="btn btn-label-secondary" data-bs-dismiss="modal"
-                            aria-label="Close">Cancelar</button>
+                        <a :href="route('sessions')" class="btn btn-label-secondary">Cancelar</a>
                     </div>
                 </form>
             </div>
