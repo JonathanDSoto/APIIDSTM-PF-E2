@@ -17,7 +17,7 @@ const name = ref(props.name);
 watchEffect(() => {
     id.value = props.id;
     name.value = props.name;
-    if (name.value === '') {
+    if (name.value.trim() === '') {
         name.value = props.name;
     }
 });
@@ -30,14 +30,11 @@ watchEffect(() => {
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     <div class="text-center">
                         <h3 class="mb-2">Reservar un espacio en la clase</h3>
-                        <p>Ingresa los datos solicitados para reservar una clase</p>
+                        <p>({{name}})</p>
                     </div>
                     <form method="POST" id="reserveCustomerSession" class="row g-3" :action="route('sessions.subscribe')">
                         <FormAuth method="POST" />
                         <div class="col-12 col-md-12">
-                            <label for="sessionName" class="form-label">Clase: </label>
-                            <input type="text" v-model="name" :placeholder="name" class="form-control" id="sessionName"
-                                readonly />
                             <input type="hidden" v-model="id" name="session_day_id" class="form-control" readonly />
                             <label for="selectCustomer" class="form-label">Selecciona al cliente</label>
                             <select id="selectCustomer" name="customer_id" class="select2 form-select form-select-lg">
