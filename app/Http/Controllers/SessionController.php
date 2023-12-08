@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSessionRequest;
+use App\Http\Requests\SubscribeSessionRequest;
 use App\Http\Requests\UpdateSessionRequest;
+use App\Models\Customer;
 use App\Models\ExerciseType;
 use App\Models\Instructor;
 use App\Models\Session;
@@ -86,7 +88,10 @@ class SessionController extends Controller
         }
 
         return view('sessions.show', [
-            'session' => $session
+            'session' => $session,
+            'customers' => Customer::where('is_active', true)
+                ->orderBy('name')
+                ->get()
         ]);
     }
 
@@ -187,5 +192,28 @@ class SessionController extends Controller
 
         return back()
             ->with('success', 'La información de la clase se ha eliminado con éxito.');
+    }
+
+    public function subscribe(SubscribeSessionRequest $request)
+    {
+        try {
+            $sessionDay = SessionDay::findOrFail($request->session_day_id);
+        } catch (ModelNotFoundException $modelNotFoundException) {
+            return back()
+                ->withErrors([
+                    'internal_error' => 'No se ha podido encontrar la clase solicitada.'
+                ]);
+        }
+
+        $sessionDay
+            ->participants()
+            ->syncWithoutDetaching([
+                $request->customer_id => [
+                    'subscription_date' => now()
+                ]
+            ]);
+        
+        return back()
+            ->with('success', 'El cliente se ha suscrito a la clase correctamente.');
     }
 }

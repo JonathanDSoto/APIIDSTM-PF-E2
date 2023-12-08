@@ -45,6 +45,7 @@ Route::controller(SessionController::class)->prefix('sessions')->group(function 
     Route::get('/{id}/edit', 'edit')->name('sessions.edit');
     Route::put('/{id}', 'update')->name('sessions.update');
     Route::delete('/{id}', 'destroy')->name('sessions.delete');
+    Route::post('/subscribe', 'subscribe')->name('sessions.subscribe');
 });
 
 Route::controller(FareController::class)->prefix('fares')->group(function () {
