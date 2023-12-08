@@ -119,7 +119,57 @@ class SessionController extends Controller
 
     public function update(UpdateSessionRequest $request, string $id)
     {
+        try {
+            $session = Session::findOrFail($id);
+        } catch (ModelNotFoundException $modelNotFoundException) {
+            return back()
+                ->withErrors([
+                    'internal_error' => 'No se ha podido encontrar la clase solicitada.'
+                ]);   
+        }
 
+        $session->update($request->only([
+            'name',
+            'max_capacity',
+            'description'
+        ]));
+
+        $sessionDays = $session->sessionDays();
+        $ids = [];
+
+        foreach($request->input('session_days') as $sessionDay) {
+            // Updating session days that where modified and have id prop.
+            if (isset($sessionDay['id'])) {
+                // Array used lately to delete those ids that are not in it.
+                array_push($ids, $sessionDay['id']);
+
+                SessionDay::find($sessionDay['id'])
+                    ->update([
+                        'instructor_id' => $sessionDay['instructor_id'],
+                        'week_day_id' => $sessionDay['week_day_id'],
+                        'start_hour' => $sessionDay['start_hour'],
+                        'end_hour' => $sessionDay['end_hour']
+                    ]);
+
+                continue;
+            }
+
+            // Creating new session days.
+            $newSessionDay = $sessionDays->create([
+                'instructor_id' => $sessionDay['instructor_id'],
+                'week_day_id' => $sessionDay['week_day_id'],
+                'start_hour' => $sessionDay['start_hour'],
+                'end_hour' => $sessionDay['end_hour'],
+                'current_capacity' => 0
+            ]);
+
+            array_push($ids, $newSessionDay->id);
+        }
+
+        $sessionDays->whereNotIn('id', $ids)->delete();
+
+        return back()
+            ->with('success', 'La información de la clase se ha actualizado con éxito.');
     }
 
     public function destroy(string $id)
