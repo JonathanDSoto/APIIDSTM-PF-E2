@@ -10,7 +10,6 @@ const props = defineProps({
     },
     params: {
         type: Object,
-        required: true
     }
 });
 const canGoNext = props.users.to < props.users.total ? true : false;

@@ -3,7 +3,11 @@ const props = defineProps({
     session: {
         type: Object,
         required: true,
-    }
+    },
+    id:{
+        type:Number,
+        required:true,
+    },
 });
 </script>
 <template>
@@ -23,7 +27,7 @@ const props = defineProps({
                     <a type="button" class="btn btn-success mt-3"  :href="route('sessions.edit',{id:props.session.id})">
                         <i class="ti ti-pencil"></i>
                     </a>
-                    <a type="button" class="btn btn-danger mt-3" data-bs-toggle="modal" data-bs-target="#deleteSession" href="javascript:void(0);">
+                    <a type="button" class="btn btn-danger mt-3" @click="this.$emit('set-id',id)" data-bs-toggle="modal" data-bs-target="#deleteUser" href="javascript:void(0);">
                         <i class="ti ti-trash"></i>
                     </a>
                 </div>
