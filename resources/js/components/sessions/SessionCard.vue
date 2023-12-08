@@ -19,10 +19,7 @@ const props = defineProps({
                     <small>Capacidad: {{ props.session.max_capacity }} personas</small>
                     <small>Ejercicio: {{props.session.exercise_type.name}}</small>
                 </div>
-                <div  class="d-flex justify-content-between align-items-end">
-                    <a type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#reserveSession"  href="javascript:void(0);">
-                        <i class="ti ti-calendar"></i>
-                    </a>
+                <div  class="d-flex justify-content-evenly align-items-end">
                     <a type="button" class="btn btn-success mt-3"  :href="route('sessions.edit',{id:props.session.id})">
                         <i class="ti ti-pencil"></i>
                     </a>
