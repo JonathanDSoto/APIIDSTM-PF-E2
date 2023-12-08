@@ -19,7 +19,7 @@ const canGoPrev = props.users.current_page > 1 ? true : false;
             class="btn btn-secondary waves-effect"
             type="button"
             :href="route(props.ruta, { page: props.users.current_page - 1 })"
-            >Prev</a
+            >Anterior</a
         >
         <button v-if="canGoPrev" class="btn btn-outline-secondary">
             {{ props.users.current_page - 1 }}
@@ -31,7 +31,7 @@ const canGoPrev = props.users.current_page > 1 ? true : false;
             v-if="canGoNext"
             class="btn btn-primary waves-effect"
             :href="route(props.ruta, { page: props.users.current_page + 1 })"
-            >Next</a
+            >Siguiente</a
         >
     </div>
 </template>
